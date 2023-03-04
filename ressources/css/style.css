@@ -1,2 +1,153 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:200,400,wght@1,1000&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  display: table;
+  margin: auto;
+}
+
+
+body header h1 {
+    color: white;
+    background-image: url(../images/beau-tir-lac-cristallin-cote-base-montagne-enneigee-au-cours-journee-ensoleillee.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position:center;
+    text-shadow: 0 0 20px #fff, 0 0 20px #fff;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: auto;
+    background-color: #bdbdbd;
+    padding-left: 0%;
+  }
+
+  header li {
+    float: left;
+  }
+  
+  header li a {
+    display: block;
+    color: gray;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+
+  li.active a {
+      background-color: white;
+      color: #2aace3;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: white;
+  }
+  
+  article p a {
+      color: #2aace3;
+  }
+  
+  article header h2 {
+      border-bottom: thin solid #C2C2C2;
+  }
+
+  article header p {
+    text-align: right;
+    color: gray;
+  }
+
+  main{
+    display: flex;
+    padding: 20px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+  
+  aside{
+    box-shadow:  0 0 20px #C2C2C2;
+    max-height: 25vh;
+    margin-left: 50px;
+    border-radius: 10px;
+  }
+  
+  aside h3{
+    background-color:#2aace3;
+    color: white;
+    margin-top: 0px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 0px 0px;
+
+    
+  }
+  aside div{
+    width: 360px;
+    
+  }
+  aside ul{
+    padding-left: 20px;
+  }
+  aside li{
+    list-style-type: none; 
+  }
+
+  footer{
+    background-color: #bdbdbd;
+    text-align: right;
+    padding: 20px;
+  }
+
+   
+@media (orientation: landscape) {
+  body {
+    flex-direction: row;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 657px) {
+  nav ul {
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  }
+
+.hamburger {
+  text-align: center;
+  display: block;
+}
+
+body header h1 {
+  color: white;
+  background-image: url(../images/beau-tir-lac-cristallin-cote-base-montagne-enneigee-au-cours-journee-ensoleillee.jpg);
+  background-position: top;
+}
+
+nav ul li{
+  width: 100%;
+}
+main{
+  flex-wrap: wrap;
+}
+}
