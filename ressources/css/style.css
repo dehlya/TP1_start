@@ -35,59 +35,59 @@ header ul {
     overflow: auto;
     background-color: #bdbdbd;
     padding-left: 0%;
-  }
+}
 
-  header li {
+header li {
     float: left;
-  }
-  
-  header li a {
+}
+
+header li a {
     display: block;
     color: gray;
     text-align: center;
     padding: 10px 20px;
     text-decoration: none;
-  }
+}
 
-  li.active a {
-      background-color: white;
-      color: #2aace3;
-  }
-  
-  li a:hover:not(.active) {
+li.active a {
     background-color: white;
-  }
-  
-  article p a {
-      color: #2aace3;
-  }
-  
-  article header h2 {
-      border-bottom: thin solid #C2C2C2;
-  }
+    color: #2aace3;
+}
 
-  article header p {
+li a:hover:not(.active) {
+    background-color: white;
+}
+
+article p a {
+    color: #2aace3;
+}
+
+article header h2 {
+    border-bottom: thin solid #C2C2C2;
+}
+
+article header p {
     text-align: right;
     color: gray;
-  }
+}
 
-  main{
+main{
     display: flex;
     padding: 20px;
-  }
+}
 
-  .hamburger {
+.hamburger {
     display: none;
-  }
-  
-  aside{
+}
+
+aside{
     box-shadow:  0 0 20px #C2C2C2;
     max-height: 25vh;
     margin-left: 50px;
     border-radius: 10px;
-  }
-  
-  aside h3{
+}
+
+aside h3{
     background-color:#2aace3;
     color: white;
     margin-top: 0px;
@@ -97,29 +97,28 @@ header ul {
     border-radius: 10px 10px 0px 0px;
 
     
-  }
-  aside div{
+}
+aside div{
     width: 360px;
     
-  }
-  aside ul{
+}
+aside ul{
     padding-left: 20px;
-  }
-  aside li{
+}
+aside li{
     list-style-type: none; 
-  }
+}
 
-  footer{
+footer{
     background-color: #bdbdbd;
     text-align: right;
     padding: 20px;
-  }
+}
 
-   
 @media (orientation: landscape) {
-  body {
+body {
     flex-direction: row;
-  }
+}
 }
 
 @media (orientation: portrait) {
