@@ -17,7 +17,7 @@ html {
 
 body header h1 {
     color: white;
-    background-image: url(../images/beau-tir-lac-cristallin-cote-base-montagne-enneigee-au-cours-journee-ensoleillee.jpg);
+    background-image: url(../../../ressources/site/background-image.jpg);
     background-repeat:no-repeat;
     background-size: cover;
     background-position:center;
@@ -113,6 +113,9 @@ footer{
     background-color: #bdbdbd;
     text-align: right;
     padding: 20px;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
 }
 
 @media (orientation: landscape) {
