@@ -1,6 +1,9 @@
 export class Canvas {
     constructor() {
-        this.canvas = document.getElementById('game');
+        this.canvas = document.createElement('canvas');
+        this.canvas.height = this.height;
+        this.canvas.width = this.width;
+        this.canvas.color = this.color;
         this.setContext();
     }
     setContext() {
