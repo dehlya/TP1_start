@@ -1,12 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700");
 /* @import url('https://fonts.googleapis.com/css2?family=Mulish:200,400,wght@1,1000&display=swap'); */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
+  width: 100%;
+  margin-bottom: 100px;
 }
 
 html {
@@ -14,123 +17,117 @@ html {
   margin: auto;
 }
 
-body {
-    display: table-cell;
-   
-    width: 1240px;
-  }
-
 body header h1 {
-    color: white;
-    background-image: url(../../../ressources/site/background-image.jpg);
-    background-repeat:no-repeat;
-    background-size: cover;
-    background-position:center;
-    text-shadow: 0 0 20px #fff, 0 0 20px #fff;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    padding-left: 20px;
+  color: white;
+  background-image: url(../../../ressources/site/background-image.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-shadow: 0 0 20px #fff, 0 0 20px #fff;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  padding-left: 20px;
 }
 
 header ul {
-    list-style-type: none;
-    margin: 0;
-    overflow: auto;
-    background-color: #bdbdbd;
-    padding-left: 0%;
+  list-style-type: none;
+  margin: 0;
+  overflow: auto;
+  background-color: #bdbdbd;
+  padding-left: 0%;
 }
 
 header li {
-    float: left;
+  float: left;
 }
 
 header li a {
-    display: block;
-    color: gray;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
+  display: block;
+  color: gray;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
 }
 
 li.active a {
-    background-color: white;
-    color: #2aace3;
+  background-color: white;
+  color: #2aace3;
 }
 
 li a:hover:not(.active) {
-    background-color: white;
+  background-color: white;
 }
 
-#articles{
+#articles {
   width: 100%;
 }
 
 article p a {
-    color: #2aace3;
+  color: #2aace3;
 }
 
 article header h2 {
-    border-bottom: thin solid #C2C2C2;
+  border-bottom: thin solid #c2c2c2;
 }
 
 article header p {
-    text-align: right;
-    color: gray;
+  text-align: right;
+  color: gray;
 }
 
-main{
-    display: flex;
-    padding: 20px;
+main {
+  display: flex;
+  padding: 20px;
 }
 
 .hamburger {
-    display: none;
+  display: none;
 }
 
-aside{
-    box-shadow:  0 0 20px #C2C2C2;
-    max-height: 30vh;
-    margin-left: 50px;
-    border-radius: 10px;
+aside {
+  box-shadow: 0 0 20px #c2c2c2;
+  min-width: 360px;
+  max-height: 280px;
+  margin-left: 50px;
+  border-radius: 10px;
 }
 
-aside h3{
-    background-color:#2aace3;
-    color: white;
-    margin-top: 0px;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    border-radius: 10px 10px 0px 0px;
-
-    
+aside h3 {
+  background-color: #2aace3;
+  color: white;
+  margin-top: 0px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-radius: 10px 10px 0px 0px;
 }
-aside div{
-    width: 360px;
-    
+aside div {
+  width: 360px;
 }
-aside ul{
-    padding-left: 20px;
+aside ul {
+  padding-left: 20px;
 }
-aside li{
-    list-style-type: none; 
+aside li {
+  list-style-type: none;
 }
 
-footer{
-    background-color: #bdbdbd;
-    text-align: right;
-    padding: 20px;
-    bottom: 0px;
-    position: fixed;
-    width: 100%;
+footer {
+  background-color: #bdbdbd;
+  text-align: right;
+  padding: 20px;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  max-height: 100px;
 }
 
 @media (orientation: landscape) {
-body {
+  body {
     flex-direction: row;
-}
+  }
 }
 
 @media (orientation: portrait) {
@@ -138,27 +135,50 @@ body {
     flex-direction: column;
   }
 }
+
 @media only screen and (max-width: 657px) {
-  nav ul {
-  justify-content: flex-start;
-  padding-bottom: 10px;
+  main {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
   }
 
-.hamburger {
-  text-align: center;
-  display: block;
-}
+  body {
+    margin-bottom: 125px;
+  }
 
-body header h1 {
-  color: white;
-  background-image: url(../images/beau-tir-lac-cristallin-cote-base-montagne-enneigee-au-cours-journee-ensoleillee.jpg);
-  background-position: top;
-}
+  body header h1 {
+    color: white;
+    background-position: top;
+    font-size: 24px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
 
-nav ul li{
-  width: 100%;
-}
-main{
-  flex-wrap: wrap;
-}
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+
+  article {
+    padding: 20px;
+  }
+
+  aside {
+    margin: 0 auto;
+  }
+
+  .hamburger {
+    text-align: center;
+    display: block;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
 }
