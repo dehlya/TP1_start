@@ -45,29 +45,25 @@
             <h2>Visual initial sketch of your game project</h2>
             <p>By Group D the 31/03/2023 at 00:00</p>
           </header>
-          <p>
-            Lorem ipsum dolor sit amet...
-            <a href="http://www.hevs.ch/">http://www.hevs.ch/</a>, Ut non eros
-            scelerisque, varius diam a, pulvinar arcu. Phasellus fermentum non
-            arcu ornare ornare. Sed libero mi, rutrum et felis commodo, molestie
-            tempor leo. Duis sit amet erat ut elit faucibus tincidunt sit amet
-            non leo. Quisque dapibus ultricies cursus.
-          </p>
-          <p>
-            Aenean elit nisi, maximus sit amet vulputate non, molestie non odio.
-            Quisque in dolor vel libero
-            <strong>lobortis commodo</strong> ultricies sed nisl. Orci varius
-            natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Ut pretium ipsum in ipsum venenatis, id elementum
-            quam ultrices. Nam nec enim sagittis, ultrices massa eu, fermentum
-            sem.
-          </p>
-          <p>
-            <strong>Nam sed justo tortor:</strong>Aliquam eros ex, porttitor vel
-            aliquam in, imperdiet id felis. Aliquam sed est quis nibh vestibulum
-            porta. Nam ipsum quam, dapibus quis felis quis, pharetra auctor
-            sapien
-          </p>
+          <div class="container">
+            <div class="text-column">
+              <h3>The map</h3>
+              <p>
+                In this part we will describe the core of our game, what objects compose the game, how they interact with each other and what they can do.
+                This game is a 2D maze where the player evolves in a map composed by multiple frames in a 8x8 square
+              </p>
+              <p>
+                Our map will be contained in this array (not every spot will contain a part of the map)
+                Each frame will have the same background but different layers of decoration. It will have a base size of (1280 x 960) They will have possibly 4 exits.
+                For example if the square on the left contains a part of the map there will be an exit in the right side of the frame, 
+                if it don’t there will be no exit on the right side.
+              </p>
+            </div>
+            <img src="../../../ressources/site/sketch/map8x8.png" width="350px" alt="map8x8">
+            <img src="../../../ressources/site/sketch/room.png" width="400px" alt="room">
+          </div>
+          <p class="textcenter">There is here an example of what our map should look like (binding of isaac) :</p>
+          <img class="imgcenter" src="../../../ressources/site/sketch/map.png" alt="map">
         </article>
       </section>
       <!-- Here is the starting point for the page content -->
