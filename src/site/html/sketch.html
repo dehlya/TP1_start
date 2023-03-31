@@ -45,29 +45,203 @@
             <h2>Visual initial sketch of your game project</h2>
             <p>By Group D the 31/03/2023 at 00:00</p>
           </header>
-          <p>
-            Lorem ipsum dolor sit amet...
-            <a href="http://www.hevs.ch/">http://www.hevs.ch/</a>, Ut non eros
-            scelerisque, varius diam a, pulvinar arcu. Phasellus fermentum non
-            arcu ornare ornare. Sed libero mi, rutrum et felis commodo, molestie
-            tempor leo. Duis sit amet erat ut elit faucibus tincidunt sit amet
-            non leo. Quisque dapibus ultricies cursus.
-          </p>
-          <p>
-            Aenean elit nisi, maximus sit amet vulputate non, molestie non odio.
-            Quisque in dolor vel libero
-            <strong>lobortis commodo</strong> ultricies sed nisl. Orci varius
-            natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Ut pretium ipsum in ipsum venenatis, id elementum
-            quam ultrices. Nam nec enim sagittis, ultrices massa eu, fermentum
-            sem.
-          </p>
-          <p>
-            <strong>Nam sed justo tortor:</strong>Aliquam eros ex, porttitor vel
-            aliquam in, imperdiet id felis. Aliquam sed est quis nibh vestibulum
-            porta. Nam ipsum quam, dapibus quis felis quis, pharetra auctor
-            sapien
-          </p>
+          <h3>The map</h3>
+          <div class="container">
+            <div class="text-column">
+              <p>
+                this part, we will describe the core of our game, what objects compose the game, how these objects 
+                interact with each other, and what they can do.
+                This game is a 2D maze where the player evolves in a map composed of multiple frames in an 8x8 square.
+              </p>
+              <p>Our map will be contained in this array, but not every square of the array contains a part of the map. 
+                It will be generated so that the player may navigate randomly. Each room is connected to another.
+                Each frame will have the same background but different layers of decoration. 
+                It will have a base size of (1280x960px) The squares will each possibly have 4 exits. For example, 
+                if the square on the left is a part of the map, there will be an exit on the right side of the square.
+                </p>
+            </div>
+            <img src="../../../ressources/site/sketch/map8x8.png" width="auto" alt="map8x8">
+            <img src="../../../ressources/site/sketch/room.png"alt="room">
+          </div>
+          <p class="textcenter">The following image is a possible example of what our map should look like (Source: Binding of Isaac):</p>
+          <div>
+            <img class="imgcenter" src="../../../ressources/site/sketch/map.png" alt="map">
+            <a href="https://store.steampowered.com/agecheck/app/250900/">
+              <p class="image-description">Map from "the binding of isaac" game</p>
+            </a>
+          </div>
+          <h3>The Main character</h3>
+          <div class="container">
+            <div class="image-column">
+                <img src="../../../ressources/site/sketch/Knight.png" width="175px" alt="knight">
+                <a href="https://aamatniekss.itch.io/fantasy-knight-free-pixelart-animated-character/devlog/301312/free-pack-fantasy-knight">
+                  <p class="image-description">Pixel art taken from user aamtniekss from itch.io</p>
+                </a>
+            </div>
+            <div class="text-column">
+              <h4>Equipment</h4>
+              <p>Now we will talk about the main character.
+                Our main character will have the ability to pick up objects to change characteristics. 
+                He will also have basic stats that can be upgraded by leveling up. 
+                The stats will have an impact on how much damage the character will inflict on enemies, 
+                how much life he possesses, the damage taken by enemy hits, his speed, and other characteristics.
+                
+              </p>
+            </div>
+          </div>
+          <div class="container">
+            <div class="image-column">
+              <img src="../../../ressources/site/sketch/directions.png" width="200px" alt="knight">
+              <a href="https://www.construct.net/en/tutorials/animation-management-8-712">
+                <p class="image-description">Image taken from a tutorial of animation management</p>
+              </a>
+            </div>
+            <div class="text-column">
+              <h3>Movement</h3>
+              <p>Our hero can be moved in 8 different direction and you can control his movements with 4 keys on your keyboard.
+                "W" to go North, "S" to go South, "A" to go West, "D" to go East. You can use a combination of 2 keys de pick 
+                another direction. For example: "W" and "A" to go North-West.
+              </p>
+              <p>He will also have the ability to dash in on of those directions by pressing the "shift" key. The dash will allow our character to move 
+                quickly in one direction and to gain an invincibilty state for a second.</p>
+            </div>
+          </div>
+          <h3>States</h3>
+          <div class="container">
+              <div class="innerBlock">
+              <p>Our main character will have several states. 
+                Idle state:
+                It’s the basic state when our hero doesn’t move.
+                
+                Moving state:
+                It’s the state that our character has when he is moving.
+                
+                Invincible state:
+                This state will be granted to our character for a short amount of time after dashing or after being hit.
+                
+                Attack state:
+                This state is the state that our character has when he attacks. 
+                Blocking state:
+                This state is the state where our character uses a shield and blocks any hit.
+                
+                Dead state:
+                This state is the state when the HP of our character reaches 0.
+                
+                
+              </p>
+              <h3>Statistics</h3>
+              <ul>
+                <li>
+                  Health points :<br>
+                  As long as this stat is greater than 0 our charachter will be alive. 
+                  He can loose health points by getting hit by an ennemy, 
+                  and increase health points by drinking a healing potion or interacting with a rest place 
+                  (represented by a room with a fire). The amount of health points can be increased by adding points in “Vigor”.
+                </li>
+                <br>
+                <li>
+                  Stamina :<br>
+                  Stamina is used by the character to do some specific actions, for example, when the character attacks, 
+                  dashes, and blocks. When the character’s stamina reaches 0 the player can’t do any of the previous actions. 
+                  To retrieve stamina points the player must wait a short amount of time without any action mentioned previously. 
+                  The player will then start to retrieve the stamina back over time. 
+                  If an action is performed during the retrieval of stamina this will interrupt the process. 
+                  The number of stamina can be increased by adding points in “Constitution”.
+                </li>
+                <br>
+                <li>
+                  Strength :<br>
+                  Strength can be increased by 1 point each time the player gains a level. 
+                  This will add damage depending on the character’s attack power.
+                </li>
+                <br>
+                <li>
+                  Dexterity :<br>
+                  Dexterity can be increased by 1 point each time the player gains a level. 
+                  This will allow the character to move faster and will increase the distance of the dash.
+                </li>
+                <br>
+                <li>
+                  Vigor :<br>
+                  Vigor can be increased by 1 point each time the player gains a level. 
+                  Each Vigor point will increase the number of Health points of the character.
+                </li>
+                <br>
+                <li>
+                  Constitution :<br>
+                  Constitution can be increased by 1 point each time the player gains a level. 
+                  Each Constitution point will increase the number of Stamina points of the character.
+                </li>
+                <br>
+                <li>
+                  Armor :<br>
+                  Armor is defined by the items the character carries. It will block enemy damage by a percent of its attack power.
+                </li>
+                <br>
+                <li>
+                  Attack power :<br>
+                  The Attack power is defined by the weapon and the character’s Strength. 
+                  This is the damage you will inflict on your enemies reduced by their own armor.
+                </li>
+                <br>
+                <li>
+                  Faith :<br>
+                  This is the amount of faith the player has. Faith is the currency used to level up, 
+                  it is the price of leveling up depending on the current level.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h2>Equipment</h2>
+          <div class="container">
+            <div class="text-column">
+              <h3>Health potion</h3>
+              <p>
+                Your charachter will have an amount of health potion that can be used to regenerate your health points.
+              </p>
+            </div>
+            <div class="image-column">
+              <img src="../../../ressources/site/sketch/equipements.png" alt="equipement">
+              <a href="https://www.pinterest.ch/pin/585397651558069042/">
+                <p class="image-description">Image taken from pinterest</p>
+              </a>
+            </div>
+          </div>
+          <h2>Ennemies</h2>
+          <div class="container">
+            <div class="image-column">
+              <img src="../../../ressources/site/sketch/ennemy.png" alt="ennemy">
+              <a href="https://kingdomhearts.fandom.com/fr/wiki/Ombre">
+                <p class="image-description">Image from the game Kingdom Hearts</p>
+              </a>
+            </div>
+            <div class="text-column">
+              <p>The enemies will be generated in each room and will have different levels of strength. 
+                Each enemy has 3 main statistics: attack power, health points, and armor. 
+                Depending on its strength, it will drop a certain amount of “Faith”. Enemies will have a hitbox. 
+                If their hitbox interacts with the hitbox of the character’s weapon, they will lose hp.
+              </p>
+              <h3>Boss</h3>
+              <p>
+                The bosses resemble standard enemies, also possessing 3 main statistics, but they will be bigger and stronger.  
+              </p>
+            </div>
+          </div>
+          <div class="container">
+            <div class="text-column">
+              <h3>Rest place</h3>
+              <p>This is a place that the player can encounter in some rooms and that will allow the regeneration of health points, 
+                refilling health potions, and leveling up. When the player interacts with a rest place (represented by a fire) 
+                every enemy on the map is reset and will respawn.
+              </p>
+            </div>
+            <div class="image-column">
+              <img src="../../../ressources/site/sketch/fire.png" width="200px" alt="fire">
+              <a href="https://www.freepik.com/premium-vector/pixel-art-bonfire-june-party-bonfire-vector-icon-8bit-game-white-background_27462098.htm">
+                <p class="image-description">Image taken from freepik.com</p>
+              </a>
+            </div>
+          </div>
         </article>
       </section>
       <!-- Here is the starting point for the page content -->
