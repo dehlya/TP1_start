@@ -14,6 +14,6 @@ export class PlayState extends State {
     toPlay() {
     }
     toPause() {
-        this.game.setCurrentState(this.game.pauseState);
+        //this.game.setCurrentState(this.game.pauseState);
     }
 }

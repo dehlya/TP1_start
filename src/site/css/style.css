@@ -180,6 +180,11 @@ footer img{
   background-color: #1b251d;
 }
 
+#canvas{
+  margin-left: 100px;
+  /*TODO: change after but needed to have 'inspect' while coding on game*/
+}
+
 @media (orientation: landscape) {
   body {
     flex-direction: row;

@@ -10,10 +10,11 @@ export class CreditState extends State {
     toGameOver() {
     }
     toMenu() {
-        this.game.setCurrentState(this.game.menuState);
+        //this.game.setCurrentState(this.game.menuState);
     }
     toPlay() {
     }
     toPause() {
     }
+    
 }

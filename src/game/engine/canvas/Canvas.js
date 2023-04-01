@@ -1,10 +1,8 @@
 export class Canvas {
     constructor() {
         this.canvas = document.createElement('canvas');
-        this.canvas.height = this.height;
-        this.canvas.width = this.width;
-        this.canvas.color = this.color;
         this.setContext();
+        document.getElementById('canvas').appendChild(this.canvas);
     }
     setContext() {
         this.context = this.canvas.getContext('2d');

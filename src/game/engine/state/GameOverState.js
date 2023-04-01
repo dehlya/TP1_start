@@ -12,8 +12,9 @@ export class GameOverState extends State {
     toMenu() {
     }
     toPlay() {
-        this.game.setCurrentState(this.game.playState);
+        //this.game.setCurrentState(this.game.playState);
     }
     toPause() {
     }
+    
 }

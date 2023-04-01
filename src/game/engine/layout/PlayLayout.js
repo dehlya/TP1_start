@@ -5,4 +5,14 @@ export class PlayLayout extends Layout {
         this.background = "grey";
         this.title = "Play in progress...";
     }
+    draw() {
+        this.addBackground();
+        this.addTitle();
+        super.draw();
+    }
+    addBackground() {
+        
+    }
+    addTitle() {
+    }
 }
