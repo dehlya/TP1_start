@@ -11,8 +11,8 @@ export class PlayLayout extends Layout {
         super.draw();
     }
     addBackground() {
-        
     }
     addTitle() {
     }
+    
 }

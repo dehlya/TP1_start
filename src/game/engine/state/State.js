@@ -7,4 +7,5 @@ export class State {
     init() {
         this.game.canvas.cleanCanvas(this);
     }
+    
 }

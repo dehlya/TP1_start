@@ -16,5 +16,7 @@ export class CreditState extends State {
     }
     toPause() {
     }
-    
+    render(){
+        this.layout.draw();
+    }
 }

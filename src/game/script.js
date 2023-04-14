@@ -5,4 +5,9 @@ import { Game } from "./Game.js";
     let game = new Game(canvas, 600, 800);
     game.start();
 
+    document.addEventListener('keydown', recordKey);
+
+    function recordKey(e) {
+      console.log(e.code);
+    }
 

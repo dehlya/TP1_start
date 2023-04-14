@@ -17,5 +17,7 @@ export class PauseState extends State {
     }
     toPause() {
     }
-    
+    render(){
+        this.layout.draw();
+    }
 }

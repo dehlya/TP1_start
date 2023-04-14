@@ -15,5 +15,7 @@ export class EndGameState extends State {
     }
     toPause() {
     }
-    
+    render(){
+        this.layout.draw();
+    }
 }

@@ -13,8 +13,8 @@ export class MenuLayout extends Layout {
         super.draw();
     }
     addBackground() {
-        
     }
     addTitle() {
     }
+    
 }

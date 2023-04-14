@@ -16,4 +16,7 @@ export class PlayState extends State {
     toPause() {
         //this.game.setCurrentState(this.game.pauseState);
     }
+    render(){
+        this.layout.draw();
+    }
 }

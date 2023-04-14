@@ -16,5 +16,7 @@ export class GameOverState extends State {
     }
     toPause() {
     }
-    
+    render(){
+        this.layout.draw();
+    }
 }

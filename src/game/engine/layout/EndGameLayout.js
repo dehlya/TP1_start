@@ -13,8 +13,10 @@ export class EndGameLayout extends Layout {
         super.draw();
     }
     addBackground() {
-        
+        this.game.context.fillStyle = this.background;
+        this.game.context.fillRect(0, 0, this.game.canvas.width, this.game.canvas.height);
     }
     addTitle() {
     }
+    
 }

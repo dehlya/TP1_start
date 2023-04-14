@@ -15,4 +15,5 @@ export class GameOverLayout extends Layout {
     }
     addTitle() {
     }
+    
 }

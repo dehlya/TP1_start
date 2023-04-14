@@ -3,13 +3,15 @@ import { PlayState } from "./engine/state/PlayState.js";
 import { MenuState } from "./engine/state/MenuState.js";
 import { CreditState } from "./engine/state/CreditState.js";
 import { PauseState } from "./engine/state/PauseState.js";
+import { LogoState } from "./engine/state/LogoState.js";
+import { Player } from "./engine/player/Player.js";
 export class Game {
     constructor(canvas, height, width) 
     {
         this.previousTime = 0;
         this.currentTime = 0;
         this.passedTime = 0;
-        this.msPerFrame = 1000.0 / 144.0;
+        this.msPerFrame = 1000335.0 / 144.0;
 
         this.character = 0;
         this.gameMode = 0;
@@ -40,14 +42,15 @@ export class Game {
         this.previousTime = new Date().getTime();
         this.canvas.setBackground("white");
 
-        //this.player = new Player();
+        this.player = new Player();
 
         let menuState = new MenuState(this);
         let playState = new PlayState(this);
         let pauseState = new PauseState(this);
         let gameOverState = new GameOverState(this);
         let creditState = new CreditState(this);
-        this.setCurrentState(menuState);
+        let logoState = new LogoState(this);
+        this.setCurrentState(logoState);
         
 
     }
@@ -58,13 +61,12 @@ export class Game {
         this.passedTime += currentTime - this.previousTime;
         this.previousTime = currentTime;
 
-        // while (this.passedTime >= this.msPerFrame)
-        // {
-            // console.log(this.passedTime);
-            // console.log(this.msPerFrame);
-            // console.log(currentTime);
-            // this.passedTime -= this.msPerFrame;
-        // }
+        while (this.passedTime >= this.msPerFrame)
+        {
+            console.log("loop");
+            this.render();
+            this.passedTime -= this.msPerFrame;
+        }
 
         // ============================================
         // RUNTIME MUST BE UNCOMMENTED TO RUN THE GAME
@@ -75,6 +77,13 @@ export class Game {
     setCurrentState(State){
         this.state = State;
         this.state.init();
+        this.render();
+    }
+    render(){
+        this.canvas.cleanCanvas(this.state);
+        console.log("clean")
+        this.state.render();
+        console.log("render")
     }
 
 }

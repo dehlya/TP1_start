@@ -11,8 +11,8 @@ export class PauseLayout extends Layout {
         super.draw();
     }
     addBackground() {
-        
     }
     addTitle() {
     }
+    
 }
