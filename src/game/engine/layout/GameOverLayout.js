@@ -5,4 +5,15 @@ export class GameOverLayout extends Layout {
         this.background = "grey";
         this.title = "Game Over";
     }
+    draw() {
+        this.addBackground();
+        this.addTitle();
+        super.draw();
+    }
+    addBackground() {
+        
+    }
+    addTitle() {
+    }
+    
 }

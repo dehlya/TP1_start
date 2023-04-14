@@ -1,7 +1,7 @@
 export class Key {
-    constructor(code, keyHandler) {
+    constructor(code, Handler) {
         this.code = code;
-        this.keyHandler = keyHandler;
+        this.Handler = Handler;
         this.isPressed = false;
         this.implementsListener();
     }
@@ -20,9 +20,11 @@ export class Key {
     onHold() {
     }
     onPressed() {
-        this.keyHandler.activeKeys.push(this);
+        this.Handler.push(this);
+        console.log(this.code);
     }
     onReleased() {
-        this.keyHandler.activeKeys.splice(this.keyHandler.activeKeys.indexOf(this));
+        //this.keyHandler.activeKeys.splice(this.keyHandler.activeKeys.indexOf(this));
+        console.log(this.code);
     }
 }

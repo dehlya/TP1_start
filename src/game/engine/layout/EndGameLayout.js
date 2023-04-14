@@ -1,11 +1,12 @@
 import { Layout } from "./Layout.js";
 import { Button } from "../interacter/Button.js";
-export class CreditLayout extends Layout {
+export class EndGameLayout extends Layout {
     constructor(game) {
         super(game);
         this.background = "grey";
-        this.title = "Credit";
+        this.title = "Game finished";
     }
+
     draw() {
         this.addBackground();
         this.addTitle();
@@ -16,7 +17,6 @@ export class CreditLayout extends Layout {
         this.game.context.fillRect(0, 0, this.game.canvas.width, this.game.canvas.height);
     }
     addTitle() {
-        
     }
     
 }

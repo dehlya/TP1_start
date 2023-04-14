@@ -1,9 +1,9 @@
-import { PlayLayout } from "../layout/PlayLayout.js";
+import { EndGamelayout } from "../layout/GameOverLayout.js";
 import { State } from "./State.js";
-export class PlayState extends State {
+export class EndGameState extends State {
     constructor(game) {
         super(game);
-        this.layout = new PlayLayout(this.game);
+        this.layout = new EndGameState(this.game);
     }
     toCredit() {
     }
@@ -14,7 +14,6 @@ export class PlayState extends State {
     toPlay() {
     }
     toPause() {
-        //this.game.setCurrentState(this.game.pauseState);
     }
     render(){
         this.layout.draw();

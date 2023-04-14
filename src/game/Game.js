@@ -3,61 +3,87 @@ import { PlayState } from "./engine/state/PlayState.js";
 import { MenuState } from "./engine/state/MenuState.js";
 import { CreditState } from "./engine/state/CreditState.js";
 import { PauseState } from "./engine/state/PauseState.js";
-import { Gravity } from "./engine/physics/Gravity.js";
+import { LogoState } from "./engine/state/LogoState.js";
+import { Player } from "./engine/player/Player.js";
 export class Game {
-    constructor(canvas, height, width) {
-        this.counter = 1;
-        this.bufferFrame = 15;
-        this.frame = 1;
-        this.FPS = 30;
-        this.lastTimestamp = 0;
-        this.canvas = canvas;
+    constructor(canvas, height, width) 
+    {
+        this.previousTime = 0;
+        this.currentTime = 0;
+        this.passedTime = 0;
+        this.msPerFrame = 1000335.0 / 144.0;
+
+        this.character = 0;
+        this.gameMode = 0;
+        this.scenes = [];
+        this.lastScene = 0;
+        this.scene = 0;
+        this.level = 0;
+        this.levelMax = 0;
+
+        this.canvas  = canvas;
         this.canvas.setHeight(height);
         this.canvas.setWidth(width);
-        this.canvas.getContext().imageSmoothingEnabled = false;
-        // this.gameOverState = new GameOverState(this);
-        // //this.playState = new PlayState(this);
-        // this.menuState = new MenuState(this);
-        // //this.creditState = new CreditState(this);
-        // //this.pauseState = new PauseState(this);
-        // this.setCurrentState(this.menuState);
-        // //this.gravity = new Gravity(this);
-        this.draw();
+
+        this.settings;
+        this.player;
+        this.state;
     }
-    setCurrentState(state) {
-        this.currentState = state;
-        this.currentState.init();
+
+    start()
+    {
+        this.init();
+        this.run();
     }
-    draw() {
-        //this.currentState.layout.draw();
-        this.manageFrame();
-        //this.manageParticules();
-        //this.getGravity().manageGravity();
-        window.requestAnimationFrame(() => {
-            this.draw();
-        });
+
+    init()
+    {   
+
+        this.previousTime = new Date().getTime();
+        this.canvas.setBackground("white");
+
+        this.player = new Player();
+
+        let menuState = new MenuState(this);
+        let playState = new PlayState(this);
+        let pauseState = new PauseState(this);
+        let gameOverState = new GameOverState(this);
+        let creditState = new CreditState(this);
+        let logoState = new LogoState(this);
+        this.setCurrentState(logoState);
+        
+
     }
-    getFrame() {
-        return this.frame;
-    }
-    manageFrame() {
-        this.counter += 1;
-        if (this.counter % this.bufferFrame == 0) {
-            this.frame += 1;
+
+    run(time)
+    {
+        let currentTime = new Date().getTime();
+        this.passedTime += currentTime - this.previousTime;
+        this.previousTime = currentTime;
+
+        while (this.passedTime >= this.msPerFrame)
+        {
+            console.log("loop");
+            this.render();
+            this.passedTime -= this.msPerFrame;
         }
+
+        // ============================================
+        // RUNTIME MUST BE UNCOMMENTED TO RUN THE GAME
+        // ============================================
+
+        requestAnimationFrame(this.run.bind(this));
     }
-    getGravity() {
-        return this.gravity;
+    setCurrentState(State){
+        this.state = State;
+        this.state.init();
+        this.render();
     }
-    addGravity() {
-        this.gravity = new Gravity(this);
+    render(){
+        this.canvas.cleanCanvas(this.state);
+        console.log("clean")
+        this.state.render();
+        console.log("render")
     }
-    manageParticules() {
-        this.currentState.bullets.forEach((particule) => {
-            if (particule.x < 0 || particule.x > this.canvas.getWidth()) {
-                this.currentState.bullets.splice(this.currentState.bullets.indexOf(particule));
-                console.log(particule);
-            }
-        });
-    }
+
 }

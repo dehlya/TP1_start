@@ -1,8 +1,9 @@
-export class Canvas {
+export class VirtualCanvas {
     constructor() {
         this.canvas = document.createElement('canvas');
         this.setContext();
-        document.getElementById('canvas').appendChild(this.canvas);
+        // do not add to hmtl since its a virtual canvas
+        // --> might be with a pattern later with Canvas.js
     }
     setContext() {
         this.context = this.canvas.getContext('2d');
@@ -24,7 +25,7 @@ export class Canvas {
     }
     setBackground(color) {
         this.context.fillStyle = color;
-        this.context.fillRect(0, 0, this.canvas.height, this.canvas.width);
+        this.context.fillRect(0, 0, this.getWidth(), this.getHeight());
     }
     drawText(text) {
         this.getContext().fillStyle = "white";
@@ -32,11 +33,9 @@ export class Canvas {
         this.context.fillText(text, 10, 50);
     }
     cleanCanvas(state) {
-        this.context.restore();
-        this.context.clearRect(0, 0, this.canvas.height, this.canvas.width);
-        this.context.fillRect(0, 0, this.canvas.height, this.canvas.width);
-        //this.setBackground(state.layout.background);
-        //this.context.save();
+        this.getContext().fillRect(0, 0, 1000, 600);
+        this.setBackground(state.layout.background);
+        this.getContext().fillStyle = "white";
     }
     mirrorImage(image, x = 0, y = 0, dw, dh, horizontal = false, vertical = false) {
         //this.getContext().save();
@@ -44,5 +43,6 @@ export class Canvas {
         this.getContext().drawImage(image, 0, 0, dw, dh);
         //this.getContext().restore();
     }
-    
+    render(State){
+    }
 }

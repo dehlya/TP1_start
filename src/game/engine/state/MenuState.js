@@ -11,11 +11,12 @@ export class MenuState extends State {
     }
     toGameOver() {
     }
-    toMenu() {
-    }
     toPlay() {
-        this.game.setCurrentState(this.game.playState);
+        //this.game.setCurrentState(this.game.playState);
     }
     toPause() {
+    }
+    render(){
+        this.layout.draw();
     }
 }

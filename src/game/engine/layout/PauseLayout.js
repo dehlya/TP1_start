@@ -5,4 +5,14 @@ export class PauseLayout extends Layout {
         this.background = "grey";
         this.title = "Play in pause...";
     }
+    draw() {
+        this.addBackground();
+        this.addTitle();
+        super.draw();
+    }
+    addBackground() {
+    }
+    addTitle() {
+    }
+    
 }
