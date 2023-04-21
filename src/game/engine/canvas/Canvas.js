@@ -24,7 +24,7 @@ export class Canvas {
     }
     setBackground(color) {
         this.context.fillStyle = color;
-        this.context.fillRect(0, 0, this.canvas.height, this.canvas.width);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
     drawText(text) {
         this.getContext().fillStyle = "white";
@@ -33,8 +33,8 @@ export class Canvas {
     }
     cleanCanvas(state) {
         this.context.restore();
-        this.context.clearRect(0, 0, this.canvas.height, this.canvas.width);
-        this.context.fillRect(0, 0, this.canvas.height, this.canvas.width);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         //this.setBackground(state.layout.background);
         //this.context.save();
     }
