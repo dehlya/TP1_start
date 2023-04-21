@@ -33,7 +33,7 @@ export class VirtualCanvas {
         this.context.fillText(text, 10, 50);
     }
     cleanCanvas(state) {
-        this.getContext().fillRect(0, 0, 1000, 600);
+        this.getContext().fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.setBackground(state.layout.background);
         this.getContext().fillStyle = "white";
     }

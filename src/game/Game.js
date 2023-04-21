@@ -4,7 +4,7 @@ import { MenuState } from "./engine/state/MenuState.js";
 import { CreditState } from "./engine/state/CreditState.js";
 import { PauseState } from "./engine/state/PauseState.js";
 import { LogoState } from "./engine/state/LogoState.js";
-import { Player } from "./engine/player/Player.js";
+import { Player } from "./engine/Player/Player.js";
 export class Game {
     constructor(canvas, height, width) 
     {
@@ -40,7 +40,7 @@ export class Game {
     {   
 
         this.previousTime = new Date().getTime();
-        this.canvas.setBackground("white");
+        this.canvas.setBackground("red");
 
         this.player = new Player();
 
