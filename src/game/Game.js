@@ -6,28 +6,19 @@ import { PauseState } from "./engine/state/PauseState.js";
 import { LogoState } from "./engine/state/LogoState.js";
 import { Player } from "./engine/Player/Player.js";
 import { SettingsState } from "./engine/state/SettingsState.js";
+import { MS_PER_FRAME } from "./Constants.js";
 export class Game {
   constructor(canvas, height, width) {
     this.previousTime = 0;
     this.currentTime = 0;
     this.passedTime = 0;
-    this.msPerFrame = 1000335.0 / 144.0;
-
-    this.character = 0;
-    this.gameMode = 0;
-    this.scenes = [];
-    this.lastScene = 0;
-    this.scene = 0;
-    this.level = 0;
-    this.levelMax = 0;
+    this.msPerFrame = MS_PER_FRAME;
 
     this.canvas = canvas;
     this.canvas.setHeight(height);
     this.canvas.setWidth(width);
 
-    this.settings;
-    this.player;
-    this.state;
+    
   }
 
   start() {
@@ -40,37 +31,38 @@ export class Game {
 
     this.player = new Player();
 
-    this.menuState = new MenuState(this);
-    this.playState = new PlayState(this);
-    this.pauseState = new PauseState(this);
-    this.gameOverState = new GameOverState(this);
-    this.creditState = new CreditState(this);
-    this.logoState = new LogoState(this);
-    this.settingsState = new SettingsState(this);
-    this.setCurrentState(this.logoState);
-    this.settingsState.audio.play();
+    this.StatesMap = new Map();
+    this.StatesMap.set("Play", new PlayState(this));
+    this.StatesMap.set("Menu", new MenuState(this));
+    this.StatesMap.set("Credits", new CreditState(this));
+    this.StatesMap.set("GameOver", new GameOverState(this));
+    this.StatesMap.set("Pause", new PauseState(this));
+    this.StatesMap.set("Logo", new LogoState(this));
+    this.StatesMap.set("Settings", new SettingsState(this));
+
+    this.state = this.StatesMap.get("Logo");
+    this.state.enter();
+    this.render();
   }
 
-  run(time) {
-    let currentTime = new Date().getTime();
-    this.passedTime += currentTime - this.previousTime;
-    this.previousTime = currentTime;
+  run() {
+    this.playGameTime = 0;
+    this.currentTime = new Date().getTime();
+    this.passedTime += this.currentTime - this.previousTime;
+    this.previousTime = this.currentTime;
 
-    while (this.passedTime >= this.msPerFrame) {
-      console.log("loop");
-      this.render();
-      this.passedTime -= this.msPerFrame;
+
+    while (this.passedTime >= this.msPerFrame)
+    {
+        console.log("loop");
+        this.game.render();
+        this.passedTime -= this.msPerFrame;
     }
-
-    // ============================================
-    // RUNTIME MUST BE UNCOMMENTED TO RUN THE GAME
-    // ============================================
-
-    requestAnimationFrame(this.run.bind(this));
   }
-  setCurrentState(State) {
-    this.state = State;
-    this.state.init();
+  setCurrentState(state) {
+    this.state.exit();
+    this.state = this.StatesMap.get(state);
+    this.state.enter();
     this.render();
   }
   render() {
@@ -78,5 +70,25 @@ export class Game {
     console.log("clean");
     this.state.render();
     console.log("render");
+  }
+  fullscreen(){
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+      this.canvas.setFullscreen(false);
+      this.render();
+    } else {
+      document.getElementById('canvas').requestFullscreen();
+      this.canvas.setFullscreen(true);
+      this.render();
+    }
+  }
+  setMsPerFrame(isPlayState) {
+    //true is in PlayState
+    //false is in other states
+    if(isPlayState){
+      this.msPerFrame = MS_PER_FRAME_PLAY;
+    }else{
+      this.msPerFrame = MS_PER_FRAME;
+    }
   }
 }

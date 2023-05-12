@@ -1,6 +1,10 @@
+import { SCREEN_RATIO } from "../../Constants.js";
+
 export class Canvas {
     constructor() {
         this.canvas = document.createElement('canvas');
+        this.initialHeight = 640;
+        this.initialWidth = 1136;
         this.setContext();
         document.getElementById('canvas').appendChild(this.canvas);
     }
@@ -43,6 +47,19 @@ export class Canvas {
         this.getContext().setTransform(horizontal ? -1 : 1, 0, 0, vertical ? -1 : 1, x + (horizontal ? 256 : 0), y + (vertical ? 64 : 0));
         this.getContext().drawImage(image, 0, 0, dw, dh);
         //this.getContext().restore();
+    }
+    setFullscreen(fullscreen) {
+        if (fullscreen) {
+            this.initialWidth = this.getWidth();
+            this.initialHeight = this.getHeight();
+            this.setWidth(window.innerWidth);
+            this.setHeight(window.innerWidth / SCREEN_RATIO);
+        } else {
+            this.setWidth(this.initialWidth);
+            let height = this.initialWidth/SCREEN_RATIO;
+            this.setHeight(height);
+        }
+
     }
     
 }

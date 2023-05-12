@@ -9,6 +9,6 @@ export class Button {
   }
 
   moveState(state) {
-    this.game.setCurrentState(this.game.creditState);
+    this.game.setCurrentState("Credits");
   }
 }
