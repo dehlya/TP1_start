@@ -1,5 +1,6 @@
 import { State } from "./State.js";
 import { CreditLayout } from "../layout/CreditLayout.js";
+import { KeyHandler } from "../handler/KeyHandler.js";
 export class CreditState extends State {
   constructor(game) {
     super(game);
@@ -8,6 +9,7 @@ export class CreditState extends State {
     game.canvas.canvas.addEventListener("click", (event) =>
       this.handleClick(event)
     );
+    this.keyHandler = new KeyHandler();
   }
 
   handleMouseMove(event) {
@@ -45,10 +47,21 @@ export class CreditState extends State {
   }
 
   toMenu() {
-    this.game.setCurrentState(this.game.menuState);
+    this.game.setCurrentState("Menu");
   }
 
   render() {
     this.layout.draw();
   }
+  enter() {
+    super.enter();
+    this.addCallbacks();
+}
+
+exit() {
+    super.exit();
+    this.keyHandler.removeAllCallbacks();
+}
+addCallbacks() {
+}
 }
