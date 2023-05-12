@@ -1,7 +1,7 @@
 import { PlayLayout } from "../layout/PlayLayout.js";
 import { State } from "./State.js";
-import { Level } from "../../levels/level.js";
-import { LevelsManager } from "../../levels/levelsManager.js";
+import { Level } from "../../levels/Level.js";
+import { LevelsManager } from "../../levels/LevelsManager.js";
 import { KeyHandler } from "../handler/KeyHandler.js";
 export class PlayState extends State {
     constructor(game) {
