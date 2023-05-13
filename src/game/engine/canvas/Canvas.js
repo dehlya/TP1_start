@@ -3,8 +3,8 @@ import { SCREEN_RATIO } from "../../Constants.js";
 export class Canvas {
     constructor() {
         this.canvas = document.createElement('canvas');
-        this.initialHeight = 640;
-        this.initialWidth = 1136;
+        this.initialHeight = 0;
+        this.initialWidth = 0;
         this.setContext();
         document.getElementById('canvas').appendChild(this.canvas);
     }
@@ -52,12 +52,26 @@ export class Canvas {
         if (fullscreen) {
             this.initialWidth = this.getWidth();
             this.initialHeight = this.getHeight();
-            this.setWidth(window.innerWidth);
-            this.setHeight(window.innerWidth / SCREEN_RATIO);
+            let isLandscape = (window.innerHeight<window.innerWidth && window.innerWidth/SCREEN_RATIO <= window.innerHeight || window.innerHeight*SCREEN_RATIO >= window.innerWidth)? true : false;
+            let width, height;
+            if(isLandscape){
+                width = window.innerWidth;
+                height = width/SCREEN_RATIO;
+                this.canvas.style.marginTop = (window.innerHeight-height)/2+"px";
+            }else{
+                height = window.innerHeight;
+                width = height*SCREEN_RATIO;
+                this.canvas.style.marginLeft = (window.innerWidth-width)/2+"px";
+
+            }
+            this.setWidth(width);
+            this.setHeight(height);
         } else {
             this.setWidth(this.initialWidth);
-            let height = this.initialWidth/SCREEN_RATIO;
-            this.setHeight(height);
+            this.setHeight(this.initialHeight);
+            this.canvas.style.marginTop = "0px";
+            this.canvas.style.marginLeft =  "0px";
+
         }
 
     }

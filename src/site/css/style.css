@@ -172,7 +172,7 @@ footer {
   padding: 20px;
   bottom: 0;
   left: 0;
-  position: fixed;
+  position: bottom;
   width: 100%;
   max-height: 100px;
 }
@@ -181,7 +181,7 @@ footer img{
 }
 
 #canvas{
-  margin-left: 100px;
+  margin: 0px;
   /*TODO: change after but needed to have 'inspect' while coding on game*/
 }
 

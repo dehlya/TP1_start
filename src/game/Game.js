@@ -91,4 +91,13 @@ export class Game {
       this.msPerFrame = MS_PER_FRAME;
     }
   }
+  resize(width, height) {
+    if (document.fullscreenElement) {
+      this.canvas.setFullscreen(true);
+    }else{
+      this.canvas.setWidth(width);
+      this.canvas.setHeight(height);
+    }
+    this.render();
+  }
 }
