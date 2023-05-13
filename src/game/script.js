@@ -2,13 +2,16 @@ import { SCREEN_RATIO } from "./Constants.js";
 import { Canvas } from "./engine/canvas/Canvas.js";
 import { Game } from "./Game.js";
 
-let canvas = new Canvas();
-let height, width;
-getCanvasSize();
+$(document).ready(function () {
+  let canvas = new Canvas();
+  let height, width;
+  getCanvasSize();
 
-let game = new Game(canvas, height, width); 
-//TODO: window resize + change with ratio
-game.start();
+  let game = new Game(canvas, height, width); 
+  //TODO: window resize + change with ratio
+  game.start();
+
+});
 
 function getCanvasSize() {
   let isLandscape = (window.innerHeight<window.innerWidth && window.innerWidth/SCREEN_RATIO <= window.innerHeight || window.innerHeight*SCREEN_RATIO >= window.innerWidth)? true : false;

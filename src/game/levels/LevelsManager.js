@@ -2,9 +2,23 @@ export class LevelsManager {
     constructor(level) {
         this.currentLevel = level;
         this.levelsMap = new Map();
-        this.levelsMap.set(1, this.currentLevel);
+        //this.init();
         
     }
+    init(){
+        $.ajax({
+            dataType: "json",
+            url: './Levels.ajax.js',
+            data: [{
+                action : "getFirstLevel"
+            }]
+        })
+        .done(function(data){
+            this.data = data;
+            console.log(this.data);
+        });
+    }
+
     createLevel(Level){
         this.levelsMap.set(this.levelsMap.length, Level);
     }
