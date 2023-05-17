@@ -1,26 +1,28 @@
+const LEVEL_JSON_PATH = "../../../ressources/game/json/levels.json";
+import {Level} from "./Level.js";
+
 export class LevelsManager {
-    constructor(level) {
-        this.currentLevel = level;
+    constructor(game) {
+        this.game = game;
+        this.currentLevel;
         this.levelsMap = new Map();
-        //this.init();
+        this.numberOfLevels = 0;
+        this.init();
         
     }
     init(){
-        $.ajax({
-            dataType: "json",
-            url: './Levels.ajax.js',
-            data: [{
-                action : "getFirstLevel"
-            }]
-        })
-        .done(function(data){
-            this.data = data;
-            console.log(this.data);
+        fetch(LEVEL_JSON_PATH)
+        .then((response) => response.json())
+        .then((json) => {
+            json.levels.forEach(level => {
+                this.createLevel(level.title, level.description);
+            });
+            this.numberOfLevels = json.numberOfLevels;
         });
     }
 
-    createLevel(Level){
-        this.levelsMap.set(this.levelsMap.length, Level);
+    createLevel(title, description){
+        this.levelsMap.set(this.levelsMap.length, new Level(this.game, title, description));
     }
     firstLevel(){
         this.currentLevel.end();

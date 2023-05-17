@@ -1,7 +1,7 @@
 {
-  "name": "tp1_start",
+  "name": "the_invoked_one",
   "version": "1.0.0",
-  "description": "webDev project",
+  "description": "webDev game project",
   "main": "index.html",
   "module": "./",
   "type": "module",
