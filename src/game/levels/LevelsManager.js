@@ -1,12 +1,28 @@
+const LEVEL_JSON_PATH = "../../../ressources/game/json/levels.json";
+import {Level} from "./Level.js";
+
 export class LevelsManager {
-    constructor(level) {
-        this.currentLevel = level;
+    constructor(game) {
+        this.game = game;
+        this.currentLevel;
         this.levelsMap = new Map();
-        this.levelsMap.set(1, this.currentLevel);
+        this.numberOfLevels = 0;
+        this.init();
         
     }
-    createLevel(Level){
-        this.levelsMap.set(this.levelsMap.length, Level);
+    init(){
+        fetch(LEVEL_JSON_PATH)
+        .then((response) => response.json())
+        .then((json) => {
+            json.levels.forEach(level => {
+                this.createLevel(level.title, level.description);
+            });
+            this.numberOfLevels = json.numberOfLevels;
+        });
+    }
+
+    createLevel(title, description){
+        this.levelsMap.set(this.levelsMap.length, new Level(this.game, title, description));
     }
     firstLevel(){
         this.currentLevel.end();

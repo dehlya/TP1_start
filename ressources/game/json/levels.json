@@ -1,0 +1,16 @@
+{
+    "numberOfLevels":2,
+    "levels":
+    [
+      {
+        "id": 1,
+        "title": "First Level",
+        "description": " This is the First Level "
+      },
+      {
+        "id": 2,
+        "title": "Second Level",
+        "description": " This is the Second Level "
+      }
+    ]
+  }
