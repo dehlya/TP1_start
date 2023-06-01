@@ -30,10 +30,10 @@
           <li>
             <a href="logbook.html">Logbook</a>
           </li>
-          <li class="active">
+          <li>
             <a href="game.html">Game</a>
           </li>
-          <li>
+          <li class="active">
             <a href="hitboxCreator.html">HitBox Creator</a>
           </li>
         </ul>
@@ -45,14 +45,27 @@
       <section id="articles">
         <article>
           <header>
-            <h2>Game Page</h2>
-            <p>By Group D the 31/03/2023 at 00:00</p>
+            <h2>Hitbox Creator</h2>
+            <p></p>
           </header>
           <div>
             <body>
-              <div id="canvas"></div>
-              <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-              <script type="module" src="../../game/script.js"></script>
+              <div>
+                <p>
+                  Hi! Welcome in our Hitbox Creator.
+                  Tell us a little about you and give us the image you want the hitbox for :)
+                </p>
+                <form>
+                  <input type="text" name="name" placeholder="name">
+                  <br>
+                  <input type="image" name="image" placeholder="imageLink">
+                  <br>
+                  <input type="submit">
+                </form>
+              </div>
+              <div> 
+                <button id="createAllButton" onclick="createAll();" > Create all HitBoxes for the Game</button>
+              </div>
             </body>
           </div>
         </article>
@@ -62,6 +75,24 @@
     <footer>
       <img id="logo" src="../../../ressources/site/logo.png" />
     </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script type="module">
+      import { HitboxCreator } from '../../game/engine/collisions/hitbox/HitboxCreator.js';
+      console.log("tetstststst");
+      let hitboxCreator = new HitboxCreator();
+      const IS_DEV = true;
+      if(IS_DEV){
+        $("#createAllButton").show();
+      }
+      createAll();
+      function createAll(){
+        hitboxCreator.createAll();
+      }
+      function createFromImg(){
+        let imgToDefine;
+        hitboxCreator.defineLimits(imgToDefine);
+      }
+    </script>
   </body>
-  
 </html>
