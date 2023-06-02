@@ -2,11 +2,11 @@ export class HitboxCreator {
     constructor() {
         this.hitboxes = [];
     }
-    defineLimits(){
+    defineLimits(imgPath){
         let img = new Image();
         //img.id = 'imgId';
-        img.src = '../../../../../ressources/site/sketch/ennemy.png';
-        img.onload = function(){
+        img.src = imgPath;
+        img.onload = () => {
             let canvas = document.createElement('canvas');
             canvas.width = img.width;
             canvas.height = img.height;
@@ -47,15 +47,15 @@ export class HitboxCreator {
         }
     }
     getTransparencyData(imageData){
-        let transparencyData = new Uint8ClampedArray(imageData.data.length);
+        let transparencyData ;
+        transparencyData = new Uint8ClampedArray(imageData.data.length);
+        console.log(imageData.data);
         for (let i = 0; i < imageData.data.length; i++) {
-            console.log(imageData.data[i]);
-            transparencyData[i] = imageData.data[i];
         }
         return transparencyData;
     }
     createAll(){
-        this.defineLimits();
+        this.defineLimits('../../../../../ressources/site/sketch/ennemy.png');
     }
 
     // Recursive function to find hitbox boundaries
@@ -66,30 +66,32 @@ export class HitboxCreator {
             y < 0 ||
             x >= imageData.width ||
             y >= imageData.height ||
-            transparencyData[(x + y * imageData.width) * 4]
+            transparencyData[(x + y * imageData.width) * 4 + 3] === 0
         ) {
             return;
         }
-
+    
         // Update hitbox boundaries
         if (x < hitbox.x) {
+            hitbox.width += hitbox.x - x;
             hitbox.x = x;
         }
         if (y < hitbox.y) {
+            hitbox.height += hitbox.y - y;
             hitbox.y = y;
         }
         if (x > hitbox.x + hitbox.width) {
-            hitbox.width = x - hitbox.x;
+            hitbox.width = x - hitbox.x + 1;
         }
         if (y > hitbox.y + hitbox.height) {
-            hitbox.height = y - hitbox.y;
+            hitbox.height = y - hitbox.y + 1
         }
-
+    
         // Recursive calls for adjacent pixels
-        findHitboxBounds(imageData, transparencyData, x - 1, y, hitbox);  // Left
-        findHitboxBounds(imageData, transparencyData, x + 1, y, hitbox);  // Right
-        findHitboxBounds(imageData, transparencyData, x, y - 1, hitbox);  // Up
-        findHitboxBounds(imageData, transparencyData, x, y + 1, hitbox);  // Down
+        this.findHitboxBounds(imageData, transparencyData, x - 1, y, hitbox);
+        this.findHitboxBounds(imageData, transparencyData, x + 1, y, hitbox);
+        this.findHitboxBounds(imageData, transparencyData, x, y - 1, hitbox);
+        this.findHitboxBounds(imageData, transparencyData, x, y + 1, hitbox);
     }
 
     // Function to create hitbox from image data and transparency information
@@ -100,9 +102,23 @@ export class HitboxCreator {
             width: 0,             // Initialize with minimum possible value
             height: 0             // Initialize with minimum possible value
         };
+        // function for non recusive method
+        for (let y = 0; y < imageData.height; y++) {
+            for (let x = 0; x < imageData.width; x++) {
+              const pixelIndex = (x + y * imageData.width) * 4;
+              const isTransparent = transparencyData[pixelIndex] === 0;
+        
+              if (!isTransparent) {
+                hitbox.x = Math.min(hitbox.x, x);
+                hitbox.y = Math.min(hitbox.y, y);
+                hitbox.width = Math.max(hitbox.width, x - hitbox.x + 1);
+                hitbox.height = Math.max(hitbox.height, y - hitbox.y + 1);
+              }
+            }
+        }
 
         // Start recursive function from top-left corner of the image
-        findHitboxBounds(imageData, transparencyData, 0, 0, hitbox);
+        //this.findHitboxBounds(imageData, transparencyData, 0, 0, hitbox);
 
         return hitbox;
     }
