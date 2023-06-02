@@ -1,6 +1,7 @@
 import { SCREEN_RATIO } from "./Constants.js";
 import { Canvas } from "./engine/canvas/Canvas.js";
 import { Game } from "./Game.js";
+import { HitboxCreator } from "./engine/collisions/hitbox/HitboxCreator.js";
 
 
 let canvas = new Canvas();
@@ -10,6 +11,7 @@ getCanvasSize();
 let game = new Game(canvas, height, width); 
 //TODO: window resize + change with ratio
 game.start();
+let hitboxCreator = new HitboxCreator();
 
 
 function getCanvasSize() {
