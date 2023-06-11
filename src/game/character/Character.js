@@ -9,9 +9,6 @@ import { CharacterMovingState } from "./CharacterMovingState.js";
 
 
 export class Character{
-    hpMax: number;
-    hp: number;
-    _staminaMax: number;
 
     //Constructor of the character class --------------------------------------
     constructor() {
@@ -29,7 +26,7 @@ export class Character{
         this.faith = 0;
         this.isAttacking = false;
         this.isMoving = false;
-        this.currentImage = "characterFrames/move_down/down_move_0.png";
+        this.currentImage = "ressources/game/character/idle_front.png";
     }
 
     //getter and setters ------------------------------------------------------
@@ -171,46 +168,52 @@ export class Character{
         console.log("Move animation started");
         console.log(this.currentImage);
         console.log(direction);
-    
-        // The animation depends on which way the character goes
+
         let imageFolder;
         switch (direction) {
-        case 'up':
-            imageFolder = 'move_up';
-            break;
-        case 'down':
-            imageFolder = 'move_down';
-            break;
-        case 'left':
-            imageFolder = 'move_left';
-            break;
-        case 'right':
-            imageFolder = 'move_right';
-            break;
-        default:
-            console.log('Invalid direction');
-            return;
+            case 'up':
+                imageFolder = 'move_up';
+                imageFrames = ['up_move_0.png', 'up_move_1.png', 'up_move_2.png', 'up_move_3.png','up_move_4.png','up_move_5.png','up_move_6.png','up_move_7.png','up_move_8.png'];
+                break;
+            case 'down':
+                imageFolder = 'move_down';
+                imageFrames = ['down_move_0.png', 'down_move_1.png','down_move_2.png','down_move_3.png','down_move_4.png','down_move_5.png','down_move_6.png', 'down_move_7.png'];
+                break;
+            case 'left':
+                imageFolder = 'move_left';
+                imageFrames = ['left_move_0.png', 'left_move_1.png', 'left_move_2.png', 'left_move_3.png','left_move_4.png','left_move_5.png','left_move_6.png','left_move_7.png','left_move_8.png'];
+                break;
+            case 'right':
+                imageFolder = 'move_right';
+                imageFrames = ['right_move_0.png', 'right_move_1.png', 'right_move_2.png', 'right_move_3.png','right_move_4.png','right_move_5.png','right_move_6.png','right_move_7.png','right_move_8.png'];
+                break;
+            default:
+                console.log('Invalid direction');
+                return;
         }
         const imageCount = 8;
         this.currentFrame = 0;
     
         // Start the animation loop for the specified direction
         while (this.isMoving && direction === this.currentMoveDirection) {
-        console.log(direction);
-        const currentImage = `${imageFolder}/${direction}_move_${this.currentFrame}.png`;
-        this.setCurrentImage(currentImage);
-        console.log('Current frame: ' + this.currentImage);
-    
-        this.currentFrame++;
-        if (this.currentFrame >= imageCount) {
-            this.currentFrame = 0;
+            for (const frame of imageFrames) {
+                const currentImage = `ressources/game/character/characterframes/${imageFolder}/${frame}`;
+                this.setCurrentImage(currentImage);
+                console.log('Current frame: ' + this.currentImage);
+        
+                await this.delay(100); // Delay for 0.1 second
+
+                // Call the render method to update the canvas with the new character position
+                this.render(this);
+            
+                if (!this.isMoving || direction !== this.currentMoveDirection) {
+                    break;
+                }
+            }
         }
-    
-          await this.delay(1000); // Delay for 1 second
-        }
-    
         this.currentFrame = 0;
-    }
+    } 
+    
     stop(){
         this.state.stop();
     }

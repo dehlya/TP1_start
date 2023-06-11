@@ -4,6 +4,8 @@ export class VirtualCanvas {
         this.setContext();
         // do not add to hmtl since its a virtual canvas
         // --> might be with a pattern later with Canvas.js
+        this.characterImage = new Image();
+        this.characterImage.src = '~/ressources/game/character/idle_front.png';
     }
     setContext() {
         this.context = this.canvas.getContext('2d');
@@ -45,4 +47,21 @@ export class VirtualCanvas {
     }
     render(State){
     }
+    render(character) {
+        this.cleanCanvas(character.state);
+    
+        // Draw character image
+        const characterX = 100; // Adjust the character's X position as needed
+        const characterY = 100; // Adjust the character's Y position as needed
+        const characterWidth = 64; // Adjust the character's width as needed
+        const characterHeight = 64; // Adjust the character's height as needed
+    
+        this.getContext().drawImage(
+          this.characterImage,
+          characterX,
+          characterY,
+          characterWidth,
+          characterHeight
+        );
+      }
 }

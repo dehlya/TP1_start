@@ -32,12 +32,14 @@ export class PlayState extends State {
         super.enter();
         this.addCallbacks();
     }
-  
     exit() {
         super.exit();
         this.keyHandler.removeAllCallbacks();
     }
     addCallbacks() {
+        this.game.canvas.addClickListener(() => {
+            this.layout.showUsernameInput = true; // Set the flag to display the username input window
+            this.game.render(); // Render the updated layout
+        });
     }
-
 }

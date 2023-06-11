@@ -7,6 +7,7 @@ import { LogoState } from "./engine/state/LogoState.js";
 import { Player } from "./engine/Player/Player.js";
 import { SettingsState } from "./engine/state/SettingsState.js";
 import { MS_PER_FRAME } from "./Constants.js";
+
 export class Game {
   constructor(canvas, height, width) {
     this.previousTime = 0;

@@ -39,7 +39,7 @@ export class Canvas {
         this.context.restore();
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        //this.setBackground(state.layout.background);
+        this.setBackground(state.layout.background);
         //this.context.save();
     }
     mirrorImage(image, x = 0, y = 0, dw, dh, horizontal = false, vertical = false) {
