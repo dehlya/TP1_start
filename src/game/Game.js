@@ -18,7 +18,6 @@ export class Game {
     this.canvas = canvas;
     this.canvas.setHeight(height);
     this.canvas.setWidth(width);
-
     
   }
 

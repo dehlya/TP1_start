@@ -8,8 +8,29 @@ export class PlayState extends State {
         super(game);
         this.layout = new PlayLayout(this.game);
         this.levelsManager = new LevelsManager(new Level(this.game, "Level 1", "getLevelDescription(1)"));
-        this.keyHandler = new KeyHandler();
+        game.canvas.canvas.addEventListener("click", (event) =>
+        this.handleClick(event)
+      );
+      this.keyHandler = new KeyHandler();
     }
+    handleClick(event) {
+        if (this.game.state !== this) return;
+        let rect = this.game.canvas.canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+    
+        let startX = (this.game.canvas.getWidth() - this.layout.buttonWidth) / 2;
+        let startY = this.game.canvas.getHeight() - this.layout.buttonHeight - 10;
+    
+        if (
+          x >= startX &&
+          x <= startX + this.layout.buttonWidth &&
+          y >= startY &&
+          y <= startY + this.layout.buttonHeight
+        ) {
+          this.layout.backButton.onClick();
+        }
+      }
     toPause() {
         this.game.setCurrentState("Pause");
     }

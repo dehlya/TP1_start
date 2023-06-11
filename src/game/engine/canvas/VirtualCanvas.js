@@ -5,7 +5,7 @@ export class VirtualCanvas {
         // do not add to hmtl since its a virtual canvas
         // --> might be with a pattern later with Canvas.js
         this.characterImage = new Image();
-        this.characterImage.src = '~/ressources/game/character/idle_front.png';
+        this.characterImage.src = '../../../ressources/game/character/idle_front.png';
     }
     setContext() {
         this.context = this.canvas.getContext('2d');

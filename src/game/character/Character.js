@@ -26,7 +26,7 @@ export class Character{
         this.faith = 0;
         this.isAttacking = false;
         this.isMoving = false;
-        this.currentImage = "ressources/game/character/idle_front.png";
+        this.currentImage = "../../../ressources/game/character/idle_front.png";
     }
 
     //getter and setters ------------------------------------------------------
@@ -197,7 +197,7 @@ export class Character{
         // Start the animation loop for the specified direction
         while (this.isMoving && direction === this.currentMoveDirection) {
             for (const frame of imageFrames) {
-                const currentImage = `ressources/game/character/characterframes/${imageFolder}/${frame}`;
+                const currentImage = `../../../ressources/game/character/characterframes/${imageFolder}/${frame}`;
                 this.setCurrentImage(currentImage);
                 console.log('Current frame: ' + this.currentImage);
         

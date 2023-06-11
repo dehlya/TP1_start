@@ -18,7 +18,7 @@ export class PlayLayout extends Layout {
       super.draw();
     }
   
-    // Method to display the username input window
+    // Method to display the username input window 
     addUsernameInput() {
       const usernameForm = document.createElement("form");
       usernameForm.style.position = "absolute";
@@ -67,11 +67,11 @@ export class PlayLayout extends Layout {
     }
 
     loadBackground() {
-      this.layout.setBackgroundImage("ressources/game/background/background_dungeon_final_v1.png");
+      this.layout.setBackgroundImage("../../../ressources/game/background/background_dungeon_final_v1.png");
     }
 
     loadCharacter() {
-      this.layout.setCharacterImage("/ressources/game/character/idle_front.png");
+      this.layout.setCharacterImage("../../../ressources/game/character/idle_front.png");
       // this.layout.setCharacterAppearance("color: blue; size: 32px;");
     }
   

@@ -60,9 +60,7 @@ export class SettingsLayout extends Layout {
         centeredX,
         y
     );
-}
-
-    
+    }
 
     addBackground() {
         this.context.fillStyle = this.background;
