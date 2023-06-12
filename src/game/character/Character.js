@@ -1,37 +1,73 @@
 import { CharacterIdleState } from "./CharacterIdleState.js";
-import { CharacterAttackState } from "./CharacterAttackState.js";
-import { CharacterHitState } from "./CharacterHitState.js";
-import { CharacterBlockingState } from "./CharacterBlockingState.js";
-import { CharacterDashingState } from "./CharacterDashingState.js";
-import { CharacterDeadState } from "./CharacterDeadState.js"
-import { CharacterHealingState } from "./CharacterHealingState.js";
-import { CharacterMovingState } from "./CharacterMovingState.js";
-
+import { KeyHandler } from "../engine/handler/KeyHandler.js";
 
 export class Character{
+    keyHandler = new KeyHandler();
 
     //Constructor of the character class --------------------------------------
-    constructor() {
+    constructor(x,y,canvas, ctx) {
+        this.x = x;
+        this.y = y;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.width = 70;
+        this.height = 100;
+        this.speed = 100;
         this.state = new CharacterIdleState(this);
         this.hpMax = 100;
         this.hp = this.hpMax;
         this._staminaMax = 100;
         this.stamina = this.staminaMax;
+        this.moveSpeed = 100;
+        this.attackPower = 20;
         this.potionsMax = 3;
         this.potions = this.potionsMax;
-        this.constitution = 12;
-        this.vigor = 12;
-        this.dexterity = 12;
-        this.strength = 12;
+        this.constitution = 0;
+        this.vigor = 0;
+        this.dexterity = 0;
+        this.strength = 0;
+        this.faith = 0;
+        this.state = new CharacterIdleState(this);
+        this.hpMax = 100;
+        this.hp = this.hpMax;
+        this._staminaMax = 100;
+        this.stamina = this.staminaMax;
+        this.moveSpeed = 100;
+        this.attackPower = 20;
+        this.potionsMax = 3;
+        this.potions = this.potionsMax;
+        this.constitution = 0;
+        this.vigor = 0;
+        this.dexterity = 0;
+        this.strength = 0;
         this.faith = 0;
         this.isAttacking = false;
         this.isMoving = false;
-        this.currentImage = "../../../ressources/game/character/idle_front.png";
+        this.currentImage = "../../../ressources/game/character/characterFrames/move_down/down_move_0.png";
+        this.currentMoveDirection = "down";
+        this.startStaminaRegeneration();
+        this.keyHandler.addCallback('Space','keydown',() => this.attack());
+    }
+
+    render() {
+        // Clear the canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Load the character's image
+        const image = new Image();
+        image.onload = () => {
+            // Draw the character's image on the canvas at its current position
+            this.ctx.drawImage(image, this.x, this.y, this.width, this.height);
+        };
+        image.src = this.currentImage; // Set the image source after the onload handler is defined
     }
 
     //getter and setters ------------------------------------------------------
     setCurrentImage(value) {
         this.currentImage = value;
+    }
+    setCurrentMoveDirection(value) {
+        this.currentMoveDirection = value;
     }
     setState(state) {
         this.state = null;
@@ -56,13 +92,70 @@ export class Character{
         this._staminaMax = value;
     }
     //End of getter and setters -----------------------------------------------
-    
+
+    //functions attributes up -------------------------------------------------
+    constitutionUp(value){
+        this.constitution += value;
+        this.hpMax += value*10;
+    }
+    vigorUp(value){
+        this.vigor += value;
+        this.staminaMax += value*10;
+    }
+    dexterityUp(value){
+        this.dexterity += value;
+        this.moveSpeed += value*5;
+    }
+    strengthUp(value){
+        this.strength += value;
+        this.moveSpeed += value*5;
+    }
+    constitutionDown(value){
+        this.constitution -= value;
+        this.hpMax -= value*5;
+        if(this.constitution < 0){
+            this.constitution = 0;
+        }
+    }
+    vigorDown(value){
+        this.vigor -= value;
+        this.staminaMax -= value*5;
+        if(this.vigor < 0){
+            this.vigor = 0;
+        }
+    }
+    dexterityDown(value){
+        this.dexterity -= value;
+        this.moveSpeed -= value*5;
+        if(this.dexterity < 0){
+            this.dexterity = 0;
+        }
+    }
+    strengthDown(value){
+        this.strength -= value;
+        this.moveSpeed -= value*5;
+        if(this.strength < 0){
+            this.strength = 0;
+        }
+    }
+    //End of functions attributes up ------------------------------------------
+
     //Functions specific for the character-------------------------------------
     looseStamina(value){
         this.stamina -= value;
         if(this.stamina < 0){
             this.stamina = 0;
         }
+    }
+    startStaminaRegeneration() {
+        setInterval(() => {
+            if (!this.isMoving && !this.isAttacking && this.stamina < this.staminaMax) {
+                this.stamina += this.staminaMax/10;
+                if (this.stamina > this.staminaMax) {
+                    this.stamina = this.staminaMax;
+                }
+            }
+        }, 1000); // Regenerate stamina every 1000 milliseconds (1 second)
     }
     regainHP(value){
         if(this.hp + value > this.hpMax){
@@ -78,14 +171,22 @@ export class Character{
     usePotion(){
         this.potions--;
     }
+    gainFaith(value){
+        this.faith += value;
+    }
+    looseFaith(){
+        this.faith = 0;
+    }
     //End of functions specific for the character------------------------------
 
 
     //Functions used for attack------------------------------------------------
     attack(){
         // Can only be triggered if the stamina is greater than 0 and not currently attacking
-        console.log("Attack Key Pressed");
         if(this.stamina > 0 && !this.isAttacking) {
+            console.log("Attack Key Pressed");
+            this.setIsAttacking(true);
+            this.setIsMoving(false);
             this.state.attack();
         }
     }
@@ -93,14 +194,55 @@ export class Character{
         this.isAttacking = false;
         this.state.attackOver();
     }
-    startAttackAnimation() {
+    async startAttackAnimation() {
         console.log("Attack animation started " + this.stamina);
+        let direction;
+        switch (this.currentMoveDirection) {
+            case 'up':
+                direction = 'up';
+                break;
+            case 'down':
+                direction = 'down';
+                break;
+            case 'left':
+                direction = 'left';
+                break;
+            case 'right':
+                direction = 'right';
+                break;
+            default:
+                console.log('Invalid direction');
+                return;
+        }
+        const imageCount = 5;
+        this.currentFrame = 1;
+
+        // Start the animation loop for the specified direction
+        while (this.isAttacking) {
+            console.log(this.currentMoveDirection);
+            const currentImage = `../../../ressources/game/character/characterFrames/attack/attack_${direction}_${this.currentFrame}.png`;
+            this.setCurrentImage(currentImage);
+            console.log('Current frame: ' + this.currentImage);
+
+            this.currentFrame++;
+            if (this.currentFrame >= imageCount) {
+                this.currentFrame = 1;
+                this.attackOver();
+                this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${direction}/${direction}_move_0.png`);
+            }
+
+            await this.delay(100); // Delay for 1 second
+        }
+
+        this.currentFrame = 0;
+
         this.attackOver();
+        console.log(this.currentImage);
     }
     //End of functions used for attack-----------------------------------------
 
 
-    //Functions handeling the hits---------------------------------------------
+    //Functions handling the hits---------------------------------------------
     hit(){
         console.log("You got hit");
         this.state.hit();
@@ -112,7 +254,7 @@ export class Character{
         console.log("Hit animation started " + this.hp);
         this.hitOver();
     }
-    //End of functions handeling the hits--------------------------------------
+    //End of functions handling the hits--------------------------------------
 
 
     //Functions used for block-------------------------------------------------
@@ -169,51 +311,46 @@ export class Character{
         console.log(this.currentImage);
         console.log(direction);
 
+        // The animation depends on which way the character goes
         let imageFolder;
         switch (direction) {
-            case 'up':
-                imageFolder = 'move_up';
-                imageFrames = ['up_move_0.png', 'up_move_1.png', 'up_move_2.png', 'up_move_3.png','up_move_4.png','up_move_5.png','up_move_6.png','up_move_7.png','up_move_8.png'];
-                break;
-            case 'down':
-                imageFolder = 'move_down';
-                imageFrames = ['down_move_0.png', 'down_move_1.png','down_move_2.png','down_move_3.png','down_move_4.png','down_move_5.png','down_move_6.png', 'down_move_7.png'];
-                break;
-            case 'left':
-                imageFolder = 'move_left';
-                imageFrames = ['left_move_0.png', 'left_move_1.png', 'left_move_2.png', 'left_move_3.png','left_move_4.png','left_move_5.png','left_move_6.png','left_move_7.png','left_move_8.png'];
-                break;
-            case 'right':
-                imageFolder = 'move_right';
-                imageFrames = ['right_move_0.png', 'right_move_1.png', 'right_move_2.png', 'right_move_3.png','right_move_4.png','right_move_5.png','right_move_6.png','right_move_7.png','right_move_8.png'];
-                break;
-            default:
-                console.log('Invalid direction');
-                return;
+        case 'up':
+            imageFolder = 'move_up';
+            break;
+        case 'down':
+            imageFolder = 'move_down';
+            break;
+        case 'left':
+            imageFolder = 'move_left';
+            break;
+        case 'right':
+            imageFolder = 'move_right';
+            break;
+        default:
+            console.log('Invalid direction');
+            return;
         }
         const imageCount = 8;
         this.currentFrame = 0;
-    
+
         // Start the animation loop for the specified direction
         while (this.isMoving && direction === this.currentMoveDirection) {
-            for (const frame of imageFrames) {
-                const currentImage = `../../../ressources/game/character/characterframes/${imageFolder}/${frame}`;
-                this.setCurrentImage(currentImage);
-                console.log('Current frame: ' + this.currentImage);
-        
-                await this.delay(100); // Delay for 0.1 second
+        console.log(direction);
+        const currentImage = `${imageFolder}/${direction}_move_${this.currentFrame}.png`;
+        this.setCurrentImage(currentImage);
+        console.log('Current frame: ' + this.currentImage);
 
-                // Call the render method to update the canvas with the new character position
-                this.render(this);
-            
-                if (!this.isMoving || direction !== this.currentMoveDirection) {
-                    break;
-                }
-            }
+        this.currentFrame++;
+        if (this.currentFrame >= imageCount) {
+            this.currentFrame = 0;
         }
+
+          await this.delay(1000); // Delay for 1 second
+        }
+
         this.currentFrame = 0;
-    } 
-    
+        this.setCurrentImage(`${imageFolder}/${direction}_move_${this.currentFrame}.png`);
+    }
     stop(){
         this.state.stop();
     }

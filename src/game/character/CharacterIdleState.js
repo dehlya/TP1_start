@@ -17,7 +17,6 @@ export class CharacterIdleState extends CharacterState{
     // Override methods for IdleState
 
     attack() {
-        this.character.setIsAttacking(true);
         this.character.looseStamina(20);
         this.character.setState(new CharacterAttackState(this.character));
         //Trigger attack animation        

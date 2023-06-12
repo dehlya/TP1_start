@@ -15,9 +15,10 @@ export class CharacterMovingState extends CharacterState{
         this.character.stopMoveAnimation();
     }
     attack() {
+        this.character.looseStamina(20);
         this.character.setState(new CharacterAttackState(this.character));
-        //Stop moving animation and start attack animation
-        this.character.attackOver();
+        //Trigger attack animation
+        this.character.startAttackAnimation();
     }
     blockOn() {
         this.character.setState(new CharacterBlockingState(this.character));
@@ -38,7 +39,7 @@ export class CharacterMovingState extends CharacterState{
             //Stop moving and trigger death animation
         }
         else{
-            this.character.setState(new this.hit(this.character));
+            this.character.setState(new CharacterHitState(this.character));
             //Stop moving and trigger hit animation
         }
     }
