@@ -11,7 +11,7 @@ export class MenuLayout extends Layout {
     this.buttonSpacing = 20;
 
     this.buttons = [
-      new Button("Play", () => game.state.toPlayGame()),
+      new Button("Play", () => game.state.toPlay()),
       new Button("Load game", () => game.state.toLoadGame()),
       new Button("Settings", () => game.state.toSettings()),
       new Button("Credits", () => game.state.toCredit()),

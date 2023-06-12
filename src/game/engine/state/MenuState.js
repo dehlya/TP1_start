@@ -1,6 +1,5 @@
 import { MenuLayout } from "../layout/MenuLayout.js";
 import { State } from "./State.js";
-import { KeyHandler } from "../handler/KeyHandler.js";
 
 export class MenuState extends State {
   constructor(game) {
@@ -14,7 +13,6 @@ export class MenuState extends State {
     game.canvas.canvas.addEventListener("click", (event) =>
       this.handleClick(event)
     );
-    this.keyHandler = new KeyHandler();
   }
 
   handleMouseMove(event) {
@@ -52,7 +50,7 @@ export class MenuState extends State {
   }
   toPlay() {
     console.log("Play button clicked");
-    this.game.fullscreen();
+    this.game.setCurrentState(this.game.playState);
   }
 
   toLoadGame() {
@@ -61,27 +59,16 @@ export class MenuState extends State {
 
   toSettings() {
     console.log("Settings button clicked");
-    this.game.setCurrentState("Settings");
+    this.game.setCurrentState(this.game.settingsState);
   }
 
   toCredit() {
     console.log("Credits button clicked");
-    this.game.setCurrentState("Credits");
+    this.game.setCurrentState(this.game.creditState);
   }
 
   render() {
     console.log("MenuState render called");
     this.layout.draw();
   }
-  enter() {
-    super.enter();
-    this.addCallbacks();
-}
-
-exit() {
-    super.exit();
-    this.keyHandler.removeAllCallbacks();
-}
-addCallbacks() {
-}
 }

@@ -23,9 +23,9 @@ export class PlayLayout extends Layout {
         this.addCharacter();
         this.addTitle();
 
-        if (this.showUsernameInput) {
+        /*if (this.showUsernameInput) {
             this.addUsernameInput(); // Display the username input window
-        }
+        }*/
 
         super.draw();
     }
@@ -34,8 +34,10 @@ export class PlayLayout extends Layout {
         this.context.fillStyle = this.background;
         this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
         this.context.drawImage(this.img, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+    }
 
     // Method to display the username input window
+    /*
     addUsernameInput() {
       const usernameForm = document.createElement("form");
       usernameForm.style.position = "absolute";
@@ -81,7 +83,7 @@ export class PlayLayout extends Layout {
       });
 
       this.game.canvas.element.appendChild(usernameForm);
-    }
+    }*/
 
     addTitle() {
         // Add your title rendering logic here

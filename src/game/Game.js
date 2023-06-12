@@ -1,103 +1,90 @@
-import { GameOverState } from "./engine/state/GameOverState.js";
-import { PlayState } from "./engine/state/PlayState.js";
-import { MenuState } from "./engine/state/MenuState.js";
-import { CreditState } from "./engine/state/CreditState.js";
-import { PauseState } from "./engine/state/PauseState.js";
-import { LogoState } from "./engine/state/LogoState.js";
-import { Player } from "./engine/Player/Player.js";
-import { SettingsState } from "./engine/state/SettingsState.js";
-import { MS_PER_FRAME } from "./Constants.js";
+  import { GameOverState } from "./engine/state/GameOverState.js";
+  import { PlayState } from "./engine/state/PlayState.js";
+  import { MenuState } from "./engine/state/MenuState.js";
+  import { CreditState } from "./engine/state/CreditState.js";
+  import { PauseState } from "./engine/state/PauseState.js";
+  import { LogoState } from "./engine/state/LogoState.js";
+  import { Player } from "./engine/Player/Player.js";
+  import { SettingsState } from "./engine/state/SettingsState.js";
+  export class Game {
+    constructor(canvas, height, width) {
+      this.previousTime = 0;
+      this.currentTime = 0;
+      this.passedTime = 0;
+      this.msPerFrame = 1000 / 60;
 
-export class Game {
-  constructor(canvas, height, width) {
-    this.previousTime = 0;
-    this.currentTime = 0;
-    this.passedTime = 0;
-    this.msPerFrame = MS_PER_FRAME;
+      this.character = 0;
+      this.gameMode = 0;
+      this.scenes = [];
+      this.lastScene = 0;
+      this.scene = 0;
+      this.level = 0;
+      this.levelMax = 0;
 
-    this.canvas = canvas;
-    this.canvas.setHeight(height);
-    this.canvas.setWidth(width);
-    
-  }
-
-  start() {
-    this.init();
-    this.run();
-  }
-
-  init() {
-    this.previousTime = new Date().getTime();
-
-    this.player = new Player();
-
-    this.StatesMap = new Map();
-    this.StatesMap.set("Play", new PlayState(this));
-    this.StatesMap.set("Menu", new MenuState(this));
-    this.StatesMap.set("Credits", new CreditState(this));
-    this.StatesMap.set("GameOver", new GameOverState(this));
-    this.StatesMap.set("Pause", new PauseState(this));
-    this.StatesMap.set("Logo", new LogoState(this));
-    this.StatesMap.set("Settings", new SettingsState(this));
-
-    this.state = this.StatesMap.get("Logo");
-    this.state.enter();
-    this.render();
-  }
-
-  run() {
-    this.playGameTime = 0;
-    this.currentTime = new Date().getTime();
-    this.passedTime += this.currentTime - this.previousTime;
-    this.previousTime = this.currentTime;
-
-
-    while (this.passedTime >= this.msPerFrame)
-    {
-        console.log("loop");
-        this.game.render();
-        this.passedTime -= this.msPerFrame;
-    }
-  }
-  setCurrentState(state) {
-    this.state.exit();
-    this.state = this.StatesMap.get(state);
-    this.state.enter();
-    this.render();
-  }
-  render() {
-    this.canvas.cleanCanvas(this.state);
-    console.log("clean");
-    this.state.render();
-    console.log("render");
-  }
-  fullscreen(){
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-      this.canvas.setFullscreen(false);
-      this.render();
-    } else {
-      document.getElementById('canvas').requestFullscreen();
-      this.canvas.setFullscreen(true);
-      this.render();
-    }
-  }
-  setMsPerFrame(isPlayState) {
-    //true is in PlayState
-    //false is in other states
-    if(isPlayState){
-      this.msPerFrame = MS_PER_FRAME_PLAY;
-    }else{
-      this.msPerFrame = MS_PER_FRAME;
-    }
-  }
-  resize(width, height) {
-    if (document.fullscreenElement) {
-      this.canvas.setFullscreen(true);
-    }else{
-      this.canvas.setWidth(width);
+      this.canvas = canvas;
       this.canvas.setHeight(height);
+      this.canvas.setWidth(width);
+
+      this.settings;
+      this.player;
+      this.state;
     }
-    this.render();
+
+    start() {
+      this.init();
+      this.run();
+    }
+
+    init() {
+      this.previousTime = new Date().getTime();
+
+      this.player = new Player();
+
+      this.menuState = new MenuState(this);
+      this.playState = new PlayState(this);
+      this.pauseState = new PauseState(this);
+      this.gameOverState = new GameOverState(this);
+      this.creditState = new CreditState(this);
+      this.logoState = new LogoState(this);
+      this.settingsState = new SettingsState(this);
+      this.setCurrentState(this.logoState);
+      this.settingsState.audio.play();
+    }
+
+    run(time) {
+      let currentTime = new Date().getTime();
+      this.passedTime += currentTime - this.previousTime;
+      this.previousTime = currentTime;
+
+      while (this.passedTime >= this.msPerFrame) {
+        this.updateAnimation(); // Add this line to update animation frames
+        this.render();
+        this.passedTime -= this.msPerFrame;
+      }
+
+      // ============================================
+      // RUNTIME MUST BE UNCOMMENTED TO RUN THE GAME
+      // ============================================
+
+      requestAnimationFrame(this.run.bind(this));
+    }
+
+    updateAnimation() {
+      if (this.isAttacking) {
+        this.startAttackAnimation();
+      } else if (this.isMoving) {
+        this.startMoveAnimation(this.currentMoveDirection);
+      } else {
+        // Handle other animation states here
+      }
+    }
+    setCurrentState(State) {
+      this.state = State;
+      this.state.init();
+      this.render();
+    }
+    render() {
+      this.canvas.cleanCanvas(this.state);
+      this.state.render();
+    }
   }
-}
