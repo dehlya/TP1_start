@@ -30,10 +30,10 @@ export class CreditState extends State {
     let rect = this.game.canvas.canvas.getBoundingClientRect();
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
-
-    let startX = (this.game.canvas.getWidth() - this.layout.buttonWidth) / 2;
-    let startY = this.game.canvas.getHeight() - this.layout.buttonHeight - 10;
-
+  
+    let startX = this.game.canvas.getWidth() * 0.5 - this.layout.buttonWidth / 2;
+    let startY = this.game.canvas.getHeight() * 0.9;
+  
     if (
       x >= startX &&
       x <= startX + this.layout.buttonWidth &&
@@ -43,6 +43,7 @@ export class CreditState extends State {
       this.layout.backButton.onClick();
     }
   }
+  
 
   toMenu() {
     this.game.setCurrentState(this.game.menuState);
@@ -51,4 +52,17 @@ export class CreditState extends State {
   render() {
     this.layout.draw();
   }
+  enter() {
+    super.enter();
+    this.handleClickBound = this.handleClick.bind(this);
+    this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
+  }
+  
+  exit() {
+    super.exit();
+    this.game.canvas.canvas.removeEventListener('click', this.handleClickBound);
+  }
+  
+addCallbacks() {
+}
 }

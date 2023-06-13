@@ -36,6 +36,7 @@ export class PlayState extends State {
     }
     enter() {
         super.enter();
+        this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
     }
   
