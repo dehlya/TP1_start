@@ -1,19 +1,23 @@
-import React from 'react';
-import './public/index.css'; // Import the CSS file
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 function App() {
+  const [redirectToDescription, setRedirectToDescription] = useState(false);
+
+  const handleEnterClick = () => {
+    setRedirectToDescription(true);
+  };
+
+  if (redirectToDescription) {
+    return <Redirect to="/description" />;
+  }
+
   return (
     <div className="index-container">
       <div className="welcome">
         <h2>The invoked one: a lost hero from the past</h2>
         <p>Hi, Welcome on our Website!</p>
-        <a href="/src/site/html/description.html">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Click to enter
-        </a>
+        <button onClick={handleEnterClick}>Click here to enter</button>
       </div>
       <div className="img-welcome"></div>
     </div>
