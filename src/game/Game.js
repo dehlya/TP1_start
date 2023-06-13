@@ -122,6 +122,9 @@ export class Game {
     }
   }
   
+  isCurrentlyRunning() {
+    return this.state == this.StatesMap.get("Play");
+  }
 
   render() {
     this.canvas.cleanCanvas(this.state);

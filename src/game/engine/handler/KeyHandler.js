@@ -36,15 +36,6 @@ export class KeyHandler {
         window.addEventListener('keyup', keyUpHandler);
     }
 
-
-
-
-    // EXEMPLE D'UTILISATION
-
-    //this.keyHandler.addCallback('KeyI', 'keypress', () => {
-    //    this.toGameIntroState();
-    //})
-
     removeCallback(keyPressed, type) {
         const eventHandler = this.callbacks[keyPressed] && this.callbacks[keyPressed][type];
         if (eventHandler) {
