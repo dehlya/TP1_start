@@ -20,24 +20,21 @@ export class CreditLayout extends Layout {
   }
 
   addButton() {
-    const x = (this.game.canvas.getWidth() - this.buttonWidth) / 2;
-    const y = this.game.canvas.getHeight() - this.buttonHeight - 10;
-
-    this.context.fillStyle = "#333";
+    const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
+    const y = this.game.canvas.getHeight() * 0.9; 
+    this.context.fillStyle = "grey";
     this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
-
+  
     this.context.fillStyle = "white";
     this.context.font = "24px Arial";
     this.context.fillText(
       this.backButton.text,
-      x +
-        (this.buttonWidth -
-          this.context.measureText(this.backButton.text).width) /
-          2,
+      x + (this.buttonWidth - this.context.measureText(this.backButton.text).width) / 2,
       y + this.buttonHeight / 2 + 8
     );
     this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
   }
+  
   addBackground() {
     this.context.fillStyle = this.background;
     this.context.fillRect(

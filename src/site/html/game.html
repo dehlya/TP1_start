@@ -6,37 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header>
-      <h1>HES-SO Vs - 64-31 - HTML/CSS/JavaScript</h1>
-      <nav>
-        <!-- Hamburger -->
-        <ul>
-          <li class="hamburger">
-            <img src="../../../ressources/site/hamburger_icon.svg" />
-          </li>
-          <li>
-            <a href="description.html">Description</a>
-          </li>
-          <li>
-            <a href="sketch.html">Sketch</a>
-          </li>
-          <li>
-            <a href="mockup.html">Mockup</a>
-          </li>
-          <li>
-            <a href="flow.html">Flow</a>
-          </li>
-          <li>
-            <a href="logbook.html">Logbook</a>
-          </li>
-          <li class="active">
-            <a href="game.html">Game</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
 
+  <script src="../../../src/site/header.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      loadHeader();
+    });
+  </script>
+  
+  <body>
     <main>
       <!-- Here is the starting point for the page content -->
       <section id="articles">
