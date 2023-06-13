@@ -14,7 +14,7 @@ export class State {
     }
 
     enter(){
-        this.audio.play();
+        //this.audio.play();
     }
     exit(){
         this.audio.pause();

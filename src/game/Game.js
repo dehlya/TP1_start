@@ -20,11 +20,17 @@ export class Game {
     this.canvas.setWidth(width);
   }
 
+  /**
+   * Start the game
+   */
   start() {
     this.init();
     this.run();
   }
 
+  /**
+   * Init the game
+   */
   init() {
     this.previousTime = new Date().getTime();
     this.player = new Player();

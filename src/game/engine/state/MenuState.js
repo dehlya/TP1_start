@@ -37,8 +37,7 @@ export class MenuState extends State {
   }
   
   toPlay() {
-    console.log("Play button clicked");
-    this.game.setCurrentState(this.game.playState);
+    this.game.setCurrentState("Play");
   }
 
   toPause() {
@@ -49,7 +48,7 @@ export class MenuState extends State {
 
   toSettings() {
     console.log("Settings button clicked");
-    this.game.setCurrentState(this.game.settingsState);
+    this.game.setCurrentState("Settings");
   }
 
   toCredit() {
