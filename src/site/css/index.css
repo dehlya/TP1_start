@@ -63,7 +63,7 @@ p{
     color: white;
     margin: 20px;
 }
-a {
+a{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     position: relative;
     display: inline-block;
@@ -82,7 +82,7 @@ a {
 
 a:hover {
     background: white;
-    color: rgb(42, 58, 44);
+    color: rgb(15, 29, 17);
     border-radius: 2px;
 }
 
