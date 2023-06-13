@@ -63,8 +63,9 @@
 
 
         render(){
-            this.parent.redraw();
-            // Draw the character's image on the canvas at its current position
+        }
+
+        drawCharacter() {
             this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 

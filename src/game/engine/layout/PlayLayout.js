@@ -23,7 +23,6 @@ export class PlayLayout extends Layout {
      * Initial draw
      */
     draw() {
-
         this.addBackground();
         this.addCharacter();
         this.addTitle();
@@ -35,6 +34,7 @@ export class PlayLayout extends Layout {
      */
     redraw() {
         this.addBackground();
+        this.character.drawCharacter();
         this.addTitle();
     }
 
@@ -51,7 +51,7 @@ export class PlayLayout extends Layout {
         const img = new Image();
         img.src = character.currentImage;
         img.onload = () => {
-            character.render();
+            character.drawCharacter();
         };
     }
     addTitle() {
