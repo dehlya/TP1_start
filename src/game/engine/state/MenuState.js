@@ -1,5 +1,6 @@
 import { MenuLayout } from "../layout/MenuLayout.js";
 import { State } from "./State.js";
+import { KeyHandler } from "../handler/KeyHandler.js";
 
 export class MenuState extends State {
   constructor(game) {
@@ -7,12 +8,6 @@ export class MenuState extends State {
 
     this.layout = new MenuLayout(this.game);
     this.layout.hardFrontier = true;
-    game.canvas.canvas.addEventListener("mousemove", (event) =>
-      this.handleMouseMove(event)
-    );
-    game.canvas.canvas.addEventListener("click", (event) =>
-      this.handleClick(event)
-    );
     this.keyHandler = new KeyHandler();
   }
 
