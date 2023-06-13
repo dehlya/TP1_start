@@ -1,13 +1,19 @@
     import { CharacterIdleState } from "./CharacterIdleState.js";
     import { KeyHandler } from "../engine/handler/KeyHandler.js";
 
-    export class Character{
+    export class Character {
         keyHandler = new KeyHandler();
 
         //Constructor of the character class --------------------------------------
-        constructor(x,y,canvas, ctx) {
+        constructor(x,y,canvas, ctx, parent) {
+            /** Position on the X axis */
             this.x = x;
+            /** Position on the Y axis */
             this.y = y;
+
+            /** Reference to the PlayLayout parent */
+            this.parent = parent;
+
             this.canvas = canvas;
             this.ctx = ctx;
             this.width = 70;
@@ -65,7 +71,7 @@
 
 
         render(){
-            this.ctx.clearRect(this.image,0, 0, this.canvas.width, this.canvas.height);
+            this.parent.addBackground();
             // Draw the character's image on the canvas at its current position
             this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }

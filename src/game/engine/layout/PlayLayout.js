@@ -11,7 +11,8 @@ export class PlayLayout extends Layout {
             this.game.canvas.getWidth() / 2,
             this.game.canvas.getHeight() / 2,
             this.game.canvas.getCanvas(),
-            this.game.canvas.getContext()
+            this.game.canvas.getContext(),
+            this
         );
 
         this.img = new Image();
