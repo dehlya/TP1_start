@@ -1,8 +1,9 @@
 class Handler {
 }
 export class State {
-    constructor(game) {
+    constructor(game, name) {
         this.game = game;
+        this.name = name;
         this.audio = new Audio(
             "../../../ressources/site/video/forest-lullaby-110624.mp3"
         );
@@ -11,10 +12,12 @@ export class State {
     init() {
         this.game.canvas.cleanCanvas(this);
     }
+
     enter(){
-        this.audio.play();
+        //this.audio.play();
     }
     exit(){
         this.audio.pause();
     }
-}
+    
+    }

@@ -12,19 +12,31 @@ export class KeyHandler {
     }
 
     addCallback(keyPressed, type, callback) {
-        const eventHandler = (e) => {
-            if (e.code === keyPressed) {
+        let isKeyPressed = false;
+
+        const keyDownHandler = (event) => {
+            if (!isKeyPressed && event.code === keyPressed) {
+                isKeyPressed = true;
                 callback();
             }
         };
 
-        if (!this.callbacks[keyPressed]) {
-            this.callbacks[keyPressed] = {};
-        }
+        const keyUpHandler = (event) => {
+            if (event.code === keyPressed) {
+                isKeyPressed = false;
+            }
+        };
 
-        this.callbacks[keyPressed][type] = eventHandler;
-        window.addEventListener(type, eventHandler);
+        this.callbacks[keyPressed] = {
+            keydown: keyDownHandler,
+            keyup: keyUpHandler
+        };
+
+        window.addEventListener(type, keyDownHandler);
+        window.addEventListener('keyup', keyUpHandler);
     }
+
+
 
 
     // EXEMPLE D'UTILISATION
@@ -49,4 +61,5 @@ export class KeyHandler {
             }
         }
     }
+
 }
