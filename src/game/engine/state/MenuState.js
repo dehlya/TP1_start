@@ -52,7 +52,7 @@ export class MenuState extends State {
   }
   toPlay() {
     console.log("Play button clicked");
-    this.game.fullscreen();
+    this.game.setCurrentState("Play");
   }
 
   toLoadGame() {

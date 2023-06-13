@@ -12,7 +12,7 @@ export class State {
         this.game.canvas.cleanCanvas(this);
     }
     enter(){
-        this.audio.play();
+        //this.audio.play();
     }
     exit(){
         this.audio.pause();
