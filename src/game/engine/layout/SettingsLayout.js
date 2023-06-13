@@ -22,24 +22,24 @@ export class SettingsLayout extends Layout {
     }
 
     addButtons() {
-        const buttonMargin = 10;
-        const x = (this.game.canvas.getWidth() - this.buttonWidth) / 2;
-        const soundY = this.game.canvas.getHeight() / 2 - this.buttonHeight - buttonMargin;
-        const musicY = this.game.canvas.getHeight() / 2 + buttonMargin;
-        const backY = this.game.canvas.getHeight() - this.buttonHeight - buttonMargin;
+        const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
+        const buttonMargin = this.game.canvas.getHeight() * 0.1; 
+        const musicY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
+        const soundY = musicY - this.buttonHeight - buttonMargin; 
+        const backY = this.game.canvas.getHeight() * 0.9; 
         const geoY = musicY + this.buttonHeight + (backY - (musicY + this.buttonHeight)) / 2;
-        
+
         this.addButton(this.soundButton, x, soundY);
         this.addButton(this.musicButton, x, musicY);
         this.addButton(this.backButton, x, backY);
-        this.addGeolocationText(x, geoY);
+        this.addGeolocationText(x, geoY);        
 
-    }
-
-    addButton(button, x, y) {
-        this.context.fillStyle = "#333";
+      }
+      
+      addButton(button, x, y, key) {
+        this.context.fillStyle = "grey";
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
-
+    
         this.context.fillStyle = "white";
         this.context.font = "24px Arial";
         this.context.fillText(
@@ -48,22 +48,20 @@ export class SettingsLayout extends Layout {
             y + this.buttonHeight / 2 + 8
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
+
     }
 
     addGeolocationText(x, y) {
-    this.context.fillStyle = "white";
-    this.context.font = "16px Arial";
-    const textWidth = this.context.measureText(this.game.state.geolocationText).width;
-    const centeredX = x + (this.buttonWidth - textWidth) / 2;
-    this.context.fillText(
-        this.game.state.geolocationText,
-        centeredX,
-        y
+        this.context.fillStyle = "white";
+        this.context.font = "16px Arial";
+        const textWidth = this.context.measureText(this.game.state.geolocationText).width;
+        const centeredX = x + (this.buttonWidth - textWidth) / 2;
+        this.context.fillText(
+            this.game.state.geolocationText,
+            centeredX,
+            y
     );
 }
-
-    
-
     addBackground() {
         this.context.fillStyle = this.background;
         this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());

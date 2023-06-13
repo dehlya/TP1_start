@@ -12,7 +12,7 @@ export class MenuLayout extends Layout {
 
     this.buttons = [
       new Button("Play", () => game.state.toPlay()),
-      new Button("Load game", () => game.state.toLoadGame()),
+      new Button("Load game", () => game.state.toPause()),
       new Button("Settings", () => game.state.toSettings()),
       new Button("Credits", () => game.state.toCredit()),
     ];
@@ -50,8 +50,9 @@ export class MenuLayout extends Layout {
   addButtons() {
     this.context.font = "24px Arial";
     this.buttons.forEach((button, index) => {
-      const x = (this.game.canvas.getWidth() - this.buttonWidth) / 2;
-      const y = 150 + index * (this.buttonHeight + this.buttonSpacing);
+      // Calculate position as percentage of canvas width and height
+      const x = (this.game.canvas.getWidth() * 0.5) - (this.buttonWidth * 0.5);
+      const y = (this.game.canvas.getHeight() * 0.3) + index * (this.buttonHeight + this.buttonSpacing);
   
       this.context.fillStyle = "grey";
       this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
@@ -63,6 +64,6 @@ export class MenuLayout extends Layout {
         y + this.buttonHeight / 2 + 8
       );
       this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
-     });
+    });
   }
 }
