@@ -1,6 +1,5 @@
 import { State } from "./State.js";
 import { SettingsLayout } from "../layout/SettingsLayout.js";
-import { KeyHandler } from "../handler/KeyHandler.js";
 
 export class SettingsState extends State {
   constructor(game) {
@@ -19,7 +18,6 @@ export class SettingsState extends State {
     );
 
     this.fetchGeolocation();
-    this.keyHandler = new KeyHandler();
   }
 
   handleMouseMove(event) {
@@ -82,8 +80,6 @@ export class SettingsState extends State {
   }
 
   toggleMusic() {
-    //TODO : move the variable to the player class
-    //so it also changes it in the cookies and all the states
     this.musicEnabled = !this.musicEnabled;
     if (this.musicEnabled) {
       this.audio.play();
@@ -95,7 +91,7 @@ export class SettingsState extends State {
   }
 
   toMenu() {
-    this.game.setCurrentState("Menu");
+    this.game.setCurrentState(this.game.menuState);
   }
 
   //   async fetchGeolocation() {
@@ -185,19 +181,5 @@ export class SettingsState extends State {
 
   render() {
     this.layout.draw();
-  }
-  enter() {
-    super.enter();
-    this.addCallbacks();
-  }
-
-  exit() {
-    super.exit();
-    this.keyHandler.removeAllCallbacks();
-  }
-  addCallbacks(){
-    this.keyHandler.addCallback('KeyM', 'keypress', () => {
-      this.toMenu();
-    })
   }
 }

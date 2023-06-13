@@ -16,7 +16,7 @@
             this.state = new CharacterIdleState(this);
             this.hpMax = 100;
             this.hp = this.hpMax;
-            this._staminaMax = 100;
+            this._staminaMax = 10000;
             this.stamina = this.staminaMax;
             this.moveSpeed = 1;
             this.attackPower = 20;
@@ -29,6 +29,7 @@
             this.faith = 0;
             this.isAttacking = false;
             this.isMoving = false;
+            this.isDrinking = false;
             this.currentImage = "../../../ressources/game/character/characterFrames/move_down/down_move_0.png";
             this.image = new Image();
             this.image.src = this.currentImage;
@@ -39,20 +40,32 @@
             this.currentMoveDirection = "down";
             this.nextMoveDirection = null;
             this.startStaminaRegeneration();
-            //key handlers
+
+            //key handler attack
             this.keyHandler.addCallback('Space','keydown',() => this.attack());
+
+            //key handlers movement
             this.keyHandler.addCallback('KeyW', 'keydown', () => this.move('up'));
             this.keyHandler.addCallback('KeyS', 'keydown', () => this.move('down'));
             this.keyHandler.addCallback('KeyA', 'keydown', () => this.move('left'));
             this.keyHandler.addCallback('KeyD', 'keydown', () => this.move('right'));
-            this.keyHandler.addCallback('KeyW', 'keyup', () => this.stop());
-            this.keyHandler.addCallback('KeyS', 'keyup', () => this.stop());
-            this.keyHandler.addCallback('KeyA', 'keyup', () => this.stop());
-            this.keyHandler.addCallback('KeyD', 'keyup', () => this.stop());
+            if(!this.isMoving){
+                this.keyHandler.addCallback('KeyW', 'keyup', () => this.stop());
+                this.keyHandler.addCallback('KeyS', 'keyup', () => this.stop());
+                this.keyHandler.addCallback('KeyA', 'keyup', () => this.stop());
+                this.keyHandler.addCallback('KeyD', 'keyup', () => this.stop());
+            }
+
+            //key handler heal
+            this.keyHandler.addCallback('ShiftLeft', 'keydown', () => this.heal());
+
+            //test hp
+            this.keyHandler.addCallback('KeyO', 'keydown', () => this.hit());
         }
 
 
         render(){
+            this.ctx.clearRect(this.image,0, 0, this.canvas.width, this.canvas.height);
             // Draw the character's image on the canvas at its current position
             this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
@@ -85,6 +98,9 @@
         }
         set staminaMax(value){
             this._staminaMax = value;
+        }
+        getHealth(){
+            return this.hp;
         }
         //End of getter and setters -----------------------------------------------
 
@@ -162,6 +178,7 @@
         }
         looseHP(value){
             this.hp -= value;
+            console.log(this.hp);
         }
         usePotion(){
             this.potions--;
@@ -188,6 +205,7 @@
         attackOver(){
             this.isAttacking = false;
             this.state.attackOver();
+            this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${this.currentMoveDirection}/${this.currentMoveDirection}_move_0.png`);
         }
         async startAttackAnimation() {
             console.log("Attack animation started " + this.stamina);
@@ -213,7 +231,7 @@
             this.currentFrame = 0;
 
             // Start the animation loop for the specified direction
-            while (this.isAttacking) {
+            for(let i = 0; i < imageCount; i++) {
                 console.log(this.currentMoveDirection);
                 const currentImage = `../../../ressources/game/character/characterFrames/attack/attack_${direction}_${this.currentFrame}.png`;
                 this.setCurrentImage(currentImage);
@@ -301,9 +319,6 @@
             this.isMoving = true;
         }
         async startMoveAnimation() {
-            if (this.isMoving) {
-                return;
-            }
             this.isMoving = true;
             console.log("Move animation started");
             console.log(this.currentImage);
@@ -329,7 +344,7 @@
                     return;
             }
             const imageCount = 8;
-            this.currentFrame = 0;
+            this.currentFrame = 1;
 
             const moveStep = () => {
                 let newX = this.x;
@@ -370,10 +385,8 @@
 
             // Start the animation loop for the specified direction
             while (this.isMoving && direction === this.currentMoveDirection) {
-                console.log(direction);
                 const currentImage = `../../../ressources/game/character/characterFrames/${imageFolder}/${direction}_move_${this.currentFrame}.png`;
                 this.setCurrentImage(currentImage);
-                console.log('Current frame: ' + this.currentImage);
 
                 this.currentFrame++;
                 if (this.currentFrame >= imageCount) {
@@ -387,10 +400,10 @@
             this.setCurrentImage(`../../../ressources/game/character/characterFrames/${imageFolder}/${direction}_move_${this.currentFrame}.png`);
 
             this.isMoving = false;
-            console.log("Move animation stopped");
         }
         stop(){
             this.state.stop();
+            this.currentFrame = 0;
             this.isMoving = false;
             this.nextMoveDirection = null;
         }
@@ -405,13 +418,36 @@
         heal(){
             if(this.potions > 0 && this.hp < this.hpMax){
                 this.state.heal();
+                this.isDrinking = true;
             }
         }
         healOver(){
             this.state.healOver();
+            this.isDrinking = false;
         }
-        healAnimation(){
+        async healAnimation(){
             console.log("Heal animation started ");
+
+            const imageCount = 7;
+            this.currentFrame = 0;
+
+            // Start the animation loop for drinking potion
+            for (let i = 0; i < imageCount; i++) {
+                const currentImage = `../../../ressources/game/character/characterFrames/Potion/drinking_potion_${this.currentFrame}.png`;
+                this.setCurrentImage(currentImage);
+                console.log('Current frame: ' + currentImage);
+
+                this.currentFrame++;
+                if (this.currentFrame >= imageCount) {
+                    this.currentFrame = 0;
+                    this.healOver();
+                    this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${this.currentMoveDirection}/${this.currentMoveDirection}_move_0.png`);
+                }
+
+                await this.delay(100); // Delay for 100 milliseconds (adjust as needed)
+            }
+
+            this.currentFrame = 0;
             this.healOver();
         }
         //END of function to heal--------------------------------------------------

@@ -9,6 +9,11 @@ import { CharacterHealingState } from "./CharacterHealingState.js";
 
 export class CharacterMovingState extends CharacterState{
 
+    constructor(character) {
+        super(character);
+        this.character = character;
+    }
+
     stop() {
         this.character.setState(new CharacterIdleState(this.character));
         //stop moving animation
@@ -34,7 +39,7 @@ export class CharacterMovingState extends CharacterState{
 
     hit() {
         this.character.looseHP(20 /*Temporary value*/);
-        if(this.character.health <= 0){
+        if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Stop moving and trigger death animation
         }
@@ -44,11 +49,8 @@ export class CharacterMovingState extends CharacterState{
         }
     }
     heal() {
-        if(this.character.potions > 0){
-            this.character.setState(new CharacterHealingState(this.character));
-            this.character.usePotion();
-            //Stop moving animation and start the healing animation decrease one Potion from the character
-            this.character.healOver();
-        }
+        this.character.setState(new CharacterHealingState(this.character));
+        this.character.usePotion();
+        this.character.healAnimation();
     }
 }

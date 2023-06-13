@@ -11,6 +11,7 @@ export class CharacterHitState extends CharacterState{
 
     constructor(character) {
         super(character);
+        this.character = character;
     }
 
     hitOver(){

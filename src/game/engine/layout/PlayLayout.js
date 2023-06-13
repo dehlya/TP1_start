@@ -19,14 +19,10 @@ export class PlayLayout extends Layout {
     }
 
     draw() {
+
         this.addBackground();
         this.addCharacter();
         this.addTitle();
-
-        /*if (this.showUsernameInput) {
-            this.addUsernameInput(); // Display the username input window
-        }*/
-
         super.draw();
     }
 
@@ -36,58 +32,6 @@ export class PlayLayout extends Layout {
         this.context.drawImage(this.img, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
     }
 
-    // Method to display the username input window
-    /*
-    addUsernameInput() {
-      const usernameForm = document.createElement("form");
-      usernameForm.style.position = "absolute";
-      usernameForm.style.top = "50%";
-      usernameForm.style.left = "50%";
-      usernameForm.style.transform = "translate(-50%, -50%)";
-      usernameForm.style.backgroundColor = "white";
-      usernameForm.style.padding = "20px";
-      usernameForm.style.borderRadius = "5px";
-
-      const usernameLabel = document.createElement("label");
-      usernameLabel.textContent = "Username: ";
-      usernameLabel.style.display = "block";
-      usernameLabel.style.marginBottom = "10px";
-
-      this.usernameInput = document.createElement("input");
-      this.usernameInput.type = "text";
-      this.usernameInput.required = true;
-      this.usernameInput.style.width = "200px";
-
-      const submitButton = document.createElement("button");
-      submitButton.type = "submit";
-      submitButton.textContent = "Submit";
-
-      usernameForm.appendChild(usernameLabel);
-      usernameForm.appendChild(this.usernameInput);
-      usernameForm.appendChild(submitButton);
-
-      // Submit event listener to handle form submission
-      usernameForm.addEventListener("submit", (event) => {
-        event.preventDefault(); // Prevent form submission
-
-        const username = this.usernameInput.value;
-        if (this.validateUsername(username)) {
-          this.showUsernameInput = false; // Hide the username input window
-          // Proceed with loading the background and character
-          this.loadBackground();
-          this.loadCharacter();
-        } else {
-          this.displayErrorMessage("Invalid username. Please try again."); // Display error message
-          return false;
-        }
-      });
-
-      this.game.canvas.element.appendChild(usernameForm);
-    }*/
-
-    addTitle() {
-        // Add your title rendering logic here
-    }
 
     addCharacter() {
         const character = this.character;
@@ -97,5 +41,21 @@ export class PlayLayout extends Layout {
         img.onload = () => {
             character.render();
         };
+    }
+    addTitle() {
+        const character = this.character;
+        const ctx = this.context;
+
+        // Set font properties
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'white';
+
+        // Draw health indicator
+        const healthIndicator = `Health: ${character.hp/character.hpMax*100}%`;
+        ctx.fillText(healthIndicator, this.game.canvas.getWidth()-150, 30);
+
+        // Draw stamina indicator
+        const staminaIndicator = `Stamina: ${character.stamina/character.staminaMax*100}%`;
+        ctx.fillText(staminaIndicator,this.game.canvas.getWidth()-150, 60);
     }
 }

@@ -1,3 +1,6 @@
+import {EnemyIdleState} from "./EnemyIdleState.js";
+import {EnemyState} from "./EnemyState.js";
+
 export class Enemy {
     constructor(rank){
         if(this.rank == 1){
@@ -24,7 +27,7 @@ export class Enemy {
             this.attack = 25;
             this.faith = 1500;
         }
-        this.state = new EnemyIdleState();
+        this.state = new EnemyIdleState(this);
     }
 
     // getters and setters
@@ -44,8 +47,11 @@ export class Enemy {
     attack(){
         this.state.attack(this.attack);
     }
-    StartAttackAnimation(){
+    startAttackAnimation(){
 
+    }
+    attackOver(){
+        this.state.attackOver();
     }
 
     //move methods
@@ -60,7 +66,4 @@ export class Enemy {
         this.state.hit();
     }
     hitAnimation(){}
-
-
-
 }
