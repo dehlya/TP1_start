@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 import axios from 'axios';
-import '../css/style.css';
+import './css/style.css';
+import './css/font.css';
 
-function Flow() {
+function Logbook() {
   const [pageContent, setPageContent] = useState('');
 
   useEffect(() => {
     axios
       .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
-        // Find the page with the title "Flow" from the response
-        const flowPage = response.data.find(page => page.title.rendered === 'Flow');
+        // filter the response to find the slug
+        const logbook = response.data.find(page => page.slug === 'logbook');
 
-        if (flowPage) {
-          setPageContent(flowPage.content.rendered);
+        if (logbook) {
+          setPageContent(logbook.content.rendered);
         }
       })
       .catch(error => {
@@ -42,4 +43,4 @@ function Flow() {
   );
 }
 
-export default Flow;
+export default Logbook;

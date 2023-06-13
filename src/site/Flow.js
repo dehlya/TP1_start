@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 import axios from 'axios';
-import '../css/style.css';
+import './css/style.css';
+import './css/font.css';
 
-function Logbook() {
-  const [pageContent, setPageContent] = useState(null);
+function Flow() {
+  const [pageContent, setPageContent] = useState('');
 
   useEffect(() => {
     axios
-      .get('https://your-wordpress-site.com/wp-json/wp/v2/pages')
+      .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
-        // Assuming the logbook page has a specific slug, you can filter the response to find it
-        const logbook = response.data.find(page => page.slug === 'logbook');
+        // Find the page with the title "Flow" from the response
+        const flowPage = response.data.find(page => page.title.rendered === 'Flow');
 
-        if (logbook) {
-          setPageContent(logbook.content.rendered);
+        if (flowPage) {
+          setPageContent(flowPage.content.rendered);
         }
       })
       .catch(error => {
@@ -42,4 +43,4 @@ function Logbook() {
   );
 }
 
-export default Logbook;
+export default Flow;

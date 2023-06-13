@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
-import '../css/style.css';
+import './css/style.css';
+import './css/font.css';
 
-function Mockup() {
+function Game() {
   const [pageContent, setPageContent] = useState('');
 
   useEffect(() => {
     axios
-      .get('https://your-wordpress-site.com/wp-json/wp/v2/pages')
+      .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
-        // Assuming the mockup page has a specific slug, you can filter the response to find it
-        const mockup = response.data.find(page => page.slug === 'mockup');
+        // filter the response to find the slug
+        const gamePage = response.data.find(page => page.slug === 'game');
 
-        if (mockup) {
-          setPageContent(mockup.content.rendered);
+        if (gamePage) {
+          setPageContent(gamePage.content.rendered);
         }
       })
       .catch(error => {
@@ -29,10 +30,6 @@ function Mockup() {
       <main>
         <section id="articles">
           <article>
-            <header>
-              <h2>Mockup of your project</h2>
-              <p>By Group D the 31/03/2023 at 00:00</p>
-            </header>
             {pageContent ? (
               <div dangerouslySetInnerHTML={{ __html: pageContent }} />
             ) : (
@@ -46,4 +43,4 @@ function Mockup() {
   );
 }
 
-export default Mockup;
+export default Game;
