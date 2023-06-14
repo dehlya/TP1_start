@@ -4,7 +4,7 @@ const LEVEL_JSON_PATH = "../../../ressources/game/json/levels.json";
 export class LevelsManager {
   constructor(game) {
     this.game = game;
-    this.currentLevel;
+    //this.currentLevel;
     this.levelsMap = new Map();
     this.numberOfLevels = 0;
     this.init();
@@ -40,7 +40,7 @@ export class LevelsManager {
         console.error(error);
       });
       
-    this.levelsMap.set(this.levelsMap.length, new Level(this.game, title, description));
+    //this.levelsMap.set(this.levelsMap.length, new Level(this.game, title, description));
   }
     firstLevel(){
         this.currentLevel.end();

@@ -19,9 +19,11 @@ export class GameOverState extends State {
         const buttonMargin = this.game.canvas.getHeight() * 0.1;
         let resumeY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
     
+        /*
         if (x >= startX && x <= startX + this.layout.buttonWidth && y >= settingsY && y <= settingsY + this.layout.buttonHeight) {
           this.layout.playAgainButton.onClick();
         } 
+        */
       }
 
     tryAgain(){
