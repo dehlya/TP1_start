@@ -7,21 +7,16 @@ export class EndGameState extends State {
         this.layout = new EndGameState(this.game);
         this.keyHandler = new KeyHandler();
     }
-    toCredit() {
-    }
-    toGameOver() {
-    }
+
+
     toMenu() {
-    }
-    toPlay() {
-    }
-    toPause() {
     }
     render(){
         this.layout.draw();
     }
     enter() {
         super.enter();
+        this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
     }
   

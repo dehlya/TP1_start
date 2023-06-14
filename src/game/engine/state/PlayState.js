@@ -7,14 +7,21 @@ export class PlayState extends State {
     constructor(game) {
         super(game);
         this.layout = new PlayLayout(this.game);
-        this.levelsManager = new LevelsManager(new Level(this.game, "Level 1", "getLevelDescription(1)"));
-        this.keyHandler = new KeyHandler();
+    }
+    toCredit() {
+    }
+    toGameOver() {
+    }
+    toMenu() {
+    }
+    toPlay() {
+        this.game.start();
     }
     toPause() {
         this.game.setCurrentState("Pause");
     }
     render(){
-        this.layout.draw();
+        this.layout.redraw();
     }
     nextLevel(){
         this.levelsManager.nextLevel();
@@ -30,6 +37,8 @@ export class PlayState extends State {
     }
     enter() {
         super.enter();
+        this.game.start();
+        this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
     }
   

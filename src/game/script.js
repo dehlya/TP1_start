@@ -9,7 +9,7 @@ getCanvasSize();
 
 let game = new Game(canvas, height, width); 
 //TODO: window resize + change with ratio
-game.start();
+game.init();
 
 
 function getCanvasSize() {

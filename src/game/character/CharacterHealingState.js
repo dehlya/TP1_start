@@ -14,7 +14,7 @@ export class CharacterHealingState extends CharacterState{
     }
     hit(){
         console.log("got hit during healing");
-        if(this.character.health <= 0){
+        if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Trigger the death animation
         }

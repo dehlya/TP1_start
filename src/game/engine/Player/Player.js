@@ -6,7 +6,7 @@ export class Player {
         this.level = 1;
         this.pseudo = "anonymous";
         this.sound = true;
-        this.music = true; 
+        this.music = false; 
 
         this.getCookies();
        

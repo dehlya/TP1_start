@@ -6,13 +6,13 @@ export class MenuLayout extends Layout {
     super(game);
     this.background = "black";
     this.title = "The Invoked One";
-    this.buttonWidth = 200;
-    this.buttonHeight = 50;
-    this.buttonSpacing = 20;
+    this.buttonWidth = this.game.canvas.getWidth()/4;
+    this.buttonHeight = this.game.canvas.getHeight()/8;
+    this.buttonSpacing = this.game.canvas.getHeight()/20;
 
     this.buttons = [
       new Button("Play", () => game.state.toPlay()),
-      new Button("Load game", () => game.state.toLoadGame()),
+      new Button("Load game", () => game.state.toPause()),
       new Button("Settings", () => game.state.toSettings()),
       new Button("Credits", () => game.state.toCredit()),
     ];
@@ -36,11 +36,11 @@ export class MenuLayout extends Layout {
 
   addTitle() {
       const canvasWidth = this.game.canvas.getWidth();
-      const titleFont = "64px 'Segoe Script', cursive";
+      const titleFont = this.game.canvas.getHeight()/6+"px 'Segoe Script', cursive";
       this.context.font = titleFont;
       const titleWidth = this.context.measureText(this.title).width;
       const titleX = (canvasWidth - titleWidth) / 2;
-      const titleY = 100;
+      const titleY = this.game.canvas.getHeight()/5;
     
       this.context.fillStyle = "black";
       this.context.font = titleFont;
@@ -48,10 +48,11 @@ export class MenuLayout extends Layout {
   }
 
   addButtons() {
-    this.context.font = "24px Arial";
+    this.context.font = this.game.canvas.getHeight()/15+"px Arial";
     this.buttons.forEach((button, index) => {
-      const x = (this.game.canvas.getWidth() - this.buttonWidth) / 2;
-      const y = 150 + index * (this.buttonHeight + this.buttonSpacing);
+      // Calculate position as percentage of canvas width and height
+      const x = (this.game.canvas.getWidth() * 0.5) - (this.buttonWidth * 0.5);
+      const y = (this.game.canvas.getHeight() * 0.3) + index * (this.buttonHeight + this.buttonSpacing);
   
       this.context.fillStyle = "grey";
       this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
@@ -60,9 +61,9 @@ export class MenuLayout extends Layout {
       this.context.fillText(
         button.text,
         x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-        y + this.buttonHeight / 2 + 8
+        y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
       );
       this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
-     });
+    });
   }
 }

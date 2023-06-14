@@ -17,7 +17,6 @@ export class CharacterIdleState extends CharacterState{
     // Override methods for IdleState
 
     attack() {
-        this.character.setIsAttacking(true);
         this.character.looseStamina(20);
         this.character.setState(new CharacterAttackState(this.character));
         //Trigger attack animation        
@@ -47,7 +46,7 @@ export class CharacterIdleState extends CharacterState{
     hit() {
         console.log("got hit during idle");
         this.character.looseHP(20);
-        if(this.character.health <= 0){
+        if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Trigger the death animation
         }

@@ -9,15 +9,21 @@ import { CharacterHealingState } from "./CharacterHealingState.js";
 
 export class CharacterMovingState extends CharacterState{
 
+    constructor(character) {
+        super(character);
+        this.character = character;
+    }
+
     stop() {
         this.character.setState(new CharacterIdleState(this.character));
         //stop moving animation
         this.character.stopMoveAnimation();
     }
     attack() {
+        this.character.looseStamina(20);
         this.character.setState(new CharacterAttackState(this.character));
-        //Stop moving animation and start attack animation
-        this.character.attackOver();
+        //Trigger attack animation
+        this.character.startAttackAnimation();
     }
     blockOn() {
         this.character.setState(new CharacterBlockingState(this.character));
@@ -33,21 +39,18 @@ export class CharacterMovingState extends CharacterState{
 
     hit() {
         this.character.looseHP(20 /*Temporary value*/);
-        if(this.character.health <= 0){
+        if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Stop moving and trigger death animation
         }
         else{
-            this.character.setState(new this.hit(this.character));
+            this.character.setState(new CharacterHitState(this.character));
             //Stop moving and trigger hit animation
         }
     }
     heal() {
-        if(this.character.potions > 0){
-            this.character.setState(new CharacterHealingState(this.character));
-            this.character.usePotion();
-            //Stop moving animation and start the healing animation decrease one Potion from the character
-            this.character.healOver();
-        }
+        this.character.setState(new CharacterHealingState(this.character));
+        this.character.usePotion();
+        this.character.healAnimation();
     }
 }
