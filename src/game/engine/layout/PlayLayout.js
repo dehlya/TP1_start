@@ -1,5 +1,6 @@
 import { Layout } from "./Layout.js";
 import { Character } from "../../character/Character.js";
+import {Enemy} from "../../ennemies/Enemy.js";
 
 export class PlayLayout extends Layout {
     constructor(game) {
@@ -15,6 +16,18 @@ export class PlayLayout extends Layout {
             this
         );
 
+        /**
+         * Testing Enemies
+         */
+        this.enemy = new Enemy(
+            1,
+            100,
+            100,
+            this.game.canvas.getCanvas(),
+            this.game.canvas.getContext(),
+            this
+        )
+
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
     }
@@ -25,6 +38,7 @@ export class PlayLayout extends Layout {
     draw() {
         this.addBackground();
         this.addCharacter();
+        this.addEnemy();
         this.addTitle();
         super.draw();
     }
@@ -35,6 +49,7 @@ export class PlayLayout extends Layout {
     redraw() {
         this.addBackground();
         this.character.drawCharacter();
+        this.enemy.drawEnemy();
         this.addTitle();
     }
 
@@ -52,6 +67,15 @@ export class PlayLayout extends Layout {
         img.src = character.currentImage;
         img.onload = () => {
             character.drawCharacter();
+        };
+    }
+    addEnemy() {
+        const enemy = this.enemy;
+
+        const img = new Image();
+        img.src = enemy.currentImage;
+        img.onload = () => {
+            enemy.drawEnemy();
         };
     }
     addTitle() {

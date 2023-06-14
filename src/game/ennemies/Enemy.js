@@ -3,36 +3,44 @@ import {EnemyMoveState} from "./EnemyMoveState.js";
 
 export class Enemy {
     constructor(rank, x , y, canvas, ctx, parent){
-        if(this.rank == 1){
+        if(rank == 1){
             this.rank = 1;
             this.hp = 100;
             this.attack = 10;
             this.faith = 25;
             this.folder = "enemy1";
         }
-        if(this.rank == 2){
+        if(rank == 2){
             this.rank = 2;
             this.hp = 100;
             this.attack = 20;
             this.faith = 50;
             this.folder = "enemy2";
         }
-        if(this.rank == 3){
+        if(rank == 3){
             this.rank = 3;
             this.hp = 200;
             this.attack = 30;
             this.faith = 75;
             this.folder = "enemy3";
         }
-        if(this.rank == 4){
+        if(rank == 4){
             this.rank = 4;
             this.hp = 5000;
             this.attack = 25;
             this.faith = 1500;
             this.folder = "enemy4";
         }
+        this.direction = "right"; // Direction of the enemy
         this.state = new EnemyMoveState(this);
-        this.currentIMage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_right_${this.rank}.png`;
+
+        //Setting the image of the ennemy to draw
+        console.log(this.folder)
+        this.currentImage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.rank}.png`;
+        this.image = new Image();
+        this.image.src = this.currentImage;
+
+
         this.parent = parent; // retrieve the parent of enemy
         this.x = x; // retrieve the x position of the enemy
         this.y = y; // retrieve the y position of the enemy
@@ -44,7 +52,9 @@ export class Enemy {
     }
 
     drawEnemy(){
-        this.ctx.drawImage(this.currentIMage, this.x, this.y);
+        this.ctx.drawImage(this.image, this.x, this.y);
+        this.move();
+        console.log(this.currentImage);
     }
 
     // getters and setters
@@ -53,6 +63,9 @@ export class Enemy {
     }
     getHealth(){
         return this.hp;
+    }
+    setCurrentImage(path){
+        this.currentImage = path;
     }
 
     //different methods
@@ -74,7 +87,24 @@ export class Enemy {
     //move methods
     move(){
         this.state.move();
+        if(this.x > this.character.x){
+            this.x -= 1;
+            this.direction = "left";
+        }
+        else if(this.x < this.character.x){
+            this.x += 1;
+            this.direction = "right";
+        }
+        if(this.y > this.character.y){
+            this.y -= 1;
+        }
+        else if(this.y < this.character.y){
+            this.y += 1;
+        }
+        this.setCurrentImage(`../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.rank}.png`);
+        this.image.src = this.currentImage;
     }
+
     startMoveAnimation(direction){
     }
 
@@ -83,4 +113,6 @@ export class Enemy {
         this.state.hit();
     }
     hitAnimation(){}
+
+
 }
