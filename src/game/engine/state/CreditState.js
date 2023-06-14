@@ -32,7 +32,7 @@ export class CreditState extends State {
     let y = event.clientY - rect.top;
   
     let startX = this.game.canvas.getWidth() * 0.5 - this.layout.buttonWidth / 2;
-    let startY = this.game.canvas.getHeight() * 0.9;
+    let startY = this.game.canvas.getHeight() * 0.8;
   
     if (
       x >= startX &&
@@ -46,7 +46,7 @@ export class CreditState extends State {
   
 
   toMenu() {
-    this.game.setCurrentState(this.game.menuState);
+    this.game.setCurrentState("Menu");
   }
 
   render() {

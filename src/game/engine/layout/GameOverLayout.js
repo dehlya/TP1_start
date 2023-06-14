@@ -6,8 +6,8 @@ export class GameOverLayout extends Layout {
         super(game);
         this.background = "black";
         this.title = "Game Over";
-        this.buttonWidth = 200;
-        this.buttonHeight = 50;
+        this.buttonWidth = this.game.canvas.getWidth()/4;
+        this.buttonHeight = this.game.canvas.getHeight()/8;
 
         this.playAgainButton = new Button("Play Again", () => game.state.playAgain());
         

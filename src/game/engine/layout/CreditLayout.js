@@ -5,8 +5,8 @@ export class CreditLayout extends Layout {
     super(game);
     this.background = "black";
     this.title = "Credits";
-    this.buttonWidth = 100;
-    this.buttonHeight = 50;
+    this.buttonWidth = this.game.canvas.getWidth()/4;
+    this.buttonHeight = this.game.canvas.getHeight()/8;
 
     this.backButton = new Button("Back", () => game.state.toMenu());
   }
@@ -21,16 +21,16 @@ export class CreditLayout extends Layout {
 
   addButton() {
     const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
-    const y = this.game.canvas.getHeight() * 0.9; 
+    const y = this.game.canvas.getHeight() * 0.8; 
     this.context.fillStyle = "grey";
     this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
   
     this.context.fillStyle = "white";
-    this.context.font = "24px Arial";
+    this.context.font = this.game.canvas.getHeight()/15+"px Arial";
     this.context.fillText(
       this.backButton.text,
       x + (this.buttonWidth - this.context.measureText(this.backButton.text).width) / 2,
-      y + this.buttonHeight / 2 + 8
+      y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
     );
     this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
   }
@@ -46,13 +46,13 @@ export class CreditLayout extends Layout {
   }
   addTitle() {
     this.context.fillStyle = "white";
-    this.context.font = "48px Arial";
+    this.context.font = this.game.canvas.getHeight()/10+"px Arial";
     this.context.fillText(this.title, 10, 50);
   }
 
   addCredits() {
     this.context.fillStyle = "white";
-    this.context.font = "24px Arial";
+    this.context.font = this.game.canvas.getHeight()/20+"px Arial";
 
     const credits = [
       { role: "Game Director", name: "Tony" },
