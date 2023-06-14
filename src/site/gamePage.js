@@ -29,6 +29,7 @@ function GamePage() {
   return (
     <div>
       <Header />
+      <ScriptComponent />
       <main>
         <section id="articles">
           <article>
@@ -46,6 +47,6 @@ function GamePage() {
     </div>
   );
 }
-<ScriptComponent />
+
 
 export default GamePage;
