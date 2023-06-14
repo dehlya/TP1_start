@@ -6,7 +6,7 @@ import Flow from './site/Flow'
 import Logbook from './site/Logbook'
 import Mockup from './site/Mockup'
 import Sketch from './site/Sketch'
-import Game from './site/game'
+import Game from './site/gamePage'
 import App from './site/App'
 
 
@@ -24,7 +24,7 @@ function RedirectToIndex() {
         <Route path="logbook" element={<Logbook />} />
         <Route path="mockup" element={<Mockup />} />
         <Route path="sketch" element={<Sketch />} />
-        <Route path="game" element={<Game />} />
+        <Route path="game" element={<GamePage />} />
       </Routes>
     </BrowserRouter>,
     document.getElementById('root')

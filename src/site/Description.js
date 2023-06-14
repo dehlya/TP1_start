@@ -30,15 +30,11 @@ function Description() {
       <main>
         <section id="articles">
           <article>
-            <header>
-              <h2 className="custom-heading">Description</h2>
-            </header>
             {/* Render the fetched content */}
             <div dangerouslySetInnerHTML={{ __html: pageContent }}></div>
           </article>
         </section>
       </main>
-
       <Footer />
     </div>
   );
