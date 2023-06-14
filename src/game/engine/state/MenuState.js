@@ -9,6 +9,7 @@ export class MenuState extends State {
     this.layout = new MenuLayout(this.game);
     this.layout.hardFrontier = true;
     this.keyHandler = new KeyHandler();
+    this.addCallbacks();
   }
 
   handleClick(event) {
@@ -72,6 +73,8 @@ export class MenuState extends State {
     this.game.canvas.canvas.removeEventListener('click', this.handleClickBound);
   }
   
-addCallbacks() {
-}
+  addCallbacks() {
+    this.keyHandler.addCallback('KeyF', 'keydown', () => this.game.fullscreen());
+
+  }
 }

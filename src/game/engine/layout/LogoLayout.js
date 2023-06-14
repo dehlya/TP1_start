@@ -22,7 +22,7 @@ export class LogoLayout extends Layout {
     addTitle() {
         const canvasWidth = this.game.canvas.getWidth();
         const canvasHeight = this.game.canvas.getHeight();
-        const titleFont = "96px 'Segoe Script', cursive";
+        const titleFont = this.game.canvas.getHeight()/5+"px 'Segoe Script', cursive";
         this.context.font = titleFont;
         const titleWidth = this.context.measureText(this.title).width;
         const titleX = (canvasWidth - titleWidth) / 2;
