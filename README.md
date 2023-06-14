@@ -32,5 +32,18 @@ The game Engine is organised as following :
     - The player part is specific to the player, not to the character.
     - It manages the cookies in order for the player to not loose their game information and settings. 
 
+## Website
+
+To have the website in react you have to:
+
+$ npm install
+
+in your terminal, and then run the command
+
+$ npm start
+
+The website may take a minute but then launches in localhost
+
+
 ## 
 
