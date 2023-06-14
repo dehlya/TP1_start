@@ -6,7 +6,7 @@ import Flow from './site/Flow'
 import Logbook from './site/Logbook'
 import Mockup from './site/Mockup'
 import Sketch from './site/Sketch'
-import Game from './site/gamePage'
+import GamePage from './site/gamePage'
 import App from './site/App'
 
 

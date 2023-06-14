@@ -27,17 +27,17 @@ function Flow() {
   return (
     <div>
       <Header />
-      <main>
-        <section id="articles">
-          <article>
-            {pageContent ? (
-              <div dangerouslySetInnerHTML={{ __html: pageContent }} />
-            ) : (
-              <p>Loading...</p>
-            )}
-          </article>
-        </section>
-      </main>
+        <main>
+          <section id="articles">
+            <article>
+              {pageContent ? (
+                <div dangerouslySetInnerHTML={{ __html: pageContent }} />
+              ) : (
+                <p>Loading...</p>
+              )}
+            </article>
+          </section>
+        </main>
       <Footer />
     </div>
   );
