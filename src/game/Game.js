@@ -6,33 +6,20 @@ import { PauseState } from "./engine/state/PauseState.js";
 import { LogoState } from "./engine/state/LogoState.js";
 import { Player } from "./engine/Player/Player.js";
 import { SettingsState } from "./engine/state/SettingsState.js";
-import { MS_PER_FRAME } from "./Constants.js";
+import { REFRESH_RATE } from "./Constants.js";
 export class Game {
   constructor(canvas, height, width) {
-    this.previousTime = 0;
-    this.currentTime = 0;
-    this.passedTime = 0;
-    this.msPerFrame = MS_PER_FRAME;
-    this.prevState = null;
     this.stateStack = [];
     this.canvas = canvas;
     this.canvas.setHeight(height);
     this.canvas.setWidth(width);
-  }
 
-  /**
-   * Start the game
-   */
-  start() {
-    this.init();
-    this.run();
   }
 
   /**
    * Init the game
    */
   init() {
-    this.previousTime = new Date().getTime();
     this.player = new Player();
 
     this.StatesMap = new Map();
@@ -46,23 +33,28 @@ export class Game {
 
     this.state = this.StatesMap.get("Logo");
     this.state.enter();
-    this.render();
   }
 
-  run() {
-    this.playGameTime = 0;
-    this.currentTime = new Date().getTime();
-    this.passedTime += this.currentTime - this.previousTime;
-    this.previousTime = this.currentTime;
+  /**
+   * Start the game
+   */
+  start() {
+    this.run();
+  }
 
-    while (this.passedTime >= this.msPerFrame)
-    {
-        console.log("loop");
-        this.game.render();
-        this.passedTime -= this.msPerFrame;
-    }
+  /**
+   * Create the gameLoop X time per second (depend on the REFRESH_RATE configured)
+   */
+  run() {
+    setInterval(() => {
+      this.gameLoop();
+    }, 1000 / REFRESH_RATE);
   }
   
+  gameLoop() {
+    this.render();
+  } 
+
   setCurrentState(state, isGoBack=false) {
     if(this.state) {
       if(!isGoBack) {
@@ -71,8 +63,6 @@ export class Game {
           // Add condition to prevent stacking of two consecutive same states
           if (!this.state || this.state.name !== state) {
             this.stateStack.push(this.state);
-            console.log("statestack push")
-            console.log(this.stateStack)
           }
         }
         this.state.exit();
@@ -122,9 +112,11 @@ export class Game {
     }
   }
   
+  isCurrentlyRunning() {
+    return this.state == this.StatesMap.get("Play");
+  }
 
   render() {
-    this.canvas.cleanCanvas(this.state);
     this.state.render();
   }
 
@@ -150,15 +142,6 @@ export class Game {
     }
   }
 
-  setMsPerFrame(isPlayState) {
-    //true is in PlayState
-    //false is in other states
-    if(isPlayState){
-      this.msPerFrame = MS_PER_FRAME_PLAY;
-    }else{
-      this.msPerFrame = MS_PER_FRAME;
-    }
-  }
   resize(width, height) {
     if (document.fullscreenElement) {
       this.canvas.setFullscreen(true);

@@ -15,12 +15,13 @@ export class PlayState extends State {
     toMenu() {
     }
     toPlay() {
+        this.game.start();
     }
     toPause() {
         this.game.setCurrentState("Pause");
     }
     render(){
-        this.layout.draw();
+        this.layout.redraw();
     }
     nextLevel(){
         this.levelsManager.nextLevel();
@@ -36,6 +37,7 @@ export class PlayState extends State {
     }
     enter() {
         super.enter();
+        this.game.start();
         this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
     }

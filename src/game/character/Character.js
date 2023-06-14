@@ -1,27 +1,26 @@
     import { CharacterIdleState } from "./CharacterIdleState.js";
     import { KeyHandler } from "../engine/handler/KeyHandler.js";
 
-    export class Character{
+    export class Character {
         keyHandler = new KeyHandler();
 
         //Constructor of the character class --------------------------------------
-        constructor(x,y,canvas, ctx) {
-            this.x = x;
-            this.y = y;
-            this.canvas = canvas;
-            this.ctx = ctx;
-            this.width = 70;
-            this.height = 100;
-            this.speed = 100;
+        constructor(x,y,canvas, ctx, parent) {
+
+            this.x = x; // Position on the X axis
+            this.y = y; // Position on the Y axis
+            this.parent = parent; // Reference to the PlayLayout parent
+            this.canvas = canvas; // Current canvas
+            this.ctx = ctx; // Context on which we draw the amazing character
+            this.width = 70; // With of the character
+            this.height = 100; // Height of the character
             this.state = new CharacterIdleState(this);
-            this.hpMax = 100;
-            this.hp = this.hpMax;
+            this.hp = this.hpMax = 100;
             this._staminaMax = 10000;
             this.stamina = this.staminaMax;
             this.moveSpeed = 1;
             this.attackPower = 20;
-            this.potionsMax = 3;
-            this.potions = this.potionsMax;
+            this.potions = this.potionsMax = 3;
             this.constitution = 0;
             this.vigor = 0;
             this.dexterity = 0;
@@ -34,8 +33,7 @@
             this.image = new Image();
             this.image.src = this.currentImage;
             this.image.onload = () => {
-                // Once the image is loaded, you can render it on the canvas
-                this.render();
+                this.render(); // Once the image is loaded, you can render it on the canvas
             };
             this.currentMoveDirection = "down";
             this.nextMoveDirection = null;
@@ -65,8 +63,9 @@
 
 
         render(){
-            this.ctx.clearRect(this.image,0, 0, this.canvas.width, this.canvas.height);
-            // Draw the character's image on the canvas at its current position
+        }
+
+        drawCharacter() {
             this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
@@ -309,6 +308,9 @@
 
         //Functions used to move---------------------------------------------------
         move(direction) {
+            if(!this.parent.game.isCurrentlyRunning()) {
+                return;
+            }
             this.nextMoveDirection = direction;
             if (this.isMoving && direction === this.currentMoveDirection) {
                 return;

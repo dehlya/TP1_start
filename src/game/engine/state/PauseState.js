@@ -39,9 +39,7 @@ export class PauseState extends State {
     }
     
     resumePlay() {
-        // this.game.setCurrentState("Play");
-        this.game.fullscreen();
-
+        this.game.setCurrentState("Play");
     }
 
     render() {

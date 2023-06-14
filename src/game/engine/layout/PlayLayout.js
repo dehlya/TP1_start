@@ -11,19 +11,31 @@ export class PlayLayout extends Layout {
             this.game.canvas.getWidth() / 2,
             this.game.canvas.getHeight() / 2,
             this.game.canvas.getCanvas(),
-            this.game.canvas.getContext()
+            this.game.canvas.getContext(),
+            this
         );
 
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
     }
 
+    /**
+     * Initial draw
+     */
     draw() {
-
         this.addBackground();
         this.addCharacter();
         this.addTitle();
         super.draw();
+    }
+
+    /**
+     * Redraw the title and the background (used when the character moves)
+     */
+    redraw() {
+        this.addBackground();
+        this.character.drawCharacter();
+        this.addTitle();
     }
 
     addBackground() {
@@ -39,23 +51,22 @@ export class PlayLayout extends Layout {
         const img = new Image();
         img.src = character.currentImage;
         img.onload = () => {
-            character.render();
+            character.drawCharacter();
         };
     }
     addTitle() {
         const character = this.character;
-        const ctx = this.context;
 
         // Set font properties
-        ctx.font = '20px Arial';
-        ctx.fillStyle = 'white';
+        this.context.font = '20px Arial';
+        this.context.fillStyle = 'white';
 
         // Draw health indicator
-        const healthIndicator = `Health: ${character.hp/character.hpMax*100}%`;
-        ctx.fillText(healthIndicator, this.game.canvas.getWidth()-150, 30);
+        const healthIndicator = `Health: ${this.character.hp/this.character.hpMax*100}%`;
+        this.context.fillText(healthIndicator, this.game.canvas.getWidth()-150, 30);
 
         // Draw stamina indicator
-        const staminaIndicator = `Stamina: ${character.stamina/character.staminaMax*100}%`;
-        ctx.fillText(staminaIndicator,this.game.canvas.getWidth()-150, 60);
+        const staminaIndicator = `Stamina: ${this.character.stamina/this.character.staminaMax*100}%`;
+        this.context.fillText(staminaIndicator,this.game.canvas.getWidth()-150, 60);
     }
 }
