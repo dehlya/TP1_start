@@ -43,9 +43,9 @@ export class CharacterIdleState extends CharacterState{
         //Trigger the healing animation and decrease one Potion from the character
     }
 
-    hit() {
+    hit(value) {
         console.log("got hit during idle");
-        this.character.looseHP(20);
+        this.character.looseHP(value);
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Trigger the death animation

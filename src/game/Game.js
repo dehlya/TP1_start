@@ -127,7 +127,7 @@ export class Game {
       this.render();
     } else {
       document.getElementById('canvas').requestFullscreen();
-      this.canvas.setFullscreen(true);
+      //this.canvas.setFullscreen(true);
       this.render();
     }
   }
@@ -144,7 +144,7 @@ export class Game {
 
   resize(width, height) {
     if (document.fullscreenElement) {
-      this.canvas.setFullscreen(true);
+      //this.canvas.setFullscreen(true);
     }else{
       this.canvas.setWidth(width);
       this.canvas.setHeight(height);

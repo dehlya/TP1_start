@@ -1,6 +1,6 @@
 import { Layout } from "./Layout.js";
 import { Character } from "../../character/Character.js";
-import {Enemy} from "../../ennemies/Enemy.js";
+import {Enemy} from "../../enemies/Enemy.js";
 
 export class PlayLayout extends Layout {
     constructor(game) {
@@ -17,19 +17,16 @@ export class PlayLayout extends Layout {
         );
 
         /**
-         * Testing Enemies
+         * Ennemies spawning
          */
-        this.enemy = new Enemy(
-            1,
-            100,
-            100,
-            this.game.canvas.getCanvas(),
-            this.game.canvas.getContext(),
-            this
-        )
+        this.enemies = []; // Array to store the enemies
 
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
+
+        setInterval(() => {
+            this.addEnemy();
+        }, 10000);
     }
 
     /**
@@ -38,9 +35,12 @@ export class PlayLayout extends Layout {
     draw() {
         this.addBackground();
         this.addCharacter();
-        this.addEnemy();
         this.addTitle();
         super.draw();
+    }
+
+    getEnemies() {
+        return this.enemies;
     }
 
     /**
@@ -49,7 +49,9 @@ export class PlayLayout extends Layout {
     redraw() {
         this.addBackground();
         this.character.drawCharacter();
-        this.enemy.drawEnemy();
+        this.enemies.forEach(enemy => {
+            enemy.drawEnemy();
+        });
         this.addTitle();
     }
 
@@ -70,13 +72,24 @@ export class PlayLayout extends Layout {
         };
     }
     addEnemy() {
-        const enemy = this.enemy;
+        //initialise random spawn position
+        const x = Math.random() < 0.5 ? Math.floor(Math.random() * 101) + 100
+            : Math.floor(Math.random() * 101) + (this.game.canvas.getWidth()-200);
+        const y = Math.random() < 0.5 ? Math.floor(Math.random() * 101) + 100
+            : Math.floor(Math.random() * 101) + (this.game.canvas.getHeight()-200);
+        const enemy = new Enemy(
+            Math.floor(Math.random() * 3) + 1,
+            x,
+            y,
+            this.game.canvas.getCanvas(),
+            this.game.canvas.getContext(),
+            this
+        );
 
         const img = new Image();
         img.src = enemy.currentImage;
-        img.onload = () => {
-            enemy.drawEnemy();
-        };
+
+        this.enemies.push(enemy);
     }
     addTitle() {
         const character = this.character;
@@ -93,4 +106,5 @@ export class PlayLayout extends Layout {
         const staminaIndicator = `Stamina: ${this.character.stamina/this.character.staminaMax*100}%`;
         this.context.fillText(staminaIndicator,this.game.canvas.getWidth()-150, 60);
     }
+
 }

@@ -28,10 +28,13 @@
             this.faith = 0;
             this.isAttacking = false;
             this.isMoving = false;
+            this.isHit = false;
             this.isDrinking = false;
             this.currentImage = "../../../ressources/game/character/characterFrames/move_down/down_move_0.png";
             this.image = new Image();
             this.image.src = this.currentImage;
+            this.centerX = this.image.width / 2;
+            this.centerY = this.image.height / 2;
             this.image.onload = () => {
                 this.render(); // Once the image is loaded, you can render it on the canvas
             };
@@ -58,7 +61,7 @@
             this.keyHandler.addCallback('ShiftLeft', 'keydown', () => this.heal());
 
             //test hp
-            this.keyHandler.addCallback('KeyO', 'keydown', () => this.hit());
+            this.keyHandler.addCallback('KeyO', 'keydown', () => this.hit(20, this.parent));
         }
 
 
@@ -66,7 +69,13 @@
         }
 
         drawCharacter() {
-            this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+            this.ctx.drawImage(this.image, this.x, this.y);
+            this.parent.getEnemies().forEach(enemy => {
+                if(Math.abs((enemy.getX() - (this.x + this.centerX))) < 30
+                    && Math.abs((enemy.getY() - (this.y + this.centerY))) < 30){
+                    this.hit(enemy.getAttackPower());
+                }
+            })
         }
 
         setCurrentImage(value) {
@@ -255,16 +264,24 @@
 
 
         //Functions handling the hits---------------------------------------------
-        hit(){
-            console.log("You got hit");
-            this.state.hit();
+        hit(value){
+            if(this.isHit == false){
+                console.log("You got hit");
+                this.stop();
+                this.isHit = true;
+                this.state.hit(value);
+            }
         }
         hitOver(){
             this.state.hitOver();
         }
-        hitAnimation(){
+        async hitAnimation(){
             console.log("Hit animation started " + this.hp);
+            this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${this.currentMoveDirection}/${this.currentMoveDirection}_move_0.png`);
+            await this.delay(400);
             this.hitOver();
+            await this.delay(2000);
+            this.isHit = false;
         }
         //End of functions handling the hits--------------------------------------
 
@@ -345,7 +362,13 @@
                     console.log('Invalid direction');
                     return;
             }
-            const imageCount = 8;
+            let imageCount = 0;
+            if(direction == 'up' || direction == 'down') {
+                imageCount = 8;
+            }
+            else{
+                imageCount = 6;
+            }
             this.currentFrame = 1;
 
             const moveStep = () => {

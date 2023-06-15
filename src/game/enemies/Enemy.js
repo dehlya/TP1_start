@@ -36,7 +36,8 @@ export class Enemy {
 
         //Setting the image of the ennemy to draw
         console.log(this.folder)
-        this.currentImage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.rank}.png`;
+        this.currentFrame = 0;
+        this.currentImage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.currentFrame}.png`;
         this.image = new Image();
         this.image.src = this.currentImage;
 
@@ -49,12 +50,25 @@ export class Enemy {
         this.ctx = ctx; // retrieve the context of the enemy
         this.width = 70; // With of the enemy
         this.height = 100; // Height of the enemy
+        this.startMoveAnimation();
+
+        setInterval( () => {
+            if(this.currentFrame < 7){
+                this.currentFrame += 1;
+            }
+            else{
+                this.currentFrame = 0;
+            }
+            this.currentImage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.currentFrame}.png`;
+            this.image.src = this.currentImage;
+        },100)
+        this.centerX = this.image.width/2;
+        this.centerY = this.image.height/2;
     }
 
     drawEnemy(){
         this.ctx.drawImage(this.image, this.x, this.y);
         this.move();
-        console.log(this.currentImage);
     }
 
     // getters and setters
@@ -64,8 +78,14 @@ export class Enemy {
     getHealth(){
         return this.hp;
     }
-    setCurrentImage(path){
-        this.currentImage = path;
+    getX(){
+        return (this.x + this.centerX);
+    }
+    getY(){
+        return (this.y + this.centerY);
+    }
+    getAttackPower(){
+        return this.attack;
     }
 
     //different methods
@@ -101,16 +121,16 @@ export class Enemy {
         else if(this.y < this.character.y){
             this.y += 1;
         }
-        this.setCurrentImage(`../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.rank}.png`);
-        this.image.src = this.currentImage;
+
     }
 
     startMoveAnimation(direction){
+
     }
 
     //hit methods
-    hit(){
-        this.state.hit();
+    hit(value){
+        this.state.hit(value);
     }
     hitAnimation(){}
 

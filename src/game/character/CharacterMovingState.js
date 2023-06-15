@@ -37,14 +37,15 @@ export class CharacterMovingState extends CharacterState{
         //Stop moving animation and start dash animation
     }
 
-    hit() {
-        this.character.looseHP(20 /*Temporary value*/);
+    hit(value) {
+        this.character.looseHP(value);
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Stop moving and trigger death animation
         }
         else{
             this.character.setState(new CharacterHitState(this.character));
+            this.character.hitAnimation();
             //Stop moving and trigger hit animation
         }
     }

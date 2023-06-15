@@ -19,5 +19,4 @@ export class State {
     exit(){
         this.audio.pause();
     }
-    
-    }
+}

@@ -38,6 +38,7 @@ export class MenuState extends State {
   
   toPlay() {
     this.game.setCurrentState("Play");
+    this.game.fullscreen();
   }
 
   toPause() {
@@ -58,6 +59,7 @@ export class MenuState extends State {
   }
 
   render() {
+    console.log(this.layout.game.state);
     console.log("MenuState render called");
     this.layout.draw();
   }

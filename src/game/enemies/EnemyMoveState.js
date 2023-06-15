@@ -1,6 +1,4 @@
 import {EnemyState} from "./EnemyState.js";
-import {EnemyIdleState} from "./EnemyIdleState.js";
-import {EnemyAttackState} from "./EnemyAttackState.js";
 import {EnemyDeadState} from "./EnemyDeadState.js";
 import {EnemyHitState} from "./EnemyHitState.js";
 
@@ -9,16 +7,8 @@ export class EnemyMoveState extends EnemyState {
         super(enemy);
     }
 
-    stop() {
-        this.enemy.setState(new EnemyIdleState(this.enemy));
-        this.enemy.stopMoveAnimation();
-    }
-    attack() {
-        this.enemy.setState(new EnemyAttackState(this.enemy));
-        this.enemy.StartAttackAnimation();
-    }
-    hit() {
-        this.enemy.looseHP(20);
+    hit(value) {
+        this.enemy.looseHP(value);
         if(this.enemy.getHealth <= 0) {
             this.enemy.setState(new EnemyDeadState(this.enemy));
         }

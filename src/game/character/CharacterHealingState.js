@@ -12,7 +12,8 @@ export class CharacterHealingState extends CharacterState{
     constructor(character) {
         super(character);
     }
-    hit(){
+    hit(value){
+        this.character.looseHP(value);
         console.log("got hit during healing");
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));

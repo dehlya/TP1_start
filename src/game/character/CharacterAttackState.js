@@ -20,7 +20,8 @@ export class CharacterAttackState extends CharacterState{
         console.log("attack over");
     }
 
-    hit(){
+    hit(value){
+        this.character.looseHP(value);
         console.log("got hit during attack");
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));

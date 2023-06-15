@@ -46,7 +46,7 @@ export class CreditState extends State {
   
 
   toMenu() {
-    this.game.setCurrentState(this.game.menuState);
+    this.game.setCurrentState("Menu");
   }
 
   render() {

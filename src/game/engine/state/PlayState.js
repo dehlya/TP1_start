@@ -48,5 +48,4 @@ export class PlayState extends State {
     }
     addCallbacks() {
     }
-
 }
