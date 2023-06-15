@@ -105,6 +105,9 @@ export class PlayLayout extends Layout {
         // Draw stamina indicator
         const staminaIndicator = `Stamina: ${this.character.stamina/this.character.staminaMax*100}%`;
         this.context.fillText(staminaIndicator,this.game.canvas.getWidth()-150, 60);
+
+        const faithIndicator = `Faith: ${this.character.faith}`;
+        this.context.fillText(faithIndicator, 50, 30);
     }
 
 }

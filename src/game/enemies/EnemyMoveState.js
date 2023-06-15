@@ -9,7 +9,7 @@ export class EnemyMoveState extends EnemyState {
 
     hit(value) {
         this.enemy.looseHP(value);
-        if(this.enemy.getHealth <= 0) {
+        if(this.enemy.getHealth() <= 0) {
             this.enemy.setState(new EnemyDeadState(this.enemy));
         }
         else{

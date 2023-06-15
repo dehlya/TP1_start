@@ -12,14 +12,12 @@
             this.parent = parent; // Reference to the PlayLayout parent
             this.canvas = canvas; // Current canvas
             this.ctx = ctx; // Context on which we draw the amazing character
-            this.width = 70; // With of the character
-            this.height = 100; // Height of the character
             this.state = new CharacterIdleState(this);
             this.hp = this.hpMax = 100;
             this._staminaMax = 10000;
             this.stamina = this.staminaMax;
             this.moveSpeed = 1;
-            this.attackPower = 20;
+            this.attackPower = 100;
             this.potions = this.potionsMax = 3;
             this.constitution = 0;
             this.vigor = 0;
@@ -43,7 +41,7 @@
             this.startStaminaRegeneration();
 
             //key handler attack
-            this.keyHandler.addCallback('Space','keydown',() => this.attack());
+            this.keyHandler.addCallback('Enter','keydown',() => this.attack());
 
             //key handlers movement
             this.keyHandler.addCallback('KeyW', 'keydown', () => this.move('up'));
@@ -61,7 +59,7 @@
             this.keyHandler.addCallback('ShiftLeft', 'keydown', () => this.heal());
 
             //test hp
-            this.keyHandler.addCallback('KeyO', 'keydown', () => this.hit(20, this.parent));
+            this.keyHandler.addCallback('KeyO', 'keydown', () => this.hit(100, this.parent));
         }
 
 
@@ -71,8 +69,29 @@
         drawCharacter() {
             this.ctx.drawImage(this.image, this.x, this.y);
             this.parent.getEnemies().forEach(enemy => {
-                if(Math.abs((enemy.getX() - (this.x + this.centerX))) < 30
-                    && Math.abs((enemy.getY() - (this.y + this.centerY))) < 30){
+                if(Math.abs((enemy.getX() - this.x)) < 30
+                    && Math.abs((enemy.getY() - this.y)) < 40){
+                    if(!this.isHit){
+                        if(this.x +(this.x - enemy.getX()) < 100)
+                        {
+                            this.x = 100;
+                        }
+                        else if(this.x +(this- enemy.getX()) > this.canvas.width - 100){
+                            this.x = this.canvas.width - 100;
+                        }
+                        else{
+                            this.x = this.x +((this.x+this.centerX) - enemy.getX());
+                        }
+                        if(this.y +(this.y - enemy.getY()) < 100){
+                            this.y = 100;
+                        }
+                        else if(this.y +(this.y - enemy.getY()) > this.canvas.height - 100){
+                            this.y = this.canvas.height - 100;
+                        }
+                        else{
+                            this.y = this.y +((this.y+this.centerY) - enemy.getY());
+                        }
+                    }
                     this.hit(enemy.getAttackPower());
                 }
             })
@@ -186,7 +205,6 @@
         }
         looseHP(value){
             this.hp -= value;
-            console.log(this.hp);
         }
         usePotion(){
             this.potions--;
@@ -203,8 +221,8 @@
         //Functions used for attack------------------------------------------------
         attack(){
             // Can only be triggered if the stamina is greater than 0 and not currently attacking
+            console.log(this.isAttacking);
             if(this.stamina > 0 && !this.isAttacking) {
-                console.log("Attack Key Pressed");
                 this.setIsAttacking(true);
                 this.setIsMoving(false);
                 this.state.attack();
@@ -216,8 +234,11 @@
             this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${this.currentMoveDirection}/${this.currentMoveDirection}_move_0.png`);
         }
         async startAttackAnimation() {
-            console.log("Attack animation started " + this.stamina);
             let direction;
+            let minX;
+            let maxX;
+            let minY;
+            let maxY;
             switch (this.currentMoveDirection) {
                 case 'up':
                     direction = 'up';
@@ -235,15 +256,66 @@
                     console.log('Invalid direction');
                     return;
             }
+            if(direction == 'up'){
+                minX = this.x - 100;
+                maxX = this.x + (this.image.width + 100);
+                minY = this.y;
+                maxY = this.y - 300;
+            }
+            else if(direction == 'down'){
+                minX = this.x - 100;
+                maxX = this.x + (this.image.width + 100);
+                minY = this.y + this.image.height;
+                maxY = this.y + this.image.height + 300;
+            }
+            else if(direction == 'left'){
+                minX = this.x -200;
+                maxX = this.x;
+                minY = this.y - 150;
+                maxY = this.y + (this.image.height +150);
+            }
+            else if(direction == 'right'){
+                minX = this.x + this.image.width;
+                maxX = this.x + this.image.width + 200;
+                minY = this.y - 150;
+                maxY = this.y + (this.image.height + 150);
+            }
+            this.parent.getEnemies().forEach((enemy, index) => {
+                console.log(enemy.getX() + " " + enemy.getY()); // Print enemy coordinates for debugging
+                console.log(minX + " " + maxX + " " + minY + " " + maxY); // Print boundary values for debugging
+
+                // Check if the enemy's coordinates are within the specified boundaries
+                if (enemy.getX() >= minX && enemy.getX() <= maxX && enemy.getY() >= minY && enemy.getY() <= maxY) {
+                    enemy.hit(this.attackPower); // Perform the "hit" action on the enemy
+
+                    //Knock-back the enemy
+                    if(enemy.getX() >= this.x){
+                        enemy.setX(enemy.getX() + 20);
+                    }
+                    else{
+                        enemy.setX(enemy.getX() - 20);
+                    }
+                    if(enemy.getY() >= this.y){
+                        enemy.setY(enemy.getY() + 20);
+                    }
+                    else{
+                        enemy.setY(enemy.getY() - 20);
+                    }
+
+                    // Remove the enemy from the array
+                    if(enemy.getHealth() <= 0){
+                        this.parent.getEnemies().splice(index, 1);
+                        this.gainFaith(enemy.getFaith());
+                    }
+                }
+            });
             const imageCount = 4;
             this.currentFrame = 0;
 
             // Start the animation loop for the specified direction
             for(let i = 0; i < imageCount; i++) {
-                console.log(this.currentMoveDirection);
                 const currentImage = `../../../ressources/game/character/characterFrames/attack/attack_${direction}_${this.currentFrame}.png`;
                 this.setCurrentImage(currentImage);
-                console.log('Current frame: ' + this.currentImage);
 
                 this.currentFrame++;
                 if (this.currentFrame >= imageCount) {
@@ -258,7 +330,6 @@
             this.currentFrame = 0;
 
             this.attackOver();
-            console.log(this.currentImage);
         }
         //End of functions used for attack-----------------------------------------
 
@@ -266,17 +337,16 @@
         //Functions handling the hits---------------------------------------------
         hit(value){
             if(this.isHit == false){
-                console.log("You got hit");
-                this.stop();
                 this.isHit = true;
                 this.state.hit(value);
             }
         }
         hitOver(){
             this.state.hitOver();
+            this.isAttacking = false;
+            this.isMoving = false;
         }
         async hitAnimation(){
-            console.log("Hit animation started " + this.hp);
             this.setCurrentImage(`../../../ressources/game/character/characterFrames/move_${this.currentMoveDirection}/${this.currentMoveDirection}_move_0.png`);
             await this.delay(400);
             this.hitOver();
@@ -294,13 +364,11 @@
             }
         }
         startBlockAnimation() {
-            console.log("Block animation started " + this.stamina);
         }
         blockOff(){
             this.state.blockOff();
         }
         stopBlockAnimation() {
-            console.log("Block animation stopped " + this.stamina);
         }
         //End of functions used for block------------------------------------------
 
@@ -313,11 +381,9 @@
             }
         }
         dashOver(){
-            console.log("Dash over");
             this.state.dashOver();
         }
         dashAnimation(){
-            console.log("Dash animation started " + this.stamina);
             this.dashOver();
         }
         //END of functions used for dash-------------------------------------------
@@ -339,8 +405,6 @@
         }
         async startMoveAnimation() {
             this.isMoving = true;
-            console.log("Move animation started");
-            console.log(this.currentImage);
 
             // The animation depends on which way the character goes
             const direction = this.nextMoveDirection;
@@ -394,7 +458,8 @@
                 }
 
                 // Check if the new position is within the canvas boundaries
-                if (newX >= 100 && newX + this.width <= this.canvas.width - 100 && newY >= 50 && newY + this.height <= this.canvas.height - 80) {
+                if (newX >= 100 && newX + this.image.width <= this.canvas.width - 100 && newY >= 50
+                    && newY + this.image.height <= this.canvas.height - 80) {
                     this.x = newX;
                     this.y = newY;
                     this.render(); // Render the character at the new position
@@ -433,7 +498,6 @@
             this.nextMoveDirection = null;
         }
         stopMoveAnimation(){
-            console.log("Move animation stopped");
             this.isMoving = false;
         }
         //End of functions used to move--------------------------------------------
@@ -451,7 +515,6 @@
             this.isDrinking = false;
         }
         async healAnimation(){
-            console.log("Heal animation started ");
 
             const imageCount = 7;
             this.currentFrame = 0;
@@ -460,7 +523,6 @@
             for (let i = 0; i < imageCount; i++) {
                 const currentImage = `../../../ressources/game/character/characterFrames/Potion/drinking_potion_${this.currentFrame}.png`;
                 this.setCurrentImage(currentImage);
-                console.log('Current frame: ' + currentImage);
 
                 this.currentFrame++;
                 if (this.currentFrame >= imageCount) {

@@ -5,7 +5,8 @@ export class EnemyHitState extends EnemyState{
     constructor(enemy){
         super(enemy);
     }
-    hitOver() {
+    async hitOver() {
+        await this.enemy.delay(1000);
         console.log("Enemy hit animation over");
         this.enemy.setState(new EnemyMoveState(this.enemy));
     }

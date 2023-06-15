@@ -5,21 +5,21 @@ export class Enemy {
     constructor(rank, x , y, canvas, ctx, parent){
         if(rank == 1){
             this.rank = 1;
-            this.hp = 100;
+            this.hp = 200;
             this.attack = 10;
             this.faith = 25;
             this.folder = "enemy1";
         }
         if(rank == 2){
             this.rank = 2;
-            this.hp = 100;
+            this.hp = 200;
             this.attack = 20;
             this.faith = 50;
             this.folder = "enemy2";
         }
         if(rank == 3){
             this.rank = 3;
-            this.hp = 200;
+            this.hp = 400;
             this.attack = 30;
             this.faith = 75;
             this.folder = "enemy3";
@@ -35,7 +35,6 @@ export class Enemy {
         this.state = new EnemyMoveState(this);
 
         //Setting the image of the ennemy to draw
-        console.log(this.folder)
         this.currentFrame = 0;
         this.currentImage = `../../../ressources/game/enemies/${this.folder}/${this.folder}_moving_${this.direction}_${this.currentFrame}.png`;
         this.image = new Image();
@@ -79,13 +78,22 @@ export class Enemy {
         return this.hp;
     }
     getX(){
-        return (this.x + this.centerX);
+        return this.x;
+    }
+    setX(value){
+        return this.x = value;
+    }
+    setY(value){
+        return this.y = value;
     }
     getY(){
-        return (this.y + this.centerY);
+        return this.y;
     }
     getAttackPower(){
         return this.attack;
+    }
+    getFaith(){
+        return this.faith;
     }
 
     //different methods
@@ -134,5 +142,7 @@ export class Enemy {
     }
     hitAnimation(){}
 
-
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }

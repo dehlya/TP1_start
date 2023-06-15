@@ -44,7 +44,6 @@ export class CharacterIdleState extends CharacterState{
     }
 
     hit(value) {
-        console.log("got hit during idle");
         this.character.looseHP(value);
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));

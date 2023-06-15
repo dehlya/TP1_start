@@ -11,6 +11,10 @@ export class CharacterDeadState extends CharacterState{
 
     constructor(character) {
         super(character);
+
+        character.setCurrentImage("../../../ressources/game/character/characterFrames/death/ouch.png");
     }
+
+
 
 }
