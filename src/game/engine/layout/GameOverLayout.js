@@ -7,6 +7,8 @@ export class GameOverLayout extends Layout {
         console.log("i entered the game over layout ! ");
         console.log("i'm setting the background");
         this.background = "../../../ressources/game/background/background_you_died.png";
+        this.image = new Image();
+        this.image.src = this.background;
         this.title = "Game Over";
 
         this.buttonWidth = 100;
@@ -19,7 +21,7 @@ export class GameOverLayout extends Layout {
         this.addBackground();
         this.addTitle();
         this.addButtons();
-        this.addButton();
+        //this.addButton();
         super.draw();
     }
     addButtons() {
@@ -48,6 +50,7 @@ export class GameOverLayout extends Layout {
     addBackground() {
         this.context.fillStyle = this.background;
         this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+        this.context.drawImage(this.image, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
     }
 
 

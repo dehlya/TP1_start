@@ -6,8 +6,10 @@ export class PlayLayout extends Layout {
     constructor(game) {
         super(game);
         this.background = "grey"
+        this.difficulty = 1;
+        this.raiseDifficulty = 5000;
         this.title = "Play in progress...";
-        this.showUsernameInput = false; // Flag to control the display of the username input window
+        this.scoreMilestones = 1000;
         this.character = new Character(
             this.game.canvas.getWidth() / 2,
             this.game.canvas.getHeight() / 2,
@@ -23,6 +25,24 @@ export class PlayLayout extends Layout {
 
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
+
+        let intervalId = setInterval( () => {
+            if(this.character.faith > this.scoreMilestones){
+                this.character.potions += 1;
+                this.scoreMilestones += 1000;
+            }
+            if(this.raiseDifficulty < this.character.faith){
+                this.raiseDifficulty += 5000;
+                this.difficulty += 1;
+                if(this.state.difficulty <= 0){
+                    this.state.difficulty -= 500;
+                }
+            }
+            if(this.character.getHealth() <= 0){
+                this.game.state.toMenu();
+                clearInterval(intervalId);
+            }
+        },)
     }
 
     /**
@@ -74,7 +94,7 @@ export class PlayLayout extends Layout {
         const y = Math.random() < 0.5 ? Math.floor(Math.random() * 101) + 100
             : Math.floor(Math.random() * 101) + (this.game.canvas.getHeight()-200);
         const enemy = new Enemy(
-            Math.floor(Math.random() * 3) + 1,
+            Math.floor(Math.random() * this.difficulty) + 1,
             x,
             y,
             this.game.canvas.getCanvas(),
@@ -104,6 +124,9 @@ export class PlayLayout extends Layout {
 
         const faithIndicator = `Faith: ${this.character.faith}`;
         this.context.fillText(faithIndicator, 50, 30);
+
+        const potionIndicator = `Potions: ${this.character.potions}`;
+        this.context.fillText(potionIndicator, 50, 60);
     }
 
 }

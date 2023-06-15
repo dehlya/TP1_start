@@ -33,7 +33,7 @@ export class GameOverState extends State {
     }
 
     render(){
-        //this.layout.draw();
+        this.layout.draw();
     }
     enter() {
         super.enter();
