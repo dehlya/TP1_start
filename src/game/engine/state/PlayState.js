@@ -7,6 +7,12 @@ export class PlayState extends State {
     constructor(game) {
         super(game);
         this.layout = new PlayLayout(this.game);
+        this.isState = false;
+        setInterval(() => {
+            if (this.isState) {
+               this.layout.addEnemy(); 
+            }
+        }, 10000);
     }
     toCredit() {
     }
@@ -41,11 +47,13 @@ export class PlayState extends State {
         this.game.start();
         this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
+        this.isState = true;
     }
   
     exit() {
         super.exit();
         this.keyHandler.removeAllCallbacks();
+        this.isState = false;
     }
     addCallbacks() {
     }

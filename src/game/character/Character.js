@@ -1,12 +1,12 @@
-    import { CharacterIdleState } from "./CharacterIdleState.js";
-    import { KeyHandler } from "../engine/handler/KeyHandler.js";
+import { CharacterIdleState } from "./CharacterIdleState.js";
+import { KeyHandler } from "../engine/handler/KeyHandler.js";
+import { CharacterDeadState } from "./CharacterDeadState.js";
+import { GameOverState } from "../engine/state/GameOverState.js";
 
     export class Character {
         keyHandler = new KeyHandler();
-
         //Constructor of the character class --------------------------------------
         constructor(x,y,canvas, ctx, parent) {
-
             this.x = x; // Position on the X axis
             this.y = y; // Position on the Y axis
             this.parent = parent; // Reference to the PlayLayout parent
@@ -205,6 +205,13 @@
         }
         looseHP(value){
             this.hp -= value;
+            console.log(this.hp);
+            if (this.hp <= 0){
+                console.log("I'm dead!");
+                this.state = new CharacterDeadState(this);
+                console.log("new game over state");
+                this.game.state = new GameOverState();
+            }
         }
         usePotion(){
             this.potions--;

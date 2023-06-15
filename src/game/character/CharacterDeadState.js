@@ -6,6 +6,9 @@ import { CharacterBlockingState } from "./CharacterBlockingState.js";
 import { CharacterDashingState } from "./CharacterDashingState.js";
 import { CharacterHealingState } from "./CharacterHealingState.js";
 import { CharacterMovingState } from "./CharacterMovingState.js";
+import { GameOverState } from "../engine/state/GameOverState.js";
+//src/game/engine/state/GameOverState.js
+//src/game/character/CharacterDeadState.js
 
 export class CharacterDeadState extends CharacterState{
 
@@ -16,5 +19,11 @@ export class CharacterDeadState extends CharacterState{
     }
 
 
+
+    die() {
+        console.log("in character dead state, die");
+        this.character.setCurrentState("CharacterDeadState");
+        this.game.setCurrentState("GameOver");
+    }
 
 }

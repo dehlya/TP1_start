@@ -2,6 +2,7 @@ import { Layout } from "./Layout.js";
 import { Button } from "../interacter/Button.js";
 
 export class SettingsLayout extends Layout {
+    
     constructor(game) {
         super(game);
         this.background = "black";
@@ -36,6 +37,7 @@ export class SettingsLayout extends Layout {
 
       }
       
+      
       addButton(button, x, y, key) {
         this.context.fillStyle = "grey";
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
@@ -49,7 +51,8 @@ export class SettingsLayout extends Layout {
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
 
-    }
+        }
+        
 
     addGeolocationText(x, y) {
         this.context.fillStyle = "white";

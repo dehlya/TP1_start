@@ -1,9 +1,9 @@
-import { GameOverState } from "./engine/state/GameOverState.js";
 import { PlayState } from "./engine/state/PlayState.js";
 import { MenuState } from "./engine/state/MenuState.js";
 import { CreditState } from "./engine/state/CreditState.js";
 import { PauseState } from "./engine/state/PauseState.js";
 import { LogoState } from "./engine/state/LogoState.js";
+import { GameOverState } from "./engine/state/GameOverState.js";
 import { Player } from "./engine/Player/Player.js";
 import { SettingsState } from "./engine/state/SettingsState.js";
 import { REFRESH_RATE } from "./Constants.js";
