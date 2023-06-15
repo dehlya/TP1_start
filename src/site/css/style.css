@@ -242,4 +242,192 @@ footer img{
   nav ul li {
     width: 100%;
   }
+  
+  
 }
+.review-box{
+  margin-top: 50px;
+  width: 80%;
+  margin-left: 10%;
+  padding: 20px;
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+.review-box h2 {
+  margin: 0 0 30px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.review-box .input-box {
+  position: relative;
+  padding: 20px;
+}
+
+.review-box .input-box input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 20px;
+  border: none;
+  border: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.review-box .input-box label {
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.review-box .input-box input:focus ~ label,
+.review-box .input-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.review-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  margin-left: 40%;
+  margin-bottom: 40px;
+  letter-spacing: 4px;
+  cursor: pointer;
+}
+
+.review-box a:hover {
+  background: #192f11;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #192f11,
+              0 0 25px #192f11,
+              0 0 50px #192f11,
+              0 0 100px #192f11;
+}
+
+.review-box a span {
+  position: absolute;
+  display: block;
+}
+
+.review-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.review-box a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #ffffff);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.review-box a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #ffffff);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #ffffff);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+.area {
+  width: 100%;
+  padding: 15px;
+  background-color: transparent;
+  cursor: pointer;
+}
+#dropZone {
+  border: 2px dashed #bbb;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 50px;
+  text-align: center;
+  font: 21pt bold arial;
+  color: #bbb;
+  cursor: pointer;
+}
+#dropZone:hover {
+  background: #121e09;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #192f11,
+              0 0 25px #192f11,
+              0 0 50px #192f11,
+              0 0 100px #192f11;
+
+}
+#dropZone input[type="file"] {
+}
+
+
