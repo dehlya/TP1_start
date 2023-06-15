@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-color: rgb(51, 17, 17);
+    background-color:rgb(42, 58, 44);;
 }
 .index-container {
     height: 100%;
@@ -16,21 +16,20 @@ html, body {
 .index-container > .welcome {
     grid-column: 1 / span 1;
     grid-row: 2;
-    padding: 50px;
+    padding: 30px;
     overflow-wrap: break-word;
 }
 .index-container > .img-welcome {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 3 ;
+    grid-row: 1 / span 6 ;
     padding: 0;
     margin: 0;
     background-color:rgb(42, 58, 44);
-    background-image: url("ressources/site/background_dungeon_final_v3.png");
-    background-position: center;
+
+    background-image: url("ressources/site/forest.png");
+    background-position: left;
     height: -webkit-fill-available;
     display: flex;
-    align-content: center;
-    align-items: center;
+    align-content: top;
 }
 @media screen and (max-width: 800px) {
     .index-container {
@@ -55,6 +54,7 @@ h2{
     font-weight: 400;
     color: white;
     margin-bottom: 80px;
+    margin-left:20px;;
 }
 p{
     font-size: 1.25em;
@@ -82,7 +82,7 @@ a {
 
 a:hover {
     background: white;
-    color: rgb(42, 58, 44);
+    color: rgb(11, 15, 12);
     border-radius: 2px;
 }
 

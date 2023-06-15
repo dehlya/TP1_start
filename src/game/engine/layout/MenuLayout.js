@@ -5,16 +5,16 @@ export class MenuLayout extends Layout {
   constructor(game) {
     super(game);
     this.background = "white";
-    this.title = "The Invoked One";
+    this.title = "THE INVOKED ONE";
     this.buttonWidth = 200;
     this.buttonHeight = 50;
     this.buttonSpacing = 20;
 
     this.buttons = [
-      new Button("Play", () => game.state.toPlay()),
-      new Button("Load game", () => game.state.toPause()),
-      new Button("Settings", () => game.state.toSettings()),
-      new Button("Credits", () => game.state.toCredit()),
+      new Button("PLAY", () => game.state.toPlay()),
+      //new Button("Load game", () => game.state.toPause()),
+      new Button("SETTINGS", () => game.state.toSettings()),
+      new Button("CREDITS", () => game.state.toCredit()),
     ];
 
     this.img = new Image();
@@ -36,11 +36,11 @@ export class MenuLayout extends Layout {
 
   addTitle() {
       const canvasWidth = this.game.canvas.getWidth();
-      const titleFont = "64px 'Segoe Script', cursive";
+      const titleFont = "90px 'Times new roman'";
       this.context.font = titleFont;
       const titleWidth = this.context.measureText(this.title).width;
       const titleX = (canvasWidth - titleWidth) / 2;
-      const titleY = 100;
+      const titleY = 185;
     
       this.context.fillStyle = "white";
       this.context.font = titleFont;
@@ -48,16 +48,16 @@ export class MenuLayout extends Layout {
   }
 
   addButtons() {
-    this.context.font = "24px Arial";
+    this.context.font = "24px Times new roman";
     this.buttons.forEach((button, index) => {
       // Calculate position as percentage of canvas width and height
       const x = (this.game.canvas.getWidth() * 0.5) - (this.buttonWidth * 0.5);
       const y = (this.game.canvas.getHeight() * 0.3) + index * (this.buttonHeight + this.buttonSpacing);
   
-      this.context.fillStyle = "grey";
+      this.context.fillStyle = "white";
       this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
   
-      this.context.fillStyle = "white";
+      this.context.fillStyle = "black";
       this.context.fillText(
         button.text,
         x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,

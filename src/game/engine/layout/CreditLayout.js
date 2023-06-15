@@ -4,11 +4,11 @@ export class CreditLayout extends Layout {
   constructor(game) {
     super(game);
     this.background = "black";
-    this.title = "Credits";
+    this.title = "CREDITS";
     this.buttonWidth = 100;
     this.buttonHeight = 50;
 
-    this.backButton = new Button("Back", () => game.state.toMenu());
+    this.backButton = new Button("MENU", () => game.state.toMenu());
   }
 
   draw() {
@@ -22,14 +22,14 @@ export class CreditLayout extends Layout {
   addButton() {
     const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
     const y = this.game.canvas.getHeight() * 0.9; 
-    this.context.fillStyle = "grey";
+    this.context.fillStyle = "white";
     this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
   
-    this.context.fillStyle = "white";
-    this.context.font = "24px Arial";
+    this.context.fillStyle = "black";
+    this.context.font = "24px times new roman";
     this.context.fillText(
       this.backButton.text,
-      x + (this.buttonWidth - this.context.measureText(this.backButton.text).width) / 2,
+      x + (this.buttonWidth - this.context.measureText(this.backButton.text).width) /2,
       y + this.buttonHeight / 2 + 8
     );
     this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
@@ -46,7 +46,7 @@ export class CreditLayout extends Layout {
   }
   addTitle() {
     this.context.fillStyle = "white";
-    this.context.font = "48px Arial";
+    this.context.font = "48px Times new roman";
     this.context.fillText(this.title, 10, 50);
   }
 
@@ -55,16 +55,16 @@ export class CreditLayout extends Layout {
     this.context.font = "24px Arial";
 
     const credits = [
-      { role: "Game Director", name: "Tony" },
-      { role: "Lead Designer", name: "Dehlya" },
-      { role: "Programmer", name: "Pedro" },
-      { role: "Artist", name: "Marie-Esther" },
+      { role: "THE FINAL BOSS", name: "TONY" },
+      { role: "THE ASSISTANT TO THE FINAL BOSS", name: "M-E" },
+      { role: "THE ARCHITECT", name: "DEHLYA" },
+      { role: "THE PROGRAMMER", name: "PEDRO" },
     ];
 
     let yPosition = 100;
 
     credits.forEach((credit) => {
-      const creditText = `${credit.role}: ${credit.name}`;
+      const creditText = `${credit.role} -> ${credit.name}`;
       const xPosition =
         (this.game.canvas.getWidth() -
           this.context.measureText(creditText).width) /
