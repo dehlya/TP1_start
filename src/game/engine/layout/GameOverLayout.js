@@ -4,12 +4,13 @@ import { Button } from "../interacter/Button.js";
 export class GameOverLayout extends Layout {
     constructor(game) {
         super(game);
-        this.background = "black";
+        this.background = "../../../ressources/game/background/background_you_died.png";
         this.title = "Game Over";
+        
         this.buttonWidth = 200;
         this.buttonHeight = 50;
 
-        this.playAgainButton = new Button("Play Again", () => game.state.playAgain());
+        this.playAgainButton = new Button("Retry ?", () => game.state.playAgain());
         
     }
     draw() {

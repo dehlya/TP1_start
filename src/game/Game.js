@@ -26,7 +26,7 @@ export class Game {
     this.StatesMap.set("Play", new PlayState(this, "Play"));
     this.StatesMap.set("Menu", new MenuState(this, "Menu"));
     this.StatesMap.set("Credits", new CreditState(this));
-    this.StatesMap.set("GameOver", new GameOverState(this));
+    this.StatesMap.set("GameOver", new GameOverState(this, "GameOver"));
     this.StatesMap.set("Pause", new PauseState(this, "Pause"));
     this.StatesMap.set("Logo", new LogoState(this));
     this.StatesMap.set("Settings", new SettingsState(this, "Settings"));

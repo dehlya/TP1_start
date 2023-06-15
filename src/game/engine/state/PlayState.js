@@ -11,6 +11,7 @@ export class PlayState extends State {
     toCredit() {
     }
     toGameOver() {
+        this.game.setCurrentState("GameOver");
     }
     toMenu() {
     }
