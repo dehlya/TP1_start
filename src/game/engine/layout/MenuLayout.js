@@ -4,7 +4,7 @@ import { Button } from "../interacter/Button.js";
 export class MenuLayout extends Layout {
   constructor(game) {
     super(game);
-    this.background = "black";
+    this.background = "white";
     this.title = "The Invoked One";
     this.buttonWidth = 200;
     this.buttonHeight = 50;
@@ -18,7 +18,7 @@ export class MenuLayout extends Layout {
     ];
 
     this.img = new Image();
-    this.img.src = "../../../ressources/site/img-welcome.jpeg";
+    this.img.src = "../../../ressources/site/background_dungeon_final_v3.png";
   }
 
   draw() {
@@ -42,7 +42,7 @@ export class MenuLayout extends Layout {
       const titleX = (canvasWidth - titleWidth) / 2;
       const titleY = 100;
     
-      this.context.fillStyle = "black";
+      this.context.fillStyle = "white";
       this.context.font = titleFont;
       this.context.fillText(this.title, titleX, titleY);      
   }

@@ -17,11 +17,6 @@ function loadHeader() {
     ul.appendChild(hamburgerLi);
   
     var menuItems = [
-      { href: "description.html", text: "Description" },
-      { href: "sketch.html", text: "Sketch" },
-      { href: "mockup.html", text: "Mockup" },
-      { href: "flow.html", text: "Flow" },
-      { href: "logbook.html", text: "Logbook" },
       { href: "game.html", text: "Game" },
     ];
   
