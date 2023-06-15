@@ -23,10 +23,6 @@ export class PlayLayout extends Layout {
 
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
-
-        setInterval(() => {
-            this.addEnemy();
-        }, 10000);
     }
 
     /**
