@@ -5,7 +5,7 @@ import axios from 'axios';
 import './css/style.css';
 import './css/font.css';
 
-function Logbook() {
+function Introduction() {
   const [pageContent, setPageContent] = useState('');
 
   useEffect(() => {
@@ -13,10 +13,10 @@ function Logbook() {
       .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
         // filter the response to find the slug
-        const logbook = response.data.find(page => page.slug === 'logbook');
+        const IntroductionPage = response.data.find(page => page.title.rendered === 'Introduction');
 
-        if (logbook) {
-          setPageContent(logbook.content.rendered);
+        if (IntroductionPage) {
+          setPageContent(IntroductionPage.content.rendered);
         }
       })
       .catch(error => {
@@ -26,21 +26,21 @@ function Logbook() {
 
   return (
     <div>
-      <Header />
-      <main>
-        <section id="articles">
-          <article>
-            {pageContent ? (
-              <div dangerouslySetInnerHTML={{ __html: pageContent }} />
-            ) : (
-              <p>Loading...</p>
-            )}
-          </article>
-        </section>
-      </main>
-      <Footer />
-    </div>
+    <Header />
+    <main>
+      <section id="articles">
+        <article>
+          {pageContent ? (
+            <div dangerouslySetInnerHTML={{ __html: pageContent }} />
+          ) : (
+            <p>Loading...</p>
+          )}
+        </article>
+      </section>
+    </main>
+    <Footer />
+  </div>
   );
 }
 
-export default Logbook;
+export default Introduction;

@@ -8,13 +8,13 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <Link to="/description">Description</Link>
+            <Link to="/Introduction">Introduction</Link>
           </li>
           <li>
-            <Link to="/sketch">Sketch</Link>
+            <Link to="/Links">Links</Link>
           </li>
           <li>
-            <Link to="/mockup">Mockup</Link>
+            <Link to="/Result">Result</Link>
           </li>
           <li>
             <Link to="/flow">Flow</Link>

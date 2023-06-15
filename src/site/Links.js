@@ -5,7 +5,7 @@ import axios from 'axios';
 import './css/style.css';
 import './css/font.css';
 
-function GamePage() {
+function Links() {
   const [pageContent, setPageContent] = useState('');
 
   useEffect(() => {
@@ -13,11 +13,10 @@ function GamePage() {
       .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
         // filter the response to find the slug
-        const gamePage = response.data.find(page => page.slug === 'game');
+        const Result = response.data.find(page => page.slug === 'Links');
 
-        if (gamePage) {
-          setPageContent(gamePage.content.rendered);
-          console.log(gamePage.content.rendered);
+        if (Result) {
+          setPageContent(Result.content.rendered);
         }
       })
       .catch(error => {
@@ -31,13 +30,11 @@ function GamePage() {
       <main>
         <section id="articles">
           <article>
-            <div id="canvas">
             {pageContent ? (
-                <div dangerouslySetInnerHTML={{ __html: pageContent }} />
-              ) : (
-                <p>Loading...</p>
-              )}
-            </div>
+              <div dangerouslySetInnerHTML={{ __html: pageContent }} />
+            ) : (
+              <p>Loading...</p>
+            )}
           </article>
         </section>
       </main>
@@ -46,4 +43,4 @@ function GamePage() {
   );
 }
 
-export default GamePage;
+export default Links;

@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      <img id="logo" src="../../../ressources/site/logo.png" alt="Logo" />
+      <p>The Invoked One, 2023</p>
     </footer>
   );
 }

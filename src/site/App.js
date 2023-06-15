@@ -7,11 +7,11 @@ function Index() {
   return (
     <div className="index-container">
       <div className="welcome">
-        <h2>The invoked one: a lost hero from the past</h2>
-        <p>Hi, Welcome to our Website!</p>
+        <h2>The Invoked One: a lost hero from the past</h2>
+        <p>Welcome to our React website !</p>
         <button onClick>
           <li>
-            <Link to="/description">Click here to enter</Link>
+            <Link to="/Introduction">Click here to enter</Link>
           </li>
           </button>
       </div>
@@ -21,3 +21,5 @@ function Index() {
 }
 
 export default Index;
+
+

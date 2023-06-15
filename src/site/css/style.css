@@ -8,45 +8,22 @@
   font-family: Spiegel, "Arial Narrow", Arial, sans-serif;
 }
 strong{
-  color: grey;
+  font-size: 22px;
+  color: #339933;
 }
 article p {
-  font-size: 22px;
+  font-size: px;
 }
 article h2 {
-  font-size: 45px;
+  font-size: 30px;
+  color: #339933;
+  margin-left:19px;
 }
 article h3{
-  font-size: 40px;
-  margin: 10px 0px 10px 0px; 
+  font-size: 25px;
+  margin-left: 19px;
 }
-article .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0px 0px 50px 0px;
-}
-.container img{
-  margin: 10px;
-}
-article .text-column {
-  width: 40%;
-  padding-right: 20px;
-  box-sizing: border-box;
-}
-article .image-column {
-  width: 30%;
-  justify-content: center;
-}
-article .datasheet {
-  width: 40%;
-  justify-content: center;
-}
-article img {
-  max-width: 100%;
-  height: auto;
-  margin: 20px 0px 20px 0px;
-}
+
 html,
 body {
   height: 100%;
@@ -62,16 +39,13 @@ html {
 
 body header h1 {
   color: white;
-
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  text-shadow: 0 0 20px rgb(0, 0, 0), 0rgb(0, 0, 0)2px #fff;
+  background-color: #121e09;
+  text-shadow: 0 0 20px rgb(0, 0, 0), 0rgb(0, 0, 0)2px #5555;
   margin-bottom: 0px;
   margin-top: 0px;
   padding-top: 50px;
   padding-bottom: 20px;
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 header ul {
@@ -95,95 +69,35 @@ header li a {
 }
 
 li.active a {
-  background-color: #4c6828;
+  background-color: #121e09;
   color: white;
 }
 
 li a:hover:not(.active) {
-  background-color: #4c6828;
+  background-color: white;
 }
 
 #articles {
   width: 100%;
 }
 
-article p a {
-  color: #2aace3;
-}
-
 article header h2 {
   border-bottom: thin solid #c2c2c2;
-}
-
-article header p {
-  text-align: right;
-  color: gray;
 }
 
 main {
   padding: 20px;
 }
 
-.hamburger {
-  display: none;
-}
-
-.datasheet {
-  box-shadow: rgba(255, 255, 255, 0.3) 0px 3px 8px;
-  min-width: 360px;
-  max-height: 280px;
-  margin-left: 50px;
-  border-radius: 10px;
-  outline-style: auto;
-}
-
-.datasheet h3 {
-  background-color: #121e09;
-  color: white;
-  margin-top: 0px;
-  padding-left: 20px;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  border-radius: 10px 10px 0px 0px;
-  text-align: center;
-}
-.datasheet div {
-  width: 360px;
-}
-.datasheet ul {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-.datasheet li {
-  list-style-type: none;
-}
-.textcenter{
-  text-align: center;
-}
-.imgcenter{
-  display: block;
-  margin: 10px auto;
-}
-
 footer {
   background-color: #1b251d;
   text-align: right;
-  padding: 20px;
-  bottom: 0;
-  left: 0;
+  padding: 10px;
   position: bottom;
   width: 100%;
   max-height: 100px;
 }
-footer img{
-  background-color: #1b251d;
-}
 
-#canvas{
-  margin: 0px;
-  /*TODO: change after but needed to have 'inspect' while coding on game*/
-}
 
 @media (orientation: landscape) {
   body {
@@ -242,4 +156,5 @@ footer img{
   nav ul li {
     width: 100%;
   }
+  
 }
