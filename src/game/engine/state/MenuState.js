@@ -44,7 +44,6 @@ export class MenuState extends State {
   toPause() {
     console.log("Load Game button clicked");
     this.game.setCurrentState("Pause");
-
   }
 
   toSettings() {

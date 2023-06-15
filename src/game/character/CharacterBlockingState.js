@@ -21,12 +21,10 @@ export class CharacterBlockingState extends CharacterState{
         if(this.character.stamina <= 0){
             if(this.character.getHealth() <= 0){
                 this.character.setState(new CharacterDeadState(this.character));
-                //Trigger the death animation
             }
             else{
                 this.character.setState(new CharacterHitState(this.character));
                 this.character.hitAnimation();
-                //Trigger the hit animation
             }
         }
         else {

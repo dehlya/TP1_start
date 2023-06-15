@@ -1,11 +1,13 @@
 import { GameOverLayout } from "../layout/GameOverLayout.js";
+import { EndGameLayout } from "../layout/EndGameLayout.js";
 import { State } from "./State.js";
 import { KeyHandler } from "../handler/KeyHandler.js";
 
 export class GameOverState extends State {
     constructor(game) {
         super(game);
-        this.layout = new GameOverLayout(this.game);
+        console.log("I entered the game over state");
+        this.layout = new GameOverLayout(game);
         this.keyHandler = new KeyHandler();
     }
 
@@ -31,7 +33,7 @@ export class GameOverState extends State {
     }
 
     render(){
-        this.layout.draw();
+        //this.layout.draw();
     }
     enter() {
         super.enter();
