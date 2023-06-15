@@ -29,7 +29,6 @@ function GamePage() {
   return (
     <div>
       <Header />
-      <ScriptComponent />
       <main>
         <section id="articles">
           <article>
