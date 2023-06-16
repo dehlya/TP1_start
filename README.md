@@ -4,7 +4,7 @@ Welcome in *The Invoked One*
 
 This game ihas been made in Vanilla JS for a School Project.
 We had to develop a JS game and ... here it is !
-
+ 
 ## Architecture 
 
 In order to have an architecture fitting the context of an entire game made in Javascript, WITHOUT a framework, we first focused on the game architecture. 
