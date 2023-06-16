@@ -6,7 +6,7 @@ import { KeyHandler } from "../handler/KeyHandler.js";
 export class PlayState extends State {
     constructor(game) {
         super(game);
-        this.difficulty = 10000;
+        this.difficulty = 6000;
         this.layout = new PlayLayout(this.game);
         this.isState = false;
         setInterval(() => {
