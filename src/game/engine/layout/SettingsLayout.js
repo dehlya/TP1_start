@@ -8,8 +8,8 @@ export class SettingsLayout extends Layout {
         this.game = game;
         this.background = "black";
         this.title = "SETTINGS";
-        this.buttonWidth = 100;
-        this.buttonHeight = 50;
+        this.buttonWidth = this.game.canvas.getWidth()/4;
+        this.buttonHeight = this.game.canvas.getHeight()/8;
 
         this.soundButton = new Button("SOUND", () => game.state.toggleSound());
         this.musicButton = new Button("MUSIC", () => game.state.toggleMusic());
@@ -44,11 +44,11 @@ export class SettingsLayout extends Layout {
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
     
         this.context.fillStyle = "black";
-        this.context.font = "24px Times New Roman";
+        this.context.font = this.game.canvas.getHeight()/15+"px Times New Roman";
         this.context.fillText(
             button.text,
             x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/60
+            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
 

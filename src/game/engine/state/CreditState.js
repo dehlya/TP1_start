@@ -3,6 +3,7 @@ import { CreditLayout } from "../layout/CreditLayout.js";
 export class CreditState extends State {
   constructor(game) {
     super(game);
+    this.game = game;
     this.layout = new CreditLayout(game);
 
     game.canvas.canvas.addEventListener("click", (event) =>

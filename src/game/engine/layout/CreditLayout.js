@@ -3,12 +3,13 @@ import { Button } from "../interacter/Button.js";
 export class CreditLayout extends Layout {
   constructor(game) {
     super(game);
+    this.game = game;
     this.background = "black";
     this.title = "CREDITS";
-    this.buttonWidth = 100;
-    this.buttonHeight = 50;
+    this.buttonWidth = this.game.canvas.getWidth()/4;
+    this.buttonHeight = this.game.canvas.getHeight()/8;
 
-    this.backButton = new Button("MENU", () => game.state.toMenu());
+    this.backButton = new Button("MENU", () => this.game.state.toMenu());
   }
 
   draw() {
@@ -21,16 +22,16 @@ export class CreditLayout extends Layout {
 
   addButton() {
     const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
-    const y = this.game.canvas.getHeight() * 0.9; 
+    const y = this.game.canvas.getHeight() * 0.8; 
     this.context.fillStyle = "white";
     this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
   
     this.context.fillStyle = "black";
-    this.context.font = "24px times new roman";
+    this.context.font = this.game.canvas.getHeight()/15+"px times new roman";
     this.context.fillText(
       this.backButton.text,
       x + (this.buttonWidth - this.context.measureText(this.backButton.text).width) /2,
-      y + this.buttonHeight / 2 + 8
+      y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
     );
     this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
   }
@@ -46,7 +47,7 @@ export class CreditLayout extends Layout {
   }
   addTitle() {
     this.context.fillStyle = "white";
-    this.context.font = "48px Times new roman";
+    this.context.font = this.game.canvas.getHeight()/10+"px Times new roman";
 
     this.context.fillText(this.title, 10, 50);
   }
