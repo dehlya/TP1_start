@@ -196,7 +196,7 @@ import { GameOverState } from "../engine/state/GameOverState.js";
                         this.stamina = this.staminaMax;
                     }
                 }
-            }, 1000); // Regenerate stamina every 1000 milliseconds (1 second)
+            }, 300); // Regenerate stamina every 1000 milliseconds (1 second)
         }
         regainHP(value){
             if(this.hp + value > this.hpMax){
