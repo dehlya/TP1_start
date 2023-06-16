@@ -40,12 +40,7 @@ export class PlayLayout extends Layout {
                     this.difficulty += 1;
                 }
                 else{
-                    if(this.state.difficulty <= 0){
-                        this.state.difficulty = 0;
-                    }
-                    else{
-                        this.state.difficulty -= 500;
-                    }
+                    this.game.state.setDifficulty(1);
                 }
             }
             if(this.character.getHealth() <= 0){

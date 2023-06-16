@@ -6,17 +6,22 @@ import { KeyHandler } from "../handler/KeyHandler.js";
 export class PlayState extends State {
     constructor(game) {
         super(game);
-        this.difficulty = 6000;
+        this.difficulty = 1;
         this.layout = new PlayLayout(this.game);
         this.isState = false;
         setInterval(() => {
             if (this.isState) {
-               this.layout.addEnemy(); 
+                for(let i = 0; i < this.difficulty; i++){
+                    this.layout.addEnemy();
+                }
             }
-        }, this.difficulty);
+        }, 5000);
     }
     toCredit() {
-    }à
+    }
+    setDifficulty(difficulty){
+        this.difficulty += difficulty;
+    }
     setLayout() {
         this.layout = new PlayLayout(this.game);
     }
