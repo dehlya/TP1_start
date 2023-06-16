@@ -48,6 +48,7 @@ export class MenuLayout extends Layout {
   }
 
   addButtons() {
+
     this.context.font = "24px Times new roman";
     this.buttons.forEach((button, index) => {
       // Calculate position as percentage of canvas width and height
@@ -61,7 +62,7 @@ export class MenuLayout extends Layout {
       this.context.fillText(
         button.text,
         x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-        y + this.buttonHeight / 2 + 8
+        y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
       );
       this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
     });
