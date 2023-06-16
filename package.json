@@ -1,0 +1,13 @@
+{
+  "name": "the_invoked_one",
+  "version": "1.0.0",
+  "description": "webDev game project",
+  "main": "index.html",
+  "module": "./",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dehlya",
+  "license": "ISC"
+}
