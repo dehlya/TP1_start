@@ -17,9 +17,6 @@ function Header() {
             <Link to="/Result">Result</Link>
           </li>
           <li>
-            <Link to="/flow">Flow</Link>
-          </li>
-          <li>
             <Link to="/logbook">Logbook</Link>
           </li>
           <li>
