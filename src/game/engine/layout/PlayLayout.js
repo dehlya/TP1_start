@@ -9,7 +9,7 @@ export class PlayLayout extends Layout {
         super(game);
         this.background = "grey"
         this.difficulty = 1;
-        this.raiseDifficulty = 5000;
+        this.raiseDifficulty = 1500;
         this.title = "Play in progress...";
         this.scoreMilestones = 1000;
         this.character = new Character(
@@ -35,7 +35,7 @@ export class PlayLayout extends Layout {
                 this.scoreMilestones += 1000;
             }
             if(this.raiseDifficulty < this.character.faith){
-                this.raiseDifficulty += 5000;
+                this.raiseDifficulty += 1500;
                 this.difficulty += 1;
                 if(this.state.difficulty <= 0){
                     this.state.difficulty -= 500;
