@@ -9,7 +9,7 @@ import Links from './site/Links'
 import GamePage from './site/gamePage'
 import App from './site/App'
 
-
+ 
 function RedirectToIndex() {
     return <Navigate to="/Introduction" replace />;
   }
