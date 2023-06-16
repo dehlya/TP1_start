@@ -6,9 +6,9 @@ export class MenuLayout extends Layout {
     super(game);
     this.background = "white";
     this.title = "THE INVOKED ONE";
-    this.buttonWidth = 200;
-    this.buttonHeight = 50;
-    this.buttonSpacing = 20;
+    this.buttonWidth = this.game.canvas.getWidth()/4;
+    this.buttonHeight = this.game.canvas.getHeight()/8;
+    this.buttonSpacing = this.game.canvas.getHeight()/20;
 
     this.buttons = [
       new Button("PLAY", () => game.state.toPlay()),
@@ -36,11 +36,11 @@ export class MenuLayout extends Layout {
 
   addTitle() {
       const canvasWidth = this.game.canvas.getWidth();
-      const titleFont = "90px 'Times new roman'";
+      const titleFont = this.game.canvas.getHeight()/6+"px 'Times new roman'";
       this.context.font = titleFont;
       const titleWidth = this.context.measureText(this.title).width;
       const titleX = (canvasWidth - titleWidth) / 2;
-      const titleY = 185;
+      const titleY = this.game.canvas.getWidth()/7;
     
       this.context.fillStyle = "white";
       this.context.font = titleFont;
@@ -49,7 +49,7 @@ export class MenuLayout extends Layout {
 
   addButtons() {
 
-    this.context.font = "24px Times new roman";
+    this.context.font = this.game.canvas.getHeight()/15+"px Times new roman";
     this.buttons.forEach((button, index) => {
       // Calculate position as percentage of canvas width and height
       const x = (this.game.canvas.getWidth() * 0.5) - (this.buttonWidth * 0.5);
@@ -62,7 +62,7 @@ export class MenuLayout extends Layout {
       this.context.fillText(
         button.text,
         x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-        y + this.buttonHeight / 2 + this.game.canvas.getHeight()/60
+        y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
       );
       this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
     });
