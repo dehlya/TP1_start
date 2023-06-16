@@ -47,12 +47,13 @@ export class CreditLayout extends Layout {
   addTitle() {
     this.context.fillStyle = "white";
     this.context.font = "48px Times new roman";
+
     this.context.fillText(this.title, 10, 50);
   }
 
   addCredits() {
     this.context.fillStyle = "white";
-    this.context.font = "24px Arial";
+    this.context.font = this.game.canvas.getHeight()/20+"px Arial";
 
     const credits = [
       { role: "THE FINAL BOSS", name: "TONY" },

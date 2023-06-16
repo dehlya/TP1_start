@@ -25,9 +25,9 @@ export class SettingsState extends State {
   
     let startX = this.game.canvas.getWidth() * 0.5 - this.layout.buttonWidth / 2;
     const buttonMargin = this.game.canvas.getHeight() * 0.1; 
-    let musicY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
+    let musicY = this.game.canvas.getHeight() * 0.4 + buttonMargin;
     let soundY = musicY - this.layout.buttonHeight - buttonMargin;
-    const backY = this.game.canvas.getHeight() * 0.9;
+    const backY = this.game.canvas.getHeight() * 0.8;
 
     if (x >= startX && x <= startX + this.layout.buttonWidth && y >= soundY && y <= soundY + this.layout.buttonHeight) {
       this.layout.soundButton.onClick();

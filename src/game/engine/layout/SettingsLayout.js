@@ -5,6 +5,7 @@ export class SettingsLayout extends Layout {
     
     constructor(game) {
         super(game);
+        this.game = game;
         this.background = "black";
         this.title = "SETTINGS";
         this.buttonWidth = 100;
@@ -25,9 +26,9 @@ export class SettingsLayout extends Layout {
     addButtons() {
         const x = this.game.canvas.getWidth() * 0.5 - this.buttonWidth / 2;
         const buttonMargin = this.game.canvas.getHeight() * 0.1; 
-        const musicY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
+        const musicY = this.game.canvas.getHeight() * 0.4 + buttonMargin;
         const soundY = musicY - this.buttonHeight - buttonMargin; 
-        const backY = this.game.canvas.getHeight() * 0.9; 
+        const backY = this.game.canvas.getHeight() * 0.8; 
         const geoY = musicY + this.buttonHeight + (backY - (musicY + this.buttonHeight)) / 2;
 
         this.addButton(this.soundButton, x, soundY);
@@ -47,7 +48,7 @@ export class SettingsLayout extends Layout {
         this.context.fillText(
             button.text,
             x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-            y + this.buttonHeight / 2 + 8
+            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
 
