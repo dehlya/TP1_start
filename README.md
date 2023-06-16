@@ -31,4 +31,11 @@ The game Engine is organised as following :
     - The player part is specific to the player, not to the character.
     - It manages the cookies in order for the player to not loose their game information and settings. 
 
-## 
+## React Website
+
+You can go check the code of the react Website on the branch 'ReactWebsite'. It is also deployed [HERE](https://the-invoked-one-ts8m.vercel.app/introduction)
+
+## User Review
+
+Please review our game on our website ! 
+We would love to have your suggestions for the next versions :)
