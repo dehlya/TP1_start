@@ -44,16 +44,6 @@ export class PlayLayout extends Layout {
             if(this.character.getHealth() <= 0){
                 this.isGameOver = true;
 
-                // Get the current score
-                let score = this.character.getFaith();
-
-                // Get the current high score from local storage
-                let highScore = parseInt(localStorage.getItem('Highscore'));
-
-                // If there's no high score or the current score is greater than the high score, then store the current score
-                if(highScore === null || score > highScore) {
-                    localStorage.setItem('Highscore', score);
-                }
             }
         },)
     }
@@ -84,6 +74,16 @@ export class PlayLayout extends Layout {
         this.addTitle();
         if(this.isGameOver){
             this.addGameOver();
+            // Get the current score
+            let score = this.character.getFaith();
+
+            // Get the current high score from local storage
+            let highScore = parseInt(localStorage.getItem('Highscore'));
+
+            // If there's no high score or the current score is greater than the high score, then store the current score
+            if(isNaN(highScore) || score > highScore) {
+                localStorage.setItem('Highscore', score);
+            }
         }
     }
 
@@ -163,7 +163,7 @@ export class PlayLayout extends Layout {
 
         if(localStorage.getItem('Highscore')!== null){
             const highscoreIndicator = `Highscore: ${localStorage.getItem('Highscore')}`;
-            this.context.fillText(highscoreIndicator, this.game.canvas.getWidth()-150, 90);
+            this.context.fillText(highscoreIndicator, this.game.canvas.getWidth()/2-50, 60);
         }
         else{
             const highscoreIndicator = `Highscore: -`;
