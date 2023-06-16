@@ -13,7 +13,7 @@ function Links() {
       .get('https://dev-mewebdevtest.pantheonsite.io/wp-json/wp/v2/pages/')
       .then(response => {
         // filter the response to find the slug
-        const Result = response.data.find(page => page.slug === 'Links');
+        const Result = response.data.find(page => page.slug === 'links');
 
         if (Result) {
           setPageContent(Result.content.rendered);
