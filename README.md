@@ -1,5 +1,4 @@
 # The_Invoked_One
-
 Welcome in *The Invoked One*
 
 This game ihas been made in Vanilla JS for a School Project.
@@ -33,4 +32,3 @@ The game Engine is organised as following :
     - It manages the cookies in order for the player to not loose their game information and settings. 
 
 ## 
-

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>64-31 - Project - Flow</title>
+    <title>The Invoked One</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../css/style.css" />
@@ -20,8 +20,7 @@
       <section id="articles">
         <article>
           <header>
-            <h2>Game Page</h2>
-            <p>By Group D the 31/03/2023 at 00:00</p>
+            <p>By Group D</p>
           </header>
           <div>
             <body>
@@ -30,6 +29,48 @@
               <script type="module" src="../../game/script.js"></script>
             </body>
           </div>
+          <div class="review-box">
+            <form>
+              <h2>Please review our game</h2>
+              <div class="input-box">
+                <label>Firstname</label>
+                <input id="firstname" type="text" required> 
+              </div>
+              <div class="input-box">
+                <label>Lastname</label>
+                <input id="lastname" type="text" required> 
+              </div>
+              <div class="input-box">
+                <label>Email</label>
+                <input id="email" type="email" required> 
+              </div>
+              <div class="input-box">
+                <label>Comments on the game</label>
+                <input id="comment" type="text" required> 
+              </div>
+              <div class="input-box">
+                <label>Suggestions for Improvements</label>
+                <input id="improvements" type="text" required>
+              </div>
+              <div class="input-box">
+                <div id="dropZone" >
+                  <div class="area">
+                    Drag here an image to give us design ideas for the upcoming versions
+                    <input type="file" id="uploadFile" multiple>
+                    <input hidden type="text" id="outInput" >
+                  </div>
+                </div>
+              </div>
+              <a onclick="validateForm()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+              </a>
+            </form>
+              
+          </div>
         </article>
       </section>
     </main>
@@ -37,6 +78,57 @@
     <footer>
       <img id="logo" src="../../../ressources/site/logo.png" />
     </footer>
+    <script src="//cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
+    <script type="text/javascript">
+      var faunadb = window.faunadb
+      var q = faunadb.query
+      var client = new faunadb.Client({
+        secret: 'fnAFGfqMQ5AAzbndUsNSVFA5C7ELywCbtlQBkJef',
+        endpoint: 'https://db.fauna.com/',
+      })
+      function validateForm(){
+        var firstname = document.getElementById('firstname').value;
+        var lastname = document.getElementById('lastname').value;
+        var email = document.getElementById('email').value;
+        var comment = document.getElementById('comment').value;
+        var improvements = document.getElementById('improvements').value;
+
+        // Perform validation
+        if (firstname === '' || lastname === '' || email === '' || comment === '' || improvements === '') {
+          // Display an error message or perform any other validation logic
+          alert('Please fill in all the required fields.');
+          return;
+        }
+
+        client.query(
+          q.Create(
+            q.Collection('User_Reviews'),
+            {
+              data: {
+                Firstname: firstname,
+                Lastname: lastname,
+                Email: email ,
+                Comment: comment,
+                Improvements: improvements
+              },
+            },
+          )
+        )
+        .then((ret) => console.log(ret))
+        .catch((err) => console.error(
+          'Error: [%s] %s: %s',
+          err.name,
+          err.message,
+          err.errors()[0].description,
+        ))
+      }
+      function drop(e){
+        var selectedFile = document.getElementById("uploadFile").files;
+        console.log(selectedFile);
+        var src = URL.createObjectURL(selectedFile);
+      }
+
+    </script>
   </body>
   
 </html>

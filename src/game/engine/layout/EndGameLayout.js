@@ -6,7 +6,6 @@ export class EndGameLayout extends Layout {
         this.background = "black";
         this.title = "Game finished";
         this.replayButton = new Button("Play Again", () => game.state.replayButton());
-
     }
 
     draw() {

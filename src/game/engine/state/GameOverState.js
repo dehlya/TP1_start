@@ -1,10 +1,13 @@
 import { GameOverLayout } from "../layout/GameOverLayout.js";
+import { EndGameLayout } from "../layout/EndGameLayout.js";
 import { State } from "./State.js";
 import { KeyHandler } from "../handler/KeyHandler.js";
+
 export class GameOverState extends State {
     constructor(game) {
         super(game);
-        this.layout = new GameOverLayout(this.game);
+        console.log("I entered the game over state");
+        this.layout = new GameOverLayout(game);
         this.keyHandler = new KeyHandler();
     }
 
@@ -22,10 +25,10 @@ export class GameOverState extends State {
         if (x >= startX && x <= startX + this.layout.buttonWidth && y >= settingsY && y <= settingsY + this.layout.buttonHeight) {
           this.layout.playAgainButton.onClick();
         } 
-      }
+    }
 
     tryAgain(){
-        // this.game.setCurrentState("Play");
+        this.game.setCurrentState("Play");
         this.game.fullscreen();
     }
 
@@ -46,4 +49,5 @@ export class GameOverState extends State {
     addCallbacks() {        
         this.game.canvas.canvas.addEventListener('click', (event) => this.handleClick(event));
     }
+
 }

@@ -3,7 +3,7 @@
 function loadHeader() {
     var header = document.createElement("header");
     var h1 = document.createElement("h1");
-    h1.textContent = "HES-SO Vs - 64-31 - HTML/CSS/JavaScript";
+    h1.textContent = "HES-SO Valais-Wallis - 64-31 - Web Development";
     header.appendChild(h1);
   
     var nav = document.createElement("nav");
@@ -17,12 +17,7 @@ function loadHeader() {
     ul.appendChild(hamburgerLi);
   
     var menuItems = [
-      { href: "description.html", text: "Description" },
-      { href: "sketch.html", text: "Sketch" },
-      { href: "mockup.html", text: "Mockup" },
-      { href: "flow.html", text: "Flow" },
-      { href: "logbook.html", text: "Logbook" },
-      { href: "game.html", text: "Game" },
+      { href: "game.html", text: "GAME" },
     ];
   
     menuItems.forEach(function (menuItem) {

@@ -29,7 +29,7 @@ export class PauseState extends State {
           this.layout.menuButton.onClick();
         }
       }
-    
+
     toMenu() {
         this.game.setCurrentState("Menu");
     }
@@ -60,5 +60,4 @@ export class PauseState extends State {
 
     addCallbacks() {
     }
-
 }

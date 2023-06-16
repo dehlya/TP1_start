@@ -13,8 +13,9 @@ export class CharacterState{
     stop(){}
     heal(){}
     healOver(){}
-    hit(){}
+    hit(value){}
     hitOver(){}
+    die(){}
     
 
 }

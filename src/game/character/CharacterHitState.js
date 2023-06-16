@@ -14,6 +14,13 @@ export class CharacterHitState extends CharacterState{
         this.character = character;
     }
 
+    die(){
+        if(this.character.getHealth() <= 0){
+            this.character.setState(new CharacterDeadState(this.character));
+            // addind death
+        }
+    }
+
     hitOver(){
         console.log("hit animation over");
         this.character.setState(new CharacterIdleState(this.character));

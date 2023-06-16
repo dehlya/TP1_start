@@ -4,18 +4,24 @@ import { Button } from "../interacter/Button.js";
 export class GameOverLayout extends Layout {
     constructor(game) {
         super(game);
-        this.background = "black";
+        console.log("i entered the game over layout ! ");
+        console.log("i'm setting the background");
+        this.background = "../../../ressources/game/background/background_you_died.png";
+        this.image = new Image();
+        this.image.src = this.background;
         this.title = "Game Over";
-        this.buttonWidth = this.game.canvas.getWidth()/4;
-        this.buttonHeight = this.game.canvas.getHeight()/8;
 
-        this.playAgainButton = new Button("Play Again", () => game.state.playAgain());
+        this.buttonWidth = 100;
+        this.buttonHeight = 50;
+
+        this.playAgainButton = new Button("Retry ?", () => game.state.playAgain());
         
     }
     draw() {
         this.addBackground();
         this.addTitle();
         this.addButtons();
+        //this.addButton();
         super.draw();
     }
     addButtons() {
@@ -27,7 +33,7 @@ export class GameOverLayout extends Layout {
 
       }
       
-      addButton(button, x, y) {
+    addButton(button, x, y) {
         this.context.fillStyle = "grey";
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
     
@@ -44,6 +50,7 @@ export class GameOverLayout extends Layout {
     addBackground() {
         this.context.fillStyle = this.background;
         this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+        this.context.drawImage(this.image, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
     }
 
 

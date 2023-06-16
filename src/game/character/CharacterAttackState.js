@@ -17,11 +17,10 @@ export class CharacterAttackState extends CharacterState{
 
     attackOver(){
         this.character.setState(new CharacterIdleState(this.character));
-        console.log("attack over");
     }
 
-    hit(){
-        console.log("got hit during attack");
+    hit(value){
+        this.character.looseHP(value);
         if(this.character.getHealth() <= 0){
             this.character.setState(new CharacterDeadState(this.character));
             //Trigger the death animation

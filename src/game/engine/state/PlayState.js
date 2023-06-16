@@ -6,13 +6,25 @@ import { KeyHandler } from "../handler/KeyHandler.js";
 export class PlayState extends State {
     constructor(game) {
         super(game);
+        this.difficulty = 10000;
         this.layout = new PlayLayout(this.game);
+        this.isState = false;
+        setInterval(() => {
+            if (this.isState) {
+               this.layout.addEnemy(); 
+            }
+        }, this.difficulty);
     }
     toCredit() {
+    }à
+    setLayout() {
+        this.layout = new PlayLayout(this.game);
     }
     toGameOver() {
+        this.game.setCurrentState("GameOver");
     }
     toMenu() {
+        this.game.setCurrentState("Menu");
     }
     toPlay() {
         this.game.start();
@@ -40,13 +52,14 @@ export class PlayState extends State {
         this.game.start();
         this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
+        this.isState = true;
     }
   
     exit() {
         super.exit();
-        this.keyHandler.removeAllCallbacks();
+        //this.keyHandler.removeAllCallbacks();
+        this.isState = false;
     }
     addCallbacks() {
     }
-
 }

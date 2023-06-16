@@ -10,7 +10,7 @@ export class LogoLayout extends Layout {
 
     draw() {
         this.addBackground();
-        this.addTitle();
+        //this.addTitle();
         super.draw();
     }
 
@@ -19,6 +19,7 @@ export class LogoLayout extends Layout {
         this.context.fillRect(0, 0, this.game.canvas.width, this.game.canvas.height);
     }
 
+    
     addTitle() {
         const canvasWidth = this.game.canvas.getWidth();
         const canvasHeight = this.game.canvas.getHeight();
@@ -32,5 +33,6 @@ export class LogoLayout extends Layout {
         this.context.font = titleFont;
         this.context.fillText(this.title, titleX, titleY);      
     }
+    
 
 }

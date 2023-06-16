@@ -2,17 +2,18 @@ import { Layout } from "./Layout.js";
 import { Button } from "../interacter/Button.js";
 
 export class SettingsLayout extends Layout {
+    
     constructor(game) {
         super(game);
         this.game = game;
         this.background = "black";
-        this.title = "Settings";
-        this.buttonWidth = this.game.canvas.getWidth()/4;
-        this.buttonHeight = this.game.canvas.getHeight()/8;
+        this.title = "SETTINGS";
+        this.buttonWidth = 100;
+        this.buttonHeight = 50;
 
-        this.soundButton = new Button("Sound", () => this.game.state.toggleSound());
-        this.musicButton = new Button("Music", () => this.game.state.toggleMusic());
-        this.backButton = new Button("Back", () => this.game.state.toMenu());
+        this.soundButton = new Button("SOUND", () => game.state.toggleSound());
+        this.musicButton = new Button("MUSIC", () => game.state.toggleMusic());
+        this.backButton = new Button("BACK", () => game.state.toMenu());
     }
 
     draw() {
@@ -37,12 +38,13 @@ export class SettingsLayout extends Layout {
 
       }
       
+      
       addButton(button, x, y, key) {
-        this.context.fillStyle = "grey";
+        this.context.fillStyle = "white";
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
     
-        this.context.fillStyle = "white";
-        this.context.font = this.game.canvas.getHeight()/15+"px Arial";
+        this.context.fillStyle = "black";
+        this.context.font = "24px Times New Roman";
         this.context.fillText(
             button.text,
             x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
@@ -50,11 +52,12 @@ export class SettingsLayout extends Layout {
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
 
-    }
+        }
+        
 
     addGeolocationText(x, y) {
         this.context.fillStyle = "white";
-        this.context.font = this.game.canvas.getHeight()/20+"px Arial";
+        this.context.font = "16px Times new roman";
         const textWidth = this.context.measureText(this.game.state.geolocationText).width;
         const centeredX = x + (this.buttonWidth - textWidth) / 2;
         this.context.fillText(
@@ -71,7 +74,7 @@ export class SettingsLayout extends Layout {
 
     addTitle() {
         this.context.fillStyle = "white";
-        this.context.font = "48px Arial";
+        this.context.font = "48px Times new roman";
         this.context.fillText(this.title, 10, 50);
     }
 }

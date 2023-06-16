@@ -1,6 +1,7 @@
 import { MenuLayout } from "../layout/MenuLayout.js";
 import { State } from "./State.js";
 import { KeyHandler } from "../handler/KeyHandler.js";
+import {PlayState} from "./PlayState.js";
 
 export class MenuState extends State {
   constructor(game) {
@@ -39,12 +40,13 @@ export class MenuState extends State {
   
   toPlay() {
     this.game.setCurrentState("Play");
+    this.game.state.setLayout();
+    this.game.fullscreen();
   }
 
   toPause() {
     console.log("Load Game button clicked");
     this.game.setCurrentState("Pause");
-
   }
 
   toSettings() {
@@ -59,6 +61,7 @@ export class MenuState extends State {
   }
 
   render() {
+    console.log(this.layout.game.state);
     console.log("MenuState render called");
     this.layout.draw();
   }
