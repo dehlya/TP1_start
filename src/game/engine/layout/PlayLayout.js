@@ -36,7 +36,9 @@ export class PlayLayout extends Layout {
             }
             if(this.raiseDifficulty < this.character.faith){
                 this.raiseDifficulty += 1500;
-                this.difficulty += 1;
+                if(this.difficulty < 3){
+                    this.difficulty += 1;
+                }
                 if(this.state.difficulty <= 0){
                     this.state.difficulty -= 500;
                 }
