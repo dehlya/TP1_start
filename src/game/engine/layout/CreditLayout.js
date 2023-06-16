@@ -71,7 +71,7 @@ export class CreditLayout extends Layout {
           this.context.measureText(creditText).width) /
         2;
       this.context.fillText(creditText, xPosition, yPosition);
-      yPosition += 30;
+      yPosition += 50;
     });
   }
 }

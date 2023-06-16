@@ -45,7 +45,7 @@ export class PauseLayout extends Layout {
         this.context.fillText(
             button.text,
             x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
+            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/60
         );
         this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
     }
