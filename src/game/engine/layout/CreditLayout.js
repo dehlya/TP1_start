@@ -49,7 +49,7 @@ export class CreditLayout extends Layout {
     this.context.fillStyle = "white";
     this.context.font = this.game.canvas.getHeight()/10+"px Times new roman";
 
-    this.context.fillText(this.title, 10, 50);
+    this.context.fillText(this.title, 10, 70);
   }
 
   addCredits() {

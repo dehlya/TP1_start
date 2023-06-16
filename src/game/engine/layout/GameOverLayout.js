@@ -11,17 +11,17 @@ export class GameOverLayout extends Layout {
         this.image.src = this.background;
         this.title = "Game Over";
 
-        this.buttonWidth = 100;
-        this.buttonHeight = 50;
+        this.buttonWidth = this.game.canvas.getWidth()/5;
+        this.buttonHeight = this.game.canvas.getHeight()/8;
 
-        this.playAgainButton = new Button("Retry ?", () => game.state.playAgain());
+        this.playAgainButton = new Button("Retry ?", () => this.game.state.playAgain());
+        this.toMenuButton = new Button("Menu ?", () => this.game.state.toMenu());
         
     }
     draw() {
         this.addBackground();
         this.addTitle();
         this.addButtons();
-        //this.addButton();
         super.draw();
     }
     addButtons() {
@@ -29,22 +29,37 @@ export class GameOverLayout extends Layout {
         const buttonMargin = this.game.canvas.getHeight() * 0.1; 
         const playAgainY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
 
-        this.addButton(this.playAgainButton, x, playAgainY);
+        this.addButton(this.playAgainButton);
 
       }
       
-    addButton(button, x, y) {
-        this.context.fillStyle = "grey";
-        this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
-    
+    addButton(button) {
+        const x1 = this.game.canvas.getWidth() * 0.25 - this.buttonWidth/2 ;
+        const x2 = this.game.canvas.getWidth() * 0.75 - this.buttonWidth/2 ;
+        const y = this.game.canvas.getHeight() * 0.1; 
         this.context.fillStyle = "white";
-        this.context.font = "24px Arial";
+        this.context.fillRect(x1, y, this.buttonWidth, this.buttonHeight);
+      
+        this.context.fillStyle = "black";
+        this.context.font = this.game.canvas.getHeight()/15+"px times new roman";
         this.context.fillText(
-            button.text,
-            x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
-            y + this.buttonHeight / 2 + 8
+          button.text,
+          x1 + (this.buttonWidth - this.context.measureText(button.text).width) /2,
+          y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
         );
-        this.context.strokeRect(x, y, this.buttonWidth, this.buttonHeight);
+        this.context.strokeRect(x1, y, this.buttonWidth, this.buttonHeight);
+
+        this.context.fillStyle = "white";
+        this.context.fillRect(x2, y, this.buttonWidth, this.buttonHeight);
+
+        this.context.fillStyle = "black";
+        this.context.font = this.game.canvas.getHeight()/15+"px times new roman";
+        this.context.fillText(
+            this.toMenuButton.text,
+            x2 + (this.buttonWidth - this.context.measureText(this.toMenuButton.text).width) /2,
+            y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
+          );
+        this.context.strokeRect(x2, y, this.buttonWidth, this.buttonHeight);
     }
 
     addBackground() {

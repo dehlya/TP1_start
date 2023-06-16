@@ -19,9 +19,6 @@ export class PlayState extends State {
     }
     toCredit() {
     }
-    setDifficulty(difficulty){
-        this.difficulty += difficulty;
-    }
     setLayout() {
         this.layout = new PlayLayout(this.game);
     }
@@ -55,7 +52,6 @@ export class PlayState extends State {
     enter() {
         super.enter();
         this.game.start();
-        this.game.canvas.canvas.addEventListener('click', this.handleClickBound);
         this.addCallbacks();
         this.isState = true;
     }
@@ -66,5 +62,8 @@ export class PlayState extends State {
         this.isState = false;
     }
     addCallbacks() {
+    }
+    toGameOver(){
+        this.game.setCurrentState("GameOver");
     }
 }
