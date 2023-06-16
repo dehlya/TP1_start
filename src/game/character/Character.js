@@ -14,9 +14,9 @@ import { GameOverState } from "../engine/state/GameOverState.js";
             this.ctx = ctx; // Context on which we draw the amazing character
             this.state = new CharacterIdleState(this);
             this.hp = this.hpMax = 100;
-            this._staminaMax = 10000;
+            this._staminaMax = 100  ;
             this.stamina = this.staminaMax;
-            this.moveSpeed = 1;
+            this.moveSpeed = 4;
             this.attackPower = 100;
             this.potions = this.potionsMax = 3;
             this.constitution = 0;
@@ -129,6 +129,9 @@ import { GameOverState } from "../engine/state/GameOverState.js";
         getHealth(){
             return this.hp;
         }
+        getFaith(){
+            return this.faith;
+        }
         //End of getter and setters -----------------------------------------------
 
         //functions attributes up -------------------------------------------------
@@ -207,10 +210,7 @@ import { GameOverState } from "../engine/state/GameOverState.js";
             this.hp -= value;
             console.log(this.hp);
             if (this.hp <= 0){
-                console.log("I'm dead!");
-                this.state = new CharacterDeadState(this);
-                console.log("new game over state");
-                this.game.state = new GameOverState();
+                this.setState(new CharacterDeadState(this));
             }
         }
         usePotion(){
@@ -265,27 +265,27 @@ import { GameOverState } from "../engine/state/GameOverState.js";
             }
             if(direction == 'up'){
                 minX = this.x - 100;
-                maxX = this.x + (this.image.width + 100);
-                minY = this.y;
-                maxY = this.y - 300;
+                maxX = this.x + (this.image.width + 50);
+                minY = this.y - 50
+                maxY = this.y + this.image.height;
             }
             else if(direction == 'down'){
                 minX = this.x - 100;
-                maxX = this.x + (this.image.width + 100);
-                minY = this.y + this.image.height;
-                maxY = this.y + this.image.height + 300;
+                maxX = this.x + (this.image.width + 50);
+                minY = this.y;
+                maxY = this.y + this.image.height + 10;
             }
             else if(direction == 'left'){
-                minX = this.x -200;
-                maxX = this.x;
-                minY = this.y - 150;
-                maxY = this.y + (this.image.height +150);
+                minX = this.x -100;
+                maxX = this.x + this.image.width;
+                minY = this.y - 100;
+                maxY = this.y + (this.image.height +50);
             }
             else if(direction == 'right'){
-                minX = this.x + this.image.width;
-                maxX = this.x + this.image.width + 200;
-                minY = this.y - 150;
-                maxY = this.y + (this.image.height + 150);
+                minX = this.x;
+                maxX = this.x + this.image.width + 10;
+                minY = this.y - 100;
+                maxY = this.y + (this.image.height + 50);
             }
             this.parent.getEnemies().forEach((enemy, index) => {
                 console.log(enemy.getX() + " " + enemy.getY()); // Print enemy coordinates for debugging

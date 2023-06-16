@@ -7,21 +7,21 @@ export class Enemy {
             this.rank = 1;
             this.hp = 200;
             this.attack = 10;
-            this.faith = 25;
+            this.faith = 100;
             this.folder = "enemy1";
         }
         if(rank == 2){
             this.rank = 2;
-            this.hp = 200;
+            this.hp = 300;
             this.attack = 20;
-            this.faith = 50;
+            this.faith = 200;
             this.folder = "enemy2";
         }
         if(rank == 3){
             this.rank = 3;
             this.hp = 400;
             this.attack = 30;
-            this.faith = 75;
+            this.faith = 400;
             this.folder = "enemy3";
         }
         if(rank == 4){

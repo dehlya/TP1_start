@@ -54,7 +54,7 @@ export class SettingsState extends State {
   }
 
   toMenu() {
-    this.game.setCurrentState(this.game.menuState);
+    this.game.setCurrentState("Menu");
   }
   fetchGeolocation() {
     if ("geolocation" in navigator) {

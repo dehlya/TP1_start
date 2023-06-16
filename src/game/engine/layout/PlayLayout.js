@@ -1,6 +1,8 @@
 import { Layout } from "./Layout.js";
 import { Character } from "../../character/Character.js";
 import {Enemy} from "../../enemies/Enemy.js";
+import {MenuLayout} from "./MenuLayout.js";
+import {Button} from "../interacter/Button.js";
 
 export class PlayLayout extends Layout {
     constructor(game) {
@@ -17,6 +19,7 @@ export class PlayLayout extends Layout {
             this.game.canvas.getContext(),
             this
         );
+        this.isGameOver = false;
 
         /**
          * Ennemies spawning
@@ -26,7 +29,7 @@ export class PlayLayout extends Layout {
         this.img = new Image();
         this.img.src = "../../../ressources/game/background/background_dungeon_final_v2.png";
 
-        let intervalId = setInterval( () => {
+        setInterval( () => {
             if(this.character.faith > this.scoreMilestones){
                 this.character.potions += 1;
                 this.scoreMilestones += 1000;
@@ -39,8 +42,18 @@ export class PlayLayout extends Layout {
                 }
             }
             if(this.character.getHealth() <= 0){
-                this.game.state.toMenu();
-                clearInterval(intervalId);
+                this.isGameOver = true;
+
+                // Get the current score
+                let score = this.character.getFaith();
+
+                // Get the current high score from local storage
+                let highScore = parseInt(localStorage.getItem('Highscore'));
+
+                // If there's no high score or the current score is greater than the high score, then store the current score
+                if(highScore === null || score > highScore) {
+                    localStorage.setItem('Highscore', score);
+                }
             }
         },)
     }
@@ -69,6 +82,9 @@ export class PlayLayout extends Layout {
             enemy.drawEnemy();
         });
         this.addTitle();
+        if(this.isGameOver){
+            this.addGameOver();
+        }
     }
 
     addBackground() {
@@ -86,6 +102,23 @@ export class PlayLayout extends Layout {
         img.onload = () => {
             character.drawCharacter();
         };
+    }
+    addGameOver() {
+        this.gameOverBackGround = "../../../ressources/game/background/background_you_died.png";
+        this.gameOverImage = new Image();
+        this.gameOverImage.src = this.gameOverBackGround;
+
+        this.context.fillStyle = this.gameOverImage;
+        this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+        this.context.drawImage(this.gameOverImage, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+
+        // Set font properties
+        this.context.font = '30px Times New Roman';
+        this.context.fillStyle = 'white';
+
+        // Draw health indicator
+        const flemmeIndicator = `REFRESH THE PAGE TO RESTART THE GAME`;
+        this.context.fillText(flemmeIndicator, this.game.canvas.getWidth()/2 -300, 100);
     }
     addEnemy() {
         //initialise random spawn position
@@ -127,6 +160,16 @@ export class PlayLayout extends Layout {
 
         const potionIndicator = `Potions: ${this.character.potions}`;
         this.context.fillText(potionIndicator, 50, 60);
+
+        if(localStorage.getItem('Highscore')!== null){
+            const highscoreIndicator = `Highscore: ${localStorage.getItem('Highscore')}`;
+            this.context.fillText(highscoreIndicator, this.game.canvas.getWidth()-150, 90);
+        }
+        else{
+            const highscoreIndicator = `Highscore: -`;
+            this.context.fillText(highscoreIndicator, this.game.canvas.getWidth()/2-50, 60);
+        }
+
     }
 
 }
