@@ -79,9 +79,12 @@ export class PlayLayout extends Layout {
 
             // Get the current high score from local storage
             let highScore = parseInt(localStorage.getItem('Highscore'));
+            console.log("Your score : " + score); 
+            console.log("Your Highscore : " + highScore); 
 
             // If there's no high score or the current score is greater than the high score, then store the current score
             if(isNaN(highScore) || score > highScore) {
+                console.log("highscore updated");
                 localStorage.setItem('Highscore', score);
             }
         }
