@@ -150,4 +150,13 @@ export class Game {
     }
     this.render();
   }
+
+  resetPlayState(){
+    this.StatesMap.set("Play", new PlayState(this, "Play"));
+    this.setCurrentState("Play");
+  }
+  resetPlayStateMenu(){
+    this.StatesMap.set("Play", new PlayState(this, "Play"));
+    this.setCurrentState("Menu");
+  }
 }

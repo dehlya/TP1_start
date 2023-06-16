@@ -18,18 +18,23 @@ export class GameOverState extends State {
         let x = event.clientX - rect.left;
         let y = event.clientY - rect.top;
       
-        let startX = this.game.canvas.getWidth() * 0.5 - this.layout.buttonWidth / 2;
+        let buttonX1 = this.game.canvas.getWidth() * 0.25 - this.layout.buttonWidth/2 ;
         const buttonMargin = this.game.canvas.getHeight() * 0.1;
-        let resumeY = this.game.canvas.getHeight() * 0.5 + buttonMargin;
+        let buttonY = this.game.canvas.getHeight() * 0.1;
     
-        if (x >= startX && x <= startX + this.layout.buttonWidth && y >= settingsY && y <= settingsY + this.layout.buttonHeight) {
+        if (x >= buttonX1 && x <= buttonX1 + this.layout.buttonWidth && y >= buttonY && y <= buttonY + this.layout.buttonHeight) {
           this.layout.playAgainButton.onClick();
+        } 
+
+        let buttonX2 = this.game.canvas.getWidth() * 0.75 - this.layout.buttonWidth/2 ;
+    
+        if (x >= buttonX2 && x <= buttonX2 + this.layout.buttonWidth && y >= buttonY && y <= buttonY + this.layout.buttonHeight) {
+          this.layout.toMenuButton.onClick();
         } 
     }
 
     tryAgain(){
-        this.game.setCurrentState("Play");
-        this.game.fullscreen();
+        this.game.resetPlayState();
     }
 
     render(){
@@ -48,6 +53,12 @@ export class GameOverState extends State {
     }
     addCallbacks() {        
         this.game.canvas.canvas.addEventListener('click', (event) => this.handleClick(event));
+    }
+    playAgain(){
+        this.game.resetPlayState();
+    }
+    toMenu(){
+        this.game.resetPlayStateMenu();
     }
 
 }

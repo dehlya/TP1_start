@@ -2,11 +2,12 @@ import { Layout } from "./Layout.js";
 import { Character } from "../../character/Character.js";
 import {Enemy} from "../../enemies/Enemy.js";
 import {MenuLayout} from "./MenuLayout.js";
-import {Button} from "../interacter/Button.js";
+import { Button } from "../interacter/Button.js";
 
 export class PlayLayout extends Layout {
     constructor(game) {
         super(game);
+        this.game = game;
         this.background = "grey"
         this.difficulty = 1;
         this.raiseDifficulty = 1000;
@@ -19,8 +20,11 @@ export class PlayLayout extends Layout {
             this.game.canvas.getContext(),
             this
         );
+        this.buttonWidth = this.game.canvas.getWidth()/6;
+        this.buttonHeight = this.game.canvas.getHeight()/10;
         this.isGameOver = false;
-
+        this.pauseButton = new Button("Pause", () => this.game.state.toPause());
+            
         /**
          * Ennemies spawning
          */
@@ -109,6 +113,7 @@ export class PlayLayout extends Layout {
         };
     }
     addGameOver() {
+        this.game.state.toGameOver()
         this.gameOverBackGround = "../../../ressources/game/background/background_you_died.png";
         this.gameOverImage = new Image();
         this.gameOverImage.src = this.gameOverBackGround;
