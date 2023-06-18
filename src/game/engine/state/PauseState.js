@@ -31,7 +31,7 @@ export class PauseState extends State {
       }
 
     toMenu() {
-        this.game.setCurrentState("Menu");
+      this.game.resetPlayStateMenu();
     }
 
     toSettings() {
@@ -44,7 +44,7 @@ export class PauseState extends State {
 
     render() {
         this.layout.draw();
-      }
+    }
 
     enter() {
         super.enter();

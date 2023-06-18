@@ -33,7 +33,6 @@ export class Player {
         this.setCookie("pseudo", this.pseudo, 365);
         this.setCookie("sound", this.sound, 365);
         this.setCookie("music", this.music, 365);
-        console.log("set");
     }
     setCookie(cname, cvalue, exdays) {
         const d = new Date();

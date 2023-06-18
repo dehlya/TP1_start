@@ -45,7 +45,6 @@ export class KeyHandler {
     }
 
     removeAllCallbacks() {
-        console.log(this.callbacks);
         for (let keyPressed in this.callbacks) {
             for (let type in this.callbacks[keyPressed]) {
                 this.removeCallback(keyPressed, type);

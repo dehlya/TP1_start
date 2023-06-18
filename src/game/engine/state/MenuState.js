@@ -15,7 +15,6 @@ export class MenuState extends State {
 
   handleClick(event) {
     if (this.game.state !== this) return;
-    console.log("Mouse clicked");
     let rect = this.game.canvas.canvas.getBoundingClientRect();
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
@@ -31,7 +30,6 @@ export class MenuState extends State {
         y >= startY &&
         y <= startY + this.layout.buttonHeight
       ) {
-        console.log(`Button clicked: ${button.text}`);
         button.onClick();
       }
       
@@ -45,24 +43,19 @@ export class MenuState extends State {
   }
 
   toPause() {
-    console.log("Load Game button clicked");
     this.game.setCurrentState("Pause");
   }
 
   toSettings() {
-    console.log("Settings button clicked");
     this.game.setCurrentState("Settings");
   }
 
   toCredit() {
-    console.log("Credits button clicked");
     this.game.setCurrentState("Credits");
 
   }
 
   render() {
-    console.log(this.layout.game.state);
-    console.log("MenuState render called");
     this.layout.draw();
   }
   enter() {

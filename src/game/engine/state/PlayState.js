@@ -17,6 +17,22 @@ export class PlayState extends State {
             }
         }, 5000);
     }
+    handleClick(event) {
+        if (this.game.state !== this) return;
+      
+        let rect = this.game.canvas.canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+      
+        let buttonX1 = this.game.canvas.getWidth() * 0.5 - this.layout.buttonWidth/2 ;
+        const buttonMargin = this.game.canvas.getHeight() * 0.1;
+        let buttonY = this.game.canvas.getHeight() * 0.9 - 15;
+    
+        if (x >= buttonX1 && x <= buttonX1 + this.layout.buttonWidth && y >= buttonY && y <= buttonY + this.layout.buttonHeight) {
+          this.layout.pauseButton.onClick();
+        } 
+
+    }
     toCredit() {
     }
     setLayout() {
@@ -62,6 +78,7 @@ export class PlayState extends State {
         this.isState = false;
     }
     addCallbacks() {
+        this.game.canvas.canvas.addEventListener('click', (event) => this.handleClick(event));
     }
     toGameOver(){
         this.game.setCurrentState("GameOver");

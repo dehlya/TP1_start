@@ -15,7 +15,6 @@ export class LogoState extends State {
   }
 
   render() {
-    console.log("LogoState render called");
     this.layout.draw();
 
     setTimeout(() => this.toMenu(), 2000);

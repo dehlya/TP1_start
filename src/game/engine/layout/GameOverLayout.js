@@ -4,8 +4,6 @@ import { Button } from "../interacter/Button.js";
 export class GameOverLayout extends Layout {
     constructor(game) {
         super(game);
-        console.log("i entered the game over layout ! ");
-        console.log("i'm setting the background");
         this.background = "../../../ressources/game/background/background_you_died.png";
         this.image = new Image();
         this.image.src = this.background;

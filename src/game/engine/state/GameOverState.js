@@ -6,7 +6,6 @@ import { KeyHandler } from "../handler/KeyHandler.js";
 export class GameOverState extends State {
     constructor(game) {
         super(game);
-        console.log("I entered the game over state");
         this.layout = new GameOverLayout(game);
         this.keyHandler = new KeyHandler();
     }

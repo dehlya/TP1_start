@@ -13,6 +13,7 @@ export class PlayLayout extends Layout {
         this.raiseDifficulty = 1000;
         this.title = "Play in progress...";
         this.scoreMilestones = 1000;
+        this.pauseButton = new Button("Pause", () => this.game.state.toPause());
         this.character = new Character(
             this.game.canvas.getWidth() / 2,
             this.game.canvas.getHeight() / 2,
@@ -23,7 +24,6 @@ export class PlayLayout extends Layout {
         this.buttonWidth = this.game.canvas.getWidth()/6;
         this.buttonHeight = this.game.canvas.getHeight()/10;
         this.isGameOver = false;
-        this.pauseButton = new Button("Pause", () => this.game.state.toPause());
             
         /**
          * Ennemies spawning
@@ -61,6 +61,7 @@ export class PlayLayout extends Layout {
         this.addBackground();
         this.addCharacter();
         this.addTitle();
+        this.addButton(this.pauseButton);
         super.draw();
     }
 
@@ -78,6 +79,7 @@ export class PlayLayout extends Layout {
             enemy.drawEnemy();
         });
         this.addTitle();
+        this.addButton(this.pauseButton);
         if(this.isGameOver){
             this.addGameOver();
             // Get the current score
@@ -85,15 +87,26 @@ export class PlayLayout extends Layout {
 
             // Get the current high score from local storage
             let highScore = parseInt(localStorage.getItem('Highscore'));
-            console.log("Your score : " + score); 
-            console.log("Your Highscore : " + highScore); 
 
             // If there's no high score or the current score is greater than the high score, then store the current score
             if(isNaN(highScore) || score > highScore) {
-                console.log("highscore updated");
                 localStorage.setItem('Highscore', score);
             }
         }
+    }
+    addButton(button) {
+        const x1 = this.game.canvas.getWidth() * 0.5 - this.buttonWidth/2 ;
+        const y = this.game.canvas.getHeight() * 0.9 - 15 ;
+        this.context.fillStyle = "white";
+        this.context.fillRect(x1, y, this.buttonWidth, this.buttonHeight);
+        this.context.fillStyle = "black";
+        this.context.font = this.game.canvas.getHeight()/15+"px times new roman";
+        this.context.fillText(
+          this.pauseButton.text,
+          x1 + (this.buttonWidth - this.context.measureText(this.pauseButton.text).width) /2,
+          y + this.buttonHeight / 2 + this.game.canvas.getHeight()/40
+        );
+        this.context.strokeRect(x1, y, this.buttonWidth, this.buttonHeight);
     }
 
     addBackground() {

@@ -4,8 +4,10 @@ import { Button } from "../interacter/Button.js";
 export class PauseLayout extends Layout {
     constructor(game) {
         super(game);
-        this.background = "black";
-        this.title = "Play in pause...";
+        this.background = "../../../ressources/game/background/background_dungeon_final_v2.png";
+        this.image = new Image();
+        this.image.src = this.background;
+        this.title = "PAUSE";
         this.buttonWidth = this.game.canvas.getWidth()/4;
         this.buttonHeight = this.game.canvas.getHeight()/8;
 
@@ -37,11 +39,11 @@ export class PauseLayout extends Layout {
       }
       
       addButton(button, x, y) {
-        this.context.fillStyle = "grey";
+        this.context.fillStyle = "white";
         this.context.fillRect(x, y, this.buttonWidth, this.buttonHeight);
     
-        this.context.fillStyle = "white";
-        this.context.font = this.game.canvas.getHeight()/15+"px Arial";
+        this.context.fillStyle = "black";
+        this.context.font = this.game.canvas.getHeight()/15+"px times new roman";
         this.context.fillText(
             button.text,
             x + (this.buttonWidth - this.context.measureText(button.text).width) / 2,
@@ -53,13 +55,13 @@ export class PauseLayout extends Layout {
     addBackground() {
         this.context.fillStyle = this.background;
         this.context.fillRect(0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
+        this.context.drawImage(this.image, 0, 0, this.game.canvas.getWidth(), this.game.canvas.getHeight());
     }
-
 
     addTitle() {
         this.context.fillStyle = "white";
-        this.context.font = this.game.canvas.getHeight()/10+"px Arial";
-        this.context.fillText(this.title, 10, 50);
+        this.context.font = this.game.canvas.getHeight()/10+"px times new roman";
+        this.context.fillText(this.title, this.game.canvas.getWidth()/2.45, 50);
     }
 }
     

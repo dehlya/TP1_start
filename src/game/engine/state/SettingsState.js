@@ -46,10 +46,8 @@ export class SettingsState extends State {
     this.musicEnabled = !this.musicEnabled;
     if (this.musicEnabled) {
       this.audio.play();
-      console.log("MUSIC ON");
     } else {
       this.audio.pause();
-      console.log("MUSIC OFF");
     }
   }
 
